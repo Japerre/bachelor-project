@@ -1,6 +1,7 @@
 package com.bachproject.demo.promotor;
 
 import com.bachproject.demo.onderwerp.Onderwerp;
+import com.fasterxml.jackson.annotation.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,6 +12,7 @@ import javax.persistence.*;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+
 public class Promotor {
     @Id
     @SequenceGenerator(
@@ -24,8 +26,12 @@ public class Promotor {
     )
     private Long promotorId;
 
+
     @OneToOne(
             mappedBy = "promotor"
     )
+    //@JsonManagedReference
     private Onderwerp onderwerp;
+
+    private String naam;
 }

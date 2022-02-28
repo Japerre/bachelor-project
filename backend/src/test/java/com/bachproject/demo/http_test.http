@@ -9,7 +9,9 @@ Content-Type: application/json
   "opdrachtgever": {
     "type" : 2
   },
-  "promotor" : {}
+  "promotor" : {
+    "naam": "steven"
+  }
 }
 
 
