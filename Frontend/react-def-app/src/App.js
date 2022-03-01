@@ -15,7 +15,7 @@ import './App.css'
 function App(){
 
     const [subjects, setSubject] = useState([])
-    const baseURL = 'http://localhost:5000'
+    const baseURL = 'http://localhost:8080/api/v1'
 
     React.useEffect(() =>{
         axios.get(`${baseURL}/subjects`).then((response) => {

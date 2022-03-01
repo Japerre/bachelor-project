@@ -10,7 +10,7 @@ const Subject = () => {
     return (
         <main>
             <h1>Detail Page</h1>
-            <h2>{ subject?.title }</h2>
+            <h2>{ subject?.titel }</h2>
             <p>{ subject?.omschrijving }</p>
         </main>
     );

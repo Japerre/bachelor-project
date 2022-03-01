@@ -5,9 +5,9 @@ const Subjects = ({ subjects }) => {
         <main>
             <h1>Subjects</h1>
             {subjects.map((subject) =>(
-                <div className="subject-preview" key={subject.id} >
-                    <Link to={`/subjects/${subject.id}`}>
-                        <h2>{ subject.title }</h2>
+                <div className="subject-preview" key={subject.onderwerpId} >
+                    <Link to={`/subjects/${subject.onderwerpId}`}>
+                        <h2>{ subject.titel }</h2>
                         <p> {subject.omschrijving }</p>
                     </Link>
                 </div>
