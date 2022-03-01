@@ -3,9 +3,6 @@ package com.bachproject.demo.onderwerp;
 import com.bachproject.demo.opdrachtgever.Opdrachtgever;
 import com.bachproject.demo.promotor.Promotor;
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -53,6 +50,6 @@ public class Onderwerp {
             name = "promotor_id",
             referencedColumnName = "promotorId"
     )
-    //@JsonBackReference
+    @JsonBackReference
     private Promotor promotor;
 }

@@ -1,7 +1,7 @@
 package com.bachproject.demo.promotor;
 
 import com.bachproject.demo.onderwerp.Onderwerp;
-import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -30,7 +30,7 @@ public class Promotor {
     @OneToOne(
             mappedBy = "promotor"
     )
-    //@JsonManagedReference
+    @JsonManagedReference
     private Onderwerp onderwerp;
 
     private String naam;

@@ -17,6 +17,7 @@ public class OnderwerpController {
     }
 
     @GetMapping
+    @CrossOrigin(origins = "*")
     public List<Onderwerp> getOnderwerpen(){
         return onderwerpService.getOnderwerpen();
     }
