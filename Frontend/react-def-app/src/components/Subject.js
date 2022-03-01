@@ -1,16 +1,19 @@
 import { useParams } from "react-router-dom";
+import useFetch from "./useFetch"
 
 const Subject = () => {
-    const { id } = useParams();
-    return (
-    <>
-        <main>
-            <h3>Subject detail page: { id }</h3>
-            <p>the amount of students allowed:</p>
 
+    const { id } = useParams();
+    const {data: subject, error, isPending } = useFetch('http://localhost:3000/subjects/'+id);
+    if(isPending) return <div>Loading...</div>;
+    if(error) console.log(error);
+    return (
+        <main>
+            <h1>Detail Page</h1>
+            <h2>{ subject?.title }</h2>
+            <p>{ subject?.omschrijving }</p>
         </main>
-    </>
-    )
+    );
 }
 
 export default Subject
