@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping(path = "api/v1/subjects")
@@ -20,6 +21,12 @@ public class OnderwerpController {
     @CrossOrigin(origins = "*")
     public List<Onderwerp> getOnderwerpen(){
         return onderwerpService.getOnderwerpen();
+    }
+
+    @GetMapping(path = "/{onderwerpId}")
+    @CrossOrigin(origins = "*")
+    public Optional<Onderwerp> getOnderwerp(@PathVariable Long onderwerpId){
+        return onderwerpService.getOnderwerp(onderwerpId);
     }
 
     @PostMapping

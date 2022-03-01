@@ -43,12 +43,22 @@ a, a:hover, a:focus, a:active {
     color:inherit;
 }
 .navbar{
-    height: 44px;
+    height: 40px;
     width: auto;
-    background-color: #282a35;
+    background-color: #282c34;
 }
 .navbar-item {
+    background-color: #282c34;
     color: white;
+    float: left;
+    padding-top: 8px;
+    padding-right: 16px;
+    padding-bottom: 8px;
+    padding-left: 16px;
+}
+.navbar-item:hover {
+    background-color: grey;
+    color: black;
     float: left;
     padding-top: 8px;
     padding-right: 16px;
@@ -63,5 +73,5 @@ main{
     background-color: #cfcfcf;
     padding:8px;
     margin-bottom:16px;
-
 }
+
