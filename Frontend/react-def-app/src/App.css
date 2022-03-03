@@ -1,3 +1,10 @@
+/* CSS HEX
+--steel-blue: #4f7cacff;
+--eerie-black: #191716ff;
+--white: #fafafdff;
+--light-gray: #cfcfcfff;
+--gunmetal: #282c34ff;*/
+
 .App {
   text-align: left;
   background-color: #fafafd;
@@ -62,7 +69,7 @@ a, a:hover, a:active, a:focus {
 }
 .navbar-item:focus {
     background-color: grey;
-    color: white;
+    color: #cfcfcf;
 }
 main{
     padding-left: 24px;
@@ -76,4 +83,15 @@ main{
 }
 p{
     margin-left: 16px;
+}
+.login-form{
+    margin-top: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 8px;
+    width: 250px;
+}
+.form-group{
+    padding-bottom: 8px;
 }

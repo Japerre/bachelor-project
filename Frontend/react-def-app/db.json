@@ -1,40 +1,40 @@
 {
   "subjects":[
     {
-      "id": 1,
-      "title": "title2",
+      "onderwerpId": 1,
+      "titel": "title2",
       "omschrijving": "omschrijving3",
       "aantalStudenten": 2,
       "opdrachtgever_id": 8,
       "promotor_id": 1
     },
     {
-      "id": 2,
-      "title": "title1",
+      "onderwerpId": 2,
+      "titel": "title1",
       "omschrijving": "omschrijving1",
       "aantalStudenten": 2,
       "opdrachtgever_id": 10,
       "promotor_id": 1
     },
     {
-      "id": 3,
-      "title": "title3",
+      "onderwerpId": 3,
+      "titel": "title3",
       "omschrijving": "omschrijving1",
       "aantalStudenten": 2,
       "opdrachtgever_id": 10,
       "promotor_id": 1
     },
     {
-      "id": 4,
-      "title": "title4",
+      "onderwerpId": 4,
+      "titel": "title4",
       "omschrijving": "omschrijving1",
       "aantalStudenten": 1,
       "opdrachtgever_id": 1,
       "promotor_id": 5
     },
     {
-      "id": 5,
-      "title": "title0",
+      "onderwerpId": 5,
+      "titel": "title0",
       "omschrijving": "omschrijving2",
       "aantalStudenten": 1,
       "opdrachtgever_id": 4,
