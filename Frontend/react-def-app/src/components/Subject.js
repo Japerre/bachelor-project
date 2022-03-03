@@ -13,6 +13,8 @@ const Subject = () => {
             <h2>{ subject?.titel }</h2>
             <p>{ subject?.omschrijving }</p>
             <p> Amount of Students allow for the subject: { subject?.aantalStudenten }</p>
+            <h2> Client for the Subject </h2>
+            <p>{ subject?.opdrachtgever?.opdrachtgeverId }</p>
         </main>
     );
 }

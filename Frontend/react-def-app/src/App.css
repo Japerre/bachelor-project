@@ -38,7 +38,7 @@
   }
 }
 
-a, a:hover, a:focus, a:active {
+a, a:hover, a:active, a:focus {
     text-decoration: none;
     color:inherit;
 }
@@ -51,27 +51,29 @@ a, a:hover, a:focus, a:active {
     background-color: #282c34;
     color: white;
     float: left;
-    padding-top: 8px;
+    height: 40px;
     padding-right: 16px;
-    padding-bottom: 8px;
     padding-left: 16px;
 }
 .navbar-item:hover {
     background-color: grey;
     color: black;
-    float: left;
-    padding-top: 8px;
-    padding-right: 16px;
-    padding-bottom: 8px;
-    padding-left: 16px;
+
+}
+.navbar-item:focus {
+    background-color: grey;
+    color: white;
 }
 main{
-    padding-left: 20px;
+    padding-left: 24px;
 }
 .subject-preview{
+    color: black;
     width: 50%;
     background-color: #cfcfcf;
     padding:8px;
     margin-bottom:16px;
 }
-
+p{
+    margin-left: 16px;
+}
