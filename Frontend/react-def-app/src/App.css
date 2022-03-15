@@ -4,6 +4,9 @@
 --white: #fafafdff;
 --light-gray: #cfcfcfff;
 --gunmetal: #282c34ff;*/
+html{
+    background-color: #fafafd;
+}
 
 .App {
   text-align: left;
@@ -69,7 +72,24 @@ a, a:hover, a:active, a:focus {
 }
 .navbar-item:focus {
     background-color: grey;
-    color: #cfcfcf;
+    color: whitesmoke;
+}
+.navbar-item-right {
+    background-color: #282c34;
+    color: white;
+    float: right;
+    height: 40px;
+    padding-right: 16px;
+    padding-left: 16px;
+}
+.navbar-item-right:hover {
+    background-color: grey;
+    color: black;
+
+}
+.navbar-item-right:focus {
+    background-color: grey;
+    color: whitesmoke;
 }
 main{
     padding-left: 24px;
@@ -94,4 +114,21 @@ p{
 }
 .form-group{
     padding-bottom: 8px;
+}
+.homepage-topThree{
+    position: absolute;
+    top: 25%;
+    left: 10%;
+    background-color:  #49515F;
+}
+.subject-topThree-home{
+    color: black;
+    width: 50%;
+    background-color: #cfcfcf;
+    padding:8px;
+    margin-bottom:16px;
+    margin-left: 8px;
+}
+#topthree{
+    color: white;
 }

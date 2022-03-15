@@ -40,5 +40,11 @@
       "opdrachtgever_id": 4,
       "promotor_id": 1
     }
+  ],
+  "users": [
+    {
+      "email": "elian.vantomme@hotmail.be",
+      "password": "test123"
+    }
   ]
 }
