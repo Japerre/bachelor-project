@@ -18,18 +18,19 @@ public class OnderwerpController {
     }
 
     @GetMapping
-    @CrossOrigin(origins = "*")
+    @CrossOrigin(origins = "http://localhost:3000")
     public List<Onderwerp> getOnderwerpen(){
         return onderwerpService.getOnderwerpen();
     }
 
     @GetMapping(path = "/{onderwerpId}")
-    @CrossOrigin(origins = "*")
+    @CrossOrigin(origins = "http://localhost:3000")
     public Optional<Onderwerp> getOnderwerp(@PathVariable Long onderwerpId){
         return onderwerpService.getOnderwerp(onderwerpId);
     }
 
     @PostMapping
+    @CrossOrigin(origins = "http://localhost:3000")
     public void postNewOnderwerp(@RequestBody Onderwerp onderwerp){
         onderwerpService.addNewOnderwerp(onderwerp);
     }

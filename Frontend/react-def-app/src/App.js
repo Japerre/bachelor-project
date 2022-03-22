@@ -36,7 +36,6 @@ function App(){
             <Route path="/subjects" element={<Subjects subjects={subjects}/>} />
             <Route path="/subjects/:id" element={<Subject />} />
             <Route path="/" element={<Home />} />
-
         </Routes>
     </div>
   </Router>
