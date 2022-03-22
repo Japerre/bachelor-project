@@ -16,7 +16,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    private UserDetailsService userDetailsService;
+    private UserDetailsService userDetailsService; // hier komen de users vandaan
 
     @Bean
     AuthenticationProvider authenticationProvider() {
@@ -29,14 +29,9 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/")
-                .permitAll()
-                .antMatchers("/api/v1/subjects")
-                .hasAuthority("USER")
-                .anyRequest()
-                .authenticated()
-                .and()
-                .httpBasic();
+                .antMatchers("/**")
+                .hasRole("USER")
+                .and().formLogin();
     }
 }
 

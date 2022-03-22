@@ -4,33 +4,38 @@ import com.bachproject.demo.user.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.stereotype.Component;
 
-import java.util.Collection;
-import java.util.Collections;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class CustomUserDetails implements UserDetails {
 
-    private User user;
+    private String userName;
+    private String password;
+    private boolean active;
+    private List<GrantedAuthority> authorities;
 
     public CustomUserDetails(User user) {
-        super();
-        this.user = user;
+        this.userName = user.getUserName();
+        this.password = user.getPassword();
+        this.authorities = Arrays.stream(user.getRole().split(","))
+                .map(SimpleGrantedAuthority::new)
+                .collect(Collectors.toList());
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Collections.singleton(new SimpleGrantedAuthority(user.getRole()));
+        return authorities;
     }
 
     @Override
     public String getPassword() {
-        return user.getPassword();
+        return password;
     }
 
     @Override
     public String getUsername() {
-        return user.getUserName();
+        return userName;
     }
 
     @Override

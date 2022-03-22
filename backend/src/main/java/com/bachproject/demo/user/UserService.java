@@ -1,7 +1,10 @@
 package com.bachproject.demo.user;
 
+import com.bachproject.demo.onderwerp.Onderwerp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class UserService {
@@ -10,6 +13,10 @@ public class UserService {
     @Autowired
     public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
+    }
+
+    public List<User> getUsers() {
+        return userRepository.findAll();
     }
 
     public void addNewUser(User user){
