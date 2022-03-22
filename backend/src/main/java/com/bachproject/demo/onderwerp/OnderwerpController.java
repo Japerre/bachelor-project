@@ -30,7 +30,7 @@ public class OnderwerpController {
     }
 
     @PostMapping
-    @CrossOrigin(origins = "http://localhost:3000")
+    @CrossOrigin(origins = "*")
     public void postNewOnderwerp(@RequestBody Onderwerp onderwerp){
         onderwerpService.addNewOnderwerp(onderwerp);
     }

@@ -3,7 +3,7 @@ POST http://localhost:8080/api/v1/subjects
 Content-Type: application/json
 
 {
-  "titel": "<script>alert('xss');</script>",
+  "titel": "onderwerp1",
   "omschrijving": "dit is een testomschrijving",
   "aantalStudenten": 2,
   "opdrachtgever": {
@@ -19,9 +19,9 @@ POST http://localhost:8080/api/v1/users
 Content-Type: application/json
 
 {
-  "userName": "japerre",
+  "userName": "elian",
   "password": "1234",
-  "role": "USER"
+  "role": "ROLE_USER"
 }
 
 
