@@ -38,8 +38,10 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .csrf().disable() // TODO dit enablen vor meer security
                 .authorizeRequests()
                 .antMatchers("/**")
-                .hasRole("USER") //zet dit automatisch om naar "ROLE_USER"
-                .and().formLogin();
+                .permitAll() //zet dit automatisch om naar "ROLE_USER"
+                .and().formLogin()
+                .and().httpBasic();
     }
+
 }
 

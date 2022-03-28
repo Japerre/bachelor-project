@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import useFetch from "../functions/useFetch"
+import useFetch from "../../functions/useFetch"
 
 const Subject = () => {
     const { id } = useParams();

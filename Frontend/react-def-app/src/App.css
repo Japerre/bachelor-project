@@ -132,3 +132,8 @@ p{
 #topthree{
     color: white;
 }
+.user-preview{
+    margin: 8px;
+    padding: 2px;
+    background-color: #cfcfcf;
+}
