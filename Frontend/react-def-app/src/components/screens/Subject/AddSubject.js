@@ -1,14 +1,17 @@
 import React, { useState } from 'react'
 import axios from 'axios';
-import validationUser from "../Users/validationUser";
 
 function AddSubject() {
     const [subject, setSubject] = useState({
         aantalStudenten: '',
         omschrijving: '',
         titel: '',
-        opdrachtgever: '',
-        promotor:''
+        opdrachtgever:{
+            type:''
+        } ,
+        promotor:{
+            naam:''
+        }
     });
 
     const { aantalStudenten, omschrijving, titel ,opdrachtgever,
@@ -39,18 +42,29 @@ function AddSubject() {
                 <form onSubmit={e => FormHandle(e)}>
                     <div className={"form-group"}>
                         <label htmlFor={"exampleInputTitle"}>Subject Title</label>
-                        <input type={"text"} name={"titel"} placeholder={"Enter Title"} value={titel}
-                               onChange={(e) => onInputChange(e)} />
+                        <input
+                            type={"text"}
+                            name={"titel"}
+                            placeholder={"Enter Title"}
+                            value={titel}
+                            onChange={(e) => onInputChange(e)} />
                     </div>
                     <div className={"form-group"}>
                         <label htmlFor={"exampleInputTitle"}>Subject Description</label>
-                        <textarea name={"omschrijving"} placeholder={"Enter Description"} value={omschrijving}
-                               onChange={(e) => onInputChange(e)}/>
+                        <textarea
+                            name={"omschrijving"}
+                            placeholder={"Enter Description"}
+                            value={omschrijving}
+                            onChange={(e) => onInputChange(e)}/>
                     </div>
                     <div className={"form-group"}>
                         <label htmlFor={"exampleInputTitle"}>Subject Employee</label>
-                        <input  type={"number"} name={"opdrachtgever"} placeholder={"Enter Employee"} value={opdrachtgever}
-                               onChange={(e) => onInputChange(e)}/>
+                        <input
+                            type={"number"}
+                            name={"opdrachtgever"}
+                            placeholder={"Enter Employee"}
+                            value={opdrachtgever}
+                            onChange={(e) => onInputChange(e)}/>
                     </div>
                     <div className={"form-group"}>
                         <label htmlFor={"exampleInputTitle"}>Subject Promotor</label>
@@ -59,8 +73,17 @@ function AddSubject() {
                     </div>
                     <div className={"form-group"}>
                         <label htmlFor={"exampleInputTitle"}>Subject Amount of Students</label>
-                        <input type={"number"} min={1} max={2} name={"aantalStudenten"} placeholder={"Enter Amount of students"} value={aantalStudenten}
-                               onChange={(e) => onInputChange(e)}/>
+                        <div><input
+                            type={"radio"}
+                            onChange={(e) => onInputChange(e)}
+                            name={"aantalStudenten"}
+                            value={1}/> 1 </div>
+                        <div><input
+                            type={"radio"}
+                            onChange={(e) => onInputChange(e)}
+                            name={"aantalStudenten"}
+                            value={2}/> 2 </div>
+
                     </div>
                     <div>
                         <button type="submit">Add Subject</button>
