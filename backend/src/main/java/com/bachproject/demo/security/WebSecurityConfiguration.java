@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -24,23 +25,20 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 
-    @Bean
-    AuthenticationProvider authenticationProvider() {
-        DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
-        provider.setUserDetailsService(userDetailsService);
-        provider.setPasswordEncoder(encoder()); // weet niet zeker als dit gaat werken
-        return provider;
+
+    @Autowired // configure authentication
+    public void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(userDetailsService);
     }
 
-    @Override
+    @Override // configure authorisation
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .csrf().disable() // TODO dit enablen vor meer security
                 .authorizeRequests()
                 .antMatchers("/**")
-                .permitAll() //zet dit automatisch om naar "ROLE_USER"
-                .and().formLogin()
-                .and().httpBasic();
+                .hasRole("USER") //zet dit automatisch om naar "ROLE_USER"
+                .and().formLogin();
     }
 
 }
