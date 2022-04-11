@@ -1,6 +1,6 @@
 package com.bachproject.demo.student;
 
-import com.bachproject.demo.onderwerp.Onderwerp;
+import com.bachproject.demo.student_subject.StudentSubject;
 import com.bachproject.demo.targetAudience.TargetAudience;
 import com.bachproject.demo.user.User;
 import lombok.AllArgsConstructor;
@@ -8,7 +8,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.List;
+import java.rmi.StubNotFoundException;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Data
@@ -48,8 +50,11 @@ public class Student {
             name = "target_audience",
             referencedColumnName = "TargetAudienceId"
     )
+
+    //@Transient als je targetAudience niet wil opslaan in de DB
     private TargetAudience targetAudience;
 
-    //private List<Onderwerp> preferences;
+//    @OneToMany(mappedBy = "student")
+//    private Set<StudentSubject> studentSubjectSet = new HashSet<StudentSubject>();
 
 }

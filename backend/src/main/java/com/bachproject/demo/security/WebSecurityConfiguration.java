@@ -49,24 +49,26 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override // configure authorisation
     protected void configure(HttpSecurity http) throws Exception {
-//        http
-//                .csrf().disable() // TODO dit enablen vor meer security
-//                .authorizeRequests()
-//                .antMatchers("/authenticate", "/api/v1/users", "/api/v1/subjects", "/api/v1/subjects/{onderwerpId}").permitAll()
-//                .anyRequest().hasRole("USER").and()// alles behalve /authenticate moet een user voor ingelogd zijn
-//                //.hasRole("USER") //zet dit automatisch om naar "ROLE_USER"
-//                .exceptionHandling()
-//                .and().sessionManagement()
-//                .sessionCreationPolicy(SessionCreationPolicy.STATELESS); // geen sessies maken
-//
-//        http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
+        http
+                .csrf().disable() // TODO dit enablen vor meer security
+                .authorizeRequests()
+                .antMatchers("/authenticate", "/users/register", "/students/register", "/subjects/**", "/targetaudience").permitAll()
+                .anyRequest().hasAnyRole("USER", "STUDENT").and()// alles behalve /authenticate moet een user voor ingelogd zijn
+                .cors() //wtf dit moet er zeker staan !!
+                .and()
+                //.hasRole("USER") //zet dit automatisch om naar "ROLE_USER"
+                .exceptionHandling()
+                .and().sessionManagement()
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS); // geen sessies maken
+
+        http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
 
 
         //bovenstaande code werkt maar is uitgecomment om alle paths toe te laten tijdens testen
 
-        http
-                .csrf().disable()
-                .authorizeRequests().anyRequest().permitAll().and().formLogin();
+//        http
+//                .csrf().disable()
+//                .authorizeRequests().anyRequest().permitAll();//.and().formLogin();
     }
 
 }

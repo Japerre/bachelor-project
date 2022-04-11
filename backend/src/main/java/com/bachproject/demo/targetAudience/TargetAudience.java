@@ -23,7 +23,7 @@ public class TargetAudience {
             strategy = GenerationType.SEQUENCE,
             generator = "targetAudience_sequence"
     )
-    private Long TargetAudienceId;
+    private Long targetAudienceId;
 
     // for example IW E-ICT-> industriele wetenschappen Elektronica ICT
     private String majorCode;

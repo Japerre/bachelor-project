@@ -6,4 +6,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface TargetAudienceRepository extends JpaRepository<TargetAudience, Long> {
 
+    TargetAudience findByMajorCode(String majorCode);
+
+    TargetAudience findByTargetAudienceId(Long targetAudienceId);
 }

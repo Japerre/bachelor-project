@@ -11,6 +11,9 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class User {
+
+    private String userName;
+
     @Id
     @SequenceGenerator(
             name = "user_sequence",
@@ -22,7 +25,9 @@ public class User {
             generator = "user_sequence"
     )
     private Long userId;
-    private String userName;
+    //private String email; we zullen als userName een email gebruiken
+    private String firstName;
+    private String lastName;
     private String password;
     private String role;
 

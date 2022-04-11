@@ -1,4 +1,4 @@
-package com.bachproject.demo.opdrachtgever;
+package com.bachproject.demo.employer;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -10,17 +10,17 @@ import javax.persistence.*;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Opdrachtgever {
+public class Employer {
     @Id
     @SequenceGenerator(
-            name = "opdrachtgever_sequence",
-            sequenceName = "opdrachtgever_sequence",
+            name = "employer_sequence",
+            sequenceName = "employer_sequence",
             allocationSize = 1
     )
     @GeneratedValue(
             strategy = GenerationType.SEQUENCE,
-            generator = "opdrachtgever_sequence"
+            generator = "employer_sequence"
     )
-    private Long opdrachtgeverId;
+    private Long employerId;
     private int type;
 }

@@ -1,13 +1,12 @@
 package com.bachproject.demo.user;
 
-import com.bachproject.demo.onderwerp.Onderwerp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "api/v1/users")
+@RequestMapping(path = "/users")
 public class UserController {
 
     private final UserService userService;
@@ -18,14 +17,15 @@ public class UserController {
     }
 
     @GetMapping
-    @CrossOrigin(origins = "*")
+    //@CrossOrigin(origins = "*")
     public List<User> getUsers(){
         return userService.getUsers();
     }
 
-    @PostMapping
-    @CrossOrigin(origins = "*")
+    @PostMapping(value = "/register")
+    //@CrossOrigin(origins = "*")
     public void postNewUser(@RequestBody User user){
+        System.out.println(user.getPassword());
         userService.addNewUser(user);
     }
 }

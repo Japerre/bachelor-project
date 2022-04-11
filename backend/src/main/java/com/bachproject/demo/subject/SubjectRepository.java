@@ -1,10 +1,10 @@
-package com.bachproject.demo.onderwerp;
+package com.bachproject.demo.subject;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface OnderwerpRepository extends JpaRepository<Onderwerp, Long> {
+public interface SubjectRepository extends JpaRepository<Subject, Long> {
 
 
 }

@@ -1,6 +1,7 @@
 package com.bachproject.demo.promotor;
 
-import com.bachproject.demo.onderwerp.Onderwerp;
+import com.bachproject.demo.subject.Subject;
+import com.bachproject.demo.user.User;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -26,12 +27,21 @@ public class Promotor {
     )
     private Long promotorId;
 
-
     @OneToOne(
-            mappedBy = "promotor"
+            cascade = CascadeType.ALL,
+            fetch = FetchType.EAGER,
+            optional = true
     )
-    @JsonManagedReference
-    private Onderwerp onderwerp;
+    @JoinColumn(
+            name = "user_id",
+            referencedColumnName = "userId"
+    )
+    private User user;
 
-    private String naam;
+//    @OneToOne(
+//            mappedBy = "promotor"
+//    )
+//    @JsonManagedReference
+//    private Subject onderwerp;
+
 }
