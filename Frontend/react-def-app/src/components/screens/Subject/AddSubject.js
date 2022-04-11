@@ -58,17 +58,17 @@ function AddSubject() {
                             onChange={(e) => onInputChange(e)}/>
                     </div>
                     <div className={"form-group"}>
-                        <label htmlFor={"exampleInputTitle"}>Subject Employee</label>
+                        <label htmlFor={"exampleInputTitle"}>Subject Client</label>
                         <input
                             type={"number"}
-                            name={"opdrachtgever"}
-                            placeholder={"Enter Employee"}
-                            value={opdrachtgever}
+                            name={"type"}
+                            placeholder={"Enter Client"}
+                            value={opdrachtgever.type}
                             onChange={(e) => onInputChange(e)}/>
                     </div>
                     <div className={"form-group"}>
                         <label htmlFor={"exampleInputTitle"}>Subject Promotor</label>
-                        <input type={"number"} name={"promotor"} placeholder={"Enter Promotor"} value={promotor}
+                        <input type={"text"} name={"naam"} placeholder={"Enter Promotor"} value={promotor.naam}
                                onChange={(e) => onInputChange(e)}/>
                     </div>
                     <div className={"form-group"}>
@@ -83,7 +83,6 @@ function AddSubject() {
                             onChange={(e) => onInputChange(e)}
                             name={"aantalStudenten"}
                             value={2}/> 2 </div>
-
                     </div>
                     <div>
                         <button type="submit">Add Subject</button>

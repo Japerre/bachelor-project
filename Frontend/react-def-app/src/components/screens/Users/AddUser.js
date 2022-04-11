@@ -54,8 +54,10 @@ function AddUser() {
                     </div>
                     <div className={"form-group"}>
                         <label htmlFor={"exampleInputTitle"}>Role</label>
-                        <select  name={"role"} defaultValue={"default"}
-                               onChange={(e) => onInputChange(e)}>
+                        <select
+                            name={"role"}
+                            defaultValue={"default"}
+                            onChange={(e) => onInputChange(e)}>
                             <option value={"default"} disabled hidden>Choose a role</option>
                             <option value={"ROLE_USER"}>User</option>
                             <option value={"ROLE_ADMIN"}>Admin</option>
@@ -64,13 +66,21 @@ function AddUser() {
                     </div>
                     <div className={"form-group"}>
                         <label htmlFor={"exampleInputTitle"}>Password</label>
-                        <input type={"password"} name={"password"} placeholder={"Enter password"} value={password}
-                               onChange={(e) => onInputChange(e)}/>
+                        <input
+                            type={"password"}
+                            name={"password"}
+                            placeholder={"Enter password"}
+                            value={password}
+                            onChange={(e) => onInputChange(e)}/>
                         {errors.password && <p>{errors.password}</p>}
                     </div>
                     <div className={"form-group"}>
                         <label htmlFor={"exampleInputTitle"}>Confirm Password</label>
-                        <input type={"password"} name={"password2"} placeholder={"Enter password"} value={password2}
+                        <input
+                            type={"password"}
+                            name={"password2"}
+                            placeholder={"Enter password"}
+                            value={password2}
                                onChange={(e) => onInputChange(e)}/>
                         {errors.password2 && <p>{errors.password2}</p>}
                     </div>
