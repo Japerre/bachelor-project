@@ -5,6 +5,7 @@ const Register = () => {
   const [role, setRole] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [password2, setPassword2] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [targetAudienceId, setTargetAudienceId] = useState(0);
@@ -28,6 +29,7 @@ const Register = () => {
       user: {
         userName: email,
         password: password,
+        password2: password2,
         firstName: firstName,
         lastName: lastName,
         role: role,
@@ -63,12 +65,19 @@ const Register = () => {
           required
           onChange={(e) => setEmail(e.target.value)}
         />
-        <label htmlFor="password">password</label>
+        <label htmlFor="password">Enter password</label>
         <input
           type="password"
           id="password"
           required
           onChange={(e) => setPassword(e.target.value)}
+        />
+        <label htmlFor="password2">Confirm password</label>
+        <input
+            type="password"
+            id="password2"
+            required
+            onChange={(e) => setPassword2(e.target.value)}
         />
         <label htmlFor="fname">first name</label>
         <input

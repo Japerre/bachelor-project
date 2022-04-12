@@ -1,4 +1,4 @@
-import Subjects from "../components/Subjects"
+import Subjects from "../components/Subjects/Subjects"
 
 const Home = ({ subjects }) => {
   return (

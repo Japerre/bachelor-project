@@ -1,10 +1,10 @@
-import Subject from "./components/Subject";
-import Subjects from "./components/Subjects";
+import Subject from "./components/Subjects/Subject";
+import Subjects from "./components/Subjects/Subjects";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
 import Home from "./pages/Home";
 import { useState, useEffect } from "react";
-import SubjectDetail from "./components/SubjectDetail";
+import SubjectDetail from "./components/Subjects/SubjectDetail";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Nav from "./components/Nav";
 import axios from "axios";
