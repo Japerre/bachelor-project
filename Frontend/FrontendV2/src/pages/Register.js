@@ -52,7 +52,7 @@ const Register = () => {
       <form>
         <label htmlFor="role">role</label>
         <select name={"role"} id={"role"} defaultValue={"default"} required onChange={(e) => setRole(e.target.value)}>
-          <option value={"deafult"} disabled hidden>--SELECT ROLE--</option>
+          <option value={"default"} disabled hidden>--SELECT ROLE--</option>
           <option value={"ROLE_STUDENT"}>student</option>
           <option value={"ROLE_PROMOTOR"}>promotor</option>
         </select>

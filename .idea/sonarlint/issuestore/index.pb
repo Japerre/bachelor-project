@@ -15,8 +15,6 @@ v
 Fbackend/src/main/java/com/bachproject/demo/subject/SubjectService.java,f\4\f44d6cbfbe18bd3123fcbfb507e6ed8a9843e241
 ‡
 Wbackend/src/main/java/com/bachproject/demo/authentication/AuthenticationController.java,e\4\e409d480a6a909f0eea88ce439fcd79f539462c3
-o
-?backend/src/main/java/com/bachproject/demo/subject/Subject.java,8\7\87f38fa42297ee72693b962d593dc43d0869b652
 q
 Abackend/src/main/java/com/bachproject/demo/employer/Employer.java,d\0\d0d8f67d1fafde99b2275d428d90b37e403046ac
 y
