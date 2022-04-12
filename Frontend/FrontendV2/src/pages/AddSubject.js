@@ -7,6 +7,7 @@ const AddSubject = () => {
   const [promotorList, setPromotorList] = useState([]);
   const [targetAudienceList, setTargetAudienceList] = useState([]);
   const [topicList, setTopicList] = useState([]);
+  const [selectedMajors, setSelectedMajors] = useState([]);
 
   const fetchPromotors = async () => {
     const data = await axios.get("http://localhost:8080/promotors", {
@@ -32,9 +33,24 @@ const AddSubject = () => {
     console.log(data);
     setTargetAudienceList(
       data.data.map((targetAudience) => ({
-        label: targetAudience.majorCode + " " + targetAudience.campus.name,
+        label: targetAudience.majorCode + " _ " + targetAudience.campus.name,
         value: targetAudience.targetAudienceId,
       }))
+    );
+  };
+
+  const fetchTopics = async (majorCode) => {
+    const data = await axios.get("http://localhost:8080/topics", {
+      headers: { authorization: localStorage.getItem("token") },
+    });
+    console.log(data.data);
+    setTopicList(
+      data.data
+        .filter((topic) => selectedMajors.includes(topic.majorCode))
+        .map((topic) => ({
+          label: topic.name,
+          value: topic.name,
+        }))
     );
   };
 
@@ -49,9 +65,18 @@ const AddSubject = () => {
     console.log(data);
   };
 
+  const onMajorChange = (e) => {
+    const majorCodeList = e.map((majorCode) =>
+      majorCode.label.split("_")[0].slice(0, -1)
+    );
+    console.log(e);
+    console.log(majorCodeList);
+    setSelectedMajors(majorCodeList);
+  };
+
   return (
     <>
-      <h1>add a subject</h1>
+      <h1>subject</h1>
       <form onSubmit={handleSubmit(onSubmit)}>
         <label>Title</label>
         <input type={"text"} {...register("title", { required: true })} />
@@ -89,24 +114,28 @@ const AddSubject = () => {
               options={targetAudienceList}
               onFocus={fetchTargetAudienceList}
               {...field}
+              onChange={(e) => onMajorChange(e)}
             />
           )}
         />
         {errors.targetAudiences && <p>select at least one target audience</p>}
 
-        <Controller 
+        <label>topics</label>
+        <Controller
           name="topics"
-          rules={{required: true}}
+          rules={{ required: true }}
           control={control}
           render={({ field }) => (
-            <Select 
+            <Select
               placeholder="select topics"
               isMulti
-              
+              options={topicList}
+              onFocus={fetchTopics}
               {...field}
             />
           )}
         />
+        {errors.topics && <p>select at least one topic</p>}
 
         <label>amount of students</label>
         <input
@@ -117,6 +146,10 @@ const AddSubject = () => {
           {...register("amountOfStudents", { required: true, min: 1, max: 3 })}
         />
         {errors.amountOfStudents && <p>select 1, 2 or 3 students</p>}
+
+        <h1>employer</h1>
+
+
         <button>submit</button>
       </form>
     </>
