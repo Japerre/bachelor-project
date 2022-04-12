@@ -38,10 +38,6 @@ public class Promotor {
     )
     private User user;
 
-//    @OneToOne(
-//            mappedBy = "promotor"
-//    )
-//    @JsonManagedReference
-//    private Subject onderwerp;
+
 
 }
