@@ -1,7 +1,0 @@
-
-o
-java:S6204"RReplace this usage of 'Stream.collect(Collectors.toList())' with 'Stream.toList()'(ª™¨¹8æ¼ãÑ0
-K
-java:S1068")Remove this unused "email" private field.(ª«Õìùÿÿÿÿ8ê¼ãÑ0
-E
-java:S1068"*Remove this unused "active" private field.(¿‡ÚÙÿÿÿÿÿ
