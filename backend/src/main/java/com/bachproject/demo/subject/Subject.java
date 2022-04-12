@@ -2,6 +2,7 @@ package com.bachproject.demo.subject;
 
 import com.bachproject.demo.promotor.Promotor;
 import com.bachproject.demo.student_subject.StudentSubject;
+import com.bachproject.demo.targetAudience.TargetAudience;
 import com.bachproject.demo.topic.Topic;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
@@ -67,6 +68,23 @@ public class Subject {
             )
     )
     private List<Topic> topicList;
+
+
+    @ManyToMany(
+            cascade = CascadeType.ALL
+    )
+    @JoinTable(
+            name = "subject_targetAudience",
+            joinColumns = @JoinColumn(
+                    name = "subject_id",
+                    referencedColumnName = "subjectId"
+            ),
+            inverseJoinColumns = @JoinColumn(
+                    name = "targetAudience_id",
+                    referencedColumnName = "targetAudienceId"
+            )
+    )
+    private List<TargetAudience> targetAudienceList;
 
 //    @ManyToOne(
 //            cascade = CascadeType.ALL

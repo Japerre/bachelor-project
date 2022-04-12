@@ -3,6 +3,7 @@ import Subjects from "./components/Subjects/Subjects";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
 import Home from "./pages/Home";
+import AddSubject from "./pages/AddSubject";
 import { useState, useEffect } from "react";
 import SubjectDetail from "./components/Subjects/SubjectDetail";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
@@ -54,6 +55,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/" element={<Home subjects={subjects} />} />
           <Route path="/subject/:id" element={<SubjectDetail />} />
+          <Route path="/addSubject" element={<AddSubject />} />
         </Routes>
       </div>
     </Router>

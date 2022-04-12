@@ -18,6 +18,9 @@ const Nav = () => {
         <Link style={navStyle} to='/login'>
           <li>login</li>
         </Link>
+        <Link style={navStyle} to="/addSubject">
+          <li>add subject</li>
+        </Link>
       </ul>
     </nav>
   );

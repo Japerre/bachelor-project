@@ -1,10 +1,9 @@
 package com.bachproject.demo.promotor;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/promotors")
@@ -17,6 +16,11 @@ public class PromotorController {
     public Promotor createNewPromotor(@RequestBody Promotor promotor){
         System.out.println(promotor);
         return promotorService.createNewPromotor(promotor);
+    }
+
+    @GetMapping
+    public List<Promotor> getPromotors(){
+        return promotorService.getPromotors();
     }
 
 }
