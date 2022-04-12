@@ -39,8 +39,6 @@ w
 Gbackend/src/main/java/com/bachproject/demo/campus/CampusRepository.java,f\b\fbb525a061f5c872a141789886d2729bb2831daa
 x
 Hbackend/src/main/java/com/bachproject/demo/config/CorsConfiguration.java,1\b\1bc34b003597d7a892b384e8953801158aad3c98
-i
-9backend/src/main/java/com/bachproject/demo/user/User.java,8\7\879af62bb30a1f43608c05716f64ac29ce010680
 {
 Kbackend/src/main/java/com/bachproject/demo/promotor/PromotorRepository.java,8\e\8efb9b19848247400d504e4841216131d8bdfabe
 ‡
