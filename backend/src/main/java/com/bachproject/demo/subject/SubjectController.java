@@ -30,7 +30,7 @@ public class SubjectController {
         return subjectService.getOnderwerp(onderwerpId);
     }
 
-    @PostMapping
+    @PostMapping(path = "/createSubject")
     //@CrossOrigin(origins = "*")
     public void postNewOnderwerp(@RequestBody Subject onderwerp){
         subjectService.addNewOnderwerp(onderwerp);

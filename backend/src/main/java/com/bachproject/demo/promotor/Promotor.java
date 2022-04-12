@@ -1,5 +1,6 @@
 package com.bachproject.demo.promotor;
 
+import com.bachproject.demo.researchGroup.ResearchGroup;
 import com.bachproject.demo.subject.Subject;
 import com.bachproject.demo.user.User;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -8,6 +9,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Data
@@ -37,6 +39,13 @@ public class Promotor {
             referencedColumnName = "userId"
     )
     private User user;
+
+
+    @ManyToOne(
+            cascade = CascadeType.ALL
+    )
+    @JoinColumn(name = "researchGroup_id", referencedColumnName = "researchGroupId")
+    private ResearchGroup researchGroup;
 
 
 

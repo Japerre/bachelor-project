@@ -33,7 +33,7 @@ public class Student {
     @OneToOne(
             cascade = CascadeType.ALL,
             fetch = FetchType.EAGER,
-            optional = true
+            optional = false
     )
     @JoinColumn(
             name = "user_id",
