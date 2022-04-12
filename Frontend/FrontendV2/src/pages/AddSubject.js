@@ -8,6 +8,8 @@ const AddSubject = () => {
   const [targetAudienceList, setTargetAudienceList] = useState([]);
   const [topicList, setTopicList] = useState([]);
   const [selectedMajors, setSelectedMajors] = useState([]);
+  const [employerType, setEmployerType] = useState("");
+  const [researchGroupList, setResearchGroupList] = useState("")
 
   const fetchPromotors = async () => {
     const data = await axios.get("http://localhost:8080/promotors", {
@@ -54,6 +56,15 @@ const AddSubject = () => {
     );
   };
 
+  const fetchResearchGroups = async () => {
+    const data = await axios.get("http://localhost:8080/researchGroups", {
+      headers: { authorization: localStorage.getItem("token") },
+    });
+    setResearchGroupList(data.data.map( (group) => (
+      <option key={group.researchGroupId} value={group.researchGroupId}>{group.name}</option>
+    ) ))
+  }
+
   const {
     register,
     handleSubmit,
@@ -73,6 +84,18 @@ const AddSubject = () => {
     console.log(majorCodeList);
     setSelectedMajors(majorCodeList);
   };
+
+
+  const researchGroupForm = (
+    <>
+    <label>research group</label>
+      <select onFocus={fetchResearchGroups}>
+        {researchGroupList}
+      </select>
+      <button>submit</button>
+    </>
+  );
+
 
   return (
     <>
@@ -148,12 +171,25 @@ const AddSubject = () => {
         {errors.amountOfStudents && <p>select 1, 2 or 3 students</p>}
 
         <h1>employer</h1>
+        <label>type of employer</label>
+        <select
+          defaultValue={"default"}
+          onChange={(e) => setEmployerType(e.target.value)}
+        >
+          <option value="default" disabled hidden>
+            -- SELECT TYPE OF EMPLOYER --
+          </option>
+          <option value="researchGroup">research group</option>
+          <option value="company">company</option>
+          <option value="student">student</option>
+        </select>
 
-
-        <button>submit</button>
+        {employerType === "researchGroup" && researchGroupForm}
       </form>
     </>
   );
 };
+
+
 
 export default AddSubject;
