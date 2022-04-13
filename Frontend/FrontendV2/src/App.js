@@ -9,6 +9,7 @@ import SubjectDetail from "./components/Subjects/SubjectDetail";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Nav from "./components/Nav";
 import axios from "axios";
+import ProtectedRoute from "./components/Authenticate/ProtectedRoute";
 
 function App() {
   const [subjects, setSubjects] = useState([]);
@@ -42,20 +43,28 @@ function App() {
     const response = await axios.get("http://localhost:8080/subjects", {
       headers: { Authorization: localStorage.getItem("token") },
     });
-
     return response.data;
   };
+
+
+
 
   return (
     <Router>
       <div>
         <Nav />
         <Routes>
-          <Route path="/register" element={<Register />} />
+          {/* Private Routes */}
+          <Route element={<ProtectedRoute/>}>
+            <Route path="/register" element={<Register/>} />
+            <Route path="/addSubject" element={<AddSubject />} />
+          </Route>
+
+          {/* Public Routes */}
           <Route path="/login" element={<Login />} />
           <Route path="/" element={<Home subjects={subjects} />} />
           <Route path="/subject/:id" element={<SubjectDetail />} />
-          <Route path="/addSubject" element={<AddSubject />} />
+
         </Routes>
       </div>
     </Router>

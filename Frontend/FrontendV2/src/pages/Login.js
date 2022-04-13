@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import parseJWT from "../components/Authenticate/parseJWT";
 
 const Login = () => {
 
@@ -28,6 +29,7 @@ const Login = () => {
       })
       .then((response) => {
         console.log(response.data);
+        // localStorage.setItem("user", response.data.user.role);
         setLoginStatus("")
         localStorage.setItem("token", "Bearer " + response.data.jwt);
         setToken(response.data.jwt);
