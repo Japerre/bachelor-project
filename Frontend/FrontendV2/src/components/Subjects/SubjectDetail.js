@@ -11,12 +11,6 @@ const SubjectDetail = () => {
   const [subject, setSubject] = useState({})
   const id = useParams().id
 
-  // const fetchSubject = async () => {
-  //   const data = await fetch(`http://localhost:8080/subjects/${id}`)
-  //   const subject = await data.json()
-  //   console.log(subject)
-  //   setSubject(subject)
-  // }
 
   const fetchSubject = async () => {
     const response = await axios.get(`http://localhost:8080/subjects/${id}`, {
@@ -28,7 +22,7 @@ const SubjectDetail = () => {
   };
 
   return (
-    <h1>{subject.omschrijving}</h1>
+    <h1>{subject.description}</h1>
   )
 }
 

@@ -9,7 +9,7 @@ const AddSubject = () => {
   const [topicList, setTopicList] = useState([]);
   const [selectedMajors, setSelectedMajors] = useState([]);
   const [employerType, setEmployerType] = useState("");
-  const [researchGroupList, setResearchGroupList] = useState("")
+  const [researchGroupList, setResearchGroupList] = useState("");
 
   const fetchPromotors = async () => {
     const data = await axios.get("http://localhost:8080/promotors", {
@@ -41,18 +41,30 @@ const AddSubject = () => {
     );
   };
 
-  const fetchTopics = async (majorCode) => {
+  // const fetchTopics = async () => {
+  //   const data = await axios.get("http://localhost:8080/topics", {
+  //     headers: { authorization: localStorage.getItem("token") },
+  //   });
+  //   console.log(data.data);
+  //   setTopicList(
+  //     data.data
+  //       .filter((topic) => selectedMajors.includes(topic.majorCode))
+  //       .map((topic) => ({
+  //         label: topic.name,
+  //         value: topic.name,
+  //       }))
+  //   );
+  // };
+
+  const fetchTopics = async () => {
     const data = await axios.get("http://localhost:8080/topics", {
       headers: { authorization: localStorage.getItem("token") },
     });
-    console.log(data.data);
     setTopicList(
-      data.data
-        .filter((topic) => selectedMajors.includes(topic.majorCode))
-        .map((topic) => ({
-          label: topic.name,
-          value: topic.name,
-        }))
+      data.data.map((topic) => ({
+        label: topic.name,
+        value: topic.topicId,
+      }))
     );
   };
 
@@ -60,10 +72,14 @@ const AddSubject = () => {
     const data = await axios.get("http://localhost:8080/researchGroups", {
       headers: { authorization: localStorage.getItem("token") },
     });
-    setResearchGroupList(data.data.map( (group) => (
-      <option key={group.researchGroupId} value={group.researchGroupId}>{group.name}</option>
-    ) ))
-  }
+    setResearchGroupList(
+      data.data.map((group) => (
+        <option key={group.researchGroupId} value={group.researchGroupId}>
+          {group.name}
+        </option>
+      ))
+    );
+  };
 
   const {
     register,
@@ -74,6 +90,38 @@ const AddSubject = () => {
 
   const onSubmit = (data) => {
     console.log(data);
+
+    const subject = {
+      title: data.title,
+      description: data.description,
+      amountOfStudents: data.amountOfStudents,
+
+      targetAudienceList: data.targetAudiences.map((item) => ({
+        targetAudienceId: item.value,
+      })),
+
+      promotorList: data.promotors.map((item) => (
+        {
+          promotorId: item.value
+        })),
+
+      topicList: data.topics.map((item) => ({
+        topicId: item.value,
+      })),
+    };
+
+    console.log(subject);
+
+    axios.post("http://localhost:8080/subjects/create", subject).then(
+      (response) => {
+        console.log(response);
+        alert("subject posted");
+      },
+      (error) => {
+        console.log(error);
+        alert("Operation Failed");
+      }
+    );
   };
 
   const onMajorChange = (e) => {
@@ -84,18 +132,6 @@ const AddSubject = () => {
     console.log(majorCodeList);
     setSelectedMajors(majorCodeList);
   };
-
-
-  const researchGroupForm = (
-    <>
-    <label>research group</label>
-      <select onFocus={fetchResearchGroups}>
-        {researchGroupList}
-      </select>
-      <button>submit</button>
-    </>
-  );
-
 
   return (
     <>
@@ -110,10 +146,12 @@ const AddSubject = () => {
           {...register("description", { required: true })}
         ></textarea>
         {errors.description && <p>discription is required</p>}
+
         <label>promotors</label>
         <Controller
           name="promotors"
           control={control}
+          //rules={{required: true}}
           render={({ field }) => (
             <Select
               placeholder="select promotor(s)"
@@ -128,8 +166,8 @@ const AddSubject = () => {
         <label>target audiences</label>
         <Controller
           name="targetAudiences"
-          rules={{ required: true }}
           control={control}
+          rules={{ required: false }}
           render={({ field }) => (
             <Select
               placeholder="select target audience(s)"
@@ -137,7 +175,7 @@ const AddSubject = () => {
               options={targetAudienceList}
               onFocus={fetchTargetAudienceList}
               {...field}
-              onChange={(e) => onMajorChange(e)}
+              //onChange={(e) => onMajorChange(e)} // this doesnt work
             />
           )}
         />
@@ -146,7 +184,7 @@ const AddSubject = () => {
         <label>topics</label>
         <Controller
           name="topics"
-          rules={{ required: true }}
+          rules={{ required: false }}
           control={control}
           render={({ field }) => (
             <Select
@@ -184,12 +222,18 @@ const AddSubject = () => {
           <option value="student">student</option>
         </select>
 
-        {employerType === "researchGroup" && researchGroupForm}
+        {employerType === "researchGroup" && (
+          <>
+            <label>research group</label>
+            <select onFocus={fetchResearchGroups} {...register}>
+              {researchGroupList}
+            </select>
+            <button>submit</button>
+          </>
+        )}
       </form>
     </>
   );
 };
-
-
 
 export default AddSubject;

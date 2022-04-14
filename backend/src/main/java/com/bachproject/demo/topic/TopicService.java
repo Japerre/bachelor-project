@@ -14,4 +14,8 @@ public class TopicService {
     public List<Topic> getTopics() {
         return topicRepository.findAll();
     }
+
+    public Topic createTopic(Topic topic) {
+        return topicRepository.save(topic);
+    }
 }

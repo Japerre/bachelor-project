@@ -12,39 +12,40 @@ import axios from "axios";
 import ProtectedRoute from "./components/Authenticate/ProtectedRoute";
 
 function App() {
-  const [subjects, setSubjects] = useState([]);
+  
+  // const [subjects, setSubjects] = useState([]);
 
-  //use effect laadt alles in bij refresh
-  useEffect(() => {
-    const getSubjects = async () => {
-      const subjectsFromServer = await fetchSubjects();
-      const subjects = [];
-      subjectsFromServer.forEach((subject) => {
-        const temp = {
-          id: subject.subjectId,
-          title: subject.titel,
-          promotor: "jeroen baert",
-          coPromotor: "lobke",
-          targetGroups: "camus deaneyre",
-          disciplines: "natuurkunde, radiology",
-          amountOfStudents: subject.aantalStudenten,
-        };
-        subjects.push(temp);
-      });
-      //console.log(subjects)
-      setSubjects(subjects);
-    };
+  // //use effect laadt alles in bij refresh
+  // useEffect(() => {
+  //   const getSubjects = async () => {
+  //     const subjectsFromServer = await fetchSubjects();
+  //     const subjects = [];
+  //     subjectsFromServer.forEach((subject) => {
+  //       const temp = {
+  //         id: subject.subjectId,
+  //         title: subject.titel,
+  //         promotor: "jeroen baert",
+  //         coPromotor: "lobke",
+  //         targetGroups: "camus deaneyre",
+  //         disciplines: "natuurkunde, radiology",
+  //         amountOfStudents: subject.aantalStudenten,
+  //       };
+  //       subjects.push(temp);
+  //     });
+  //     //console.log(subjects)
+  //     setSubjects(subjects);
+  //   };
 
-    getSubjects();
-  }, []);
+  //   getSubjects();
+  // }, []);
 
 
-  const fetchSubjects = async () => {
-    const response = await axios.get("http://localhost:8080/subjects", {
-      headers: { Authorization: localStorage.getItem("token") },
-    });
-    return response.data;
-  };
+  // const fetchSubjects = async () => {
+  //   const response = await axios.get("http://localhost:8080/subjects", {
+  //     headers: { Authorization: localStorage.getItem("token") },
+  //   });
+  //   return response.data;
+  // };
 
 
 
@@ -62,7 +63,7 @@ function App() {
 
           {/* Public Routes */}
           <Route path="/login" element={<Login />} />
-          <Route path="/" element={<Home subjects={subjects} />} />
+          <Route path="/" element={<Home />} />
           <Route path="/subject/:id" element={<SubjectDetail />} />
 
         </Routes>

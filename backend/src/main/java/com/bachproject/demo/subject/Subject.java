@@ -1,18 +1,14 @@
 package com.bachproject.demo.subject;
 
 import com.bachproject.demo.promotor.Promotor;
-import com.bachproject.demo.student_subject.StudentSubject;
 import com.bachproject.demo.targetAudience.TargetAudience;
 import com.bachproject.demo.topic.Topic;
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @Data
@@ -32,9 +28,9 @@ public class Subject {
             generator = "subject_sequence"
     )
     private Long subjectId;
-    private String titel;
-    private String omschrijving;
-    private int aantalStudenten;
+    private String title;
+    private String description;
+    private int amountOfStudents;
 
     @ManyToMany(
             cascade = CascadeType.ALL
@@ -63,8 +59,8 @@ public class Subject {
                     referencedColumnName = "subjectId"
             ),
             inverseJoinColumns = @JoinColumn(
-                    name = "topic",
-                    referencedColumnName = "name"
+                    name = "topic_id",
+                    referencedColumnName = "topicId"
             )
     )
     private List<Topic> topicList;

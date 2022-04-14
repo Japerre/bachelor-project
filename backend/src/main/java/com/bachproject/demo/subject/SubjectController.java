@@ -20,21 +20,25 @@ public class SubjectController {
 
     @GetMapping
     //@CrossOrigin(origins = "*")
-    public List<Subject> getOnderwerpen(){
-        return subjectService.getOnderwerpen();
+    public List<Subject> getSubjects(){
+        return subjectService.getSubjects();
     }
 
     @GetMapping(path = "/{onderwerpId}")
     //@CrossOrigin(origins = "*")
-    public Optional<Subject> getOnderwerp(@PathVariable Long onderwerpId){
-        return subjectService.getOnderwerp(onderwerpId);
+    public Optional<Subject> getSubject(@PathVariable Long onderwerpId){
+        return subjectService.getSubject(onderwerpId);
     }
 
-    @PostMapping(path = "/createSubject")
+    @PostMapping(path = "/create")
     //@CrossOrigin(origins = "*")
-    public void postNewOnderwerp(@RequestBody Subject onderwerp){
-        subjectService.addNewOnderwerp(onderwerp);
+    public Subject createSubject(@RequestBody Subject subject){
+        System.out.println(subject);
+        return subjectService.addSubject(subject);
     }
+
+
+
 
     @PutMapping(path = "/{subjectId}")
     //@CrossOrigin(origins = "*")

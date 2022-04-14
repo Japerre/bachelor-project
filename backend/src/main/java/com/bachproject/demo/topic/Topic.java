@@ -13,6 +13,18 @@ import javax.persistence.*;
 public class Topic {
 
     @Id
+    @SequenceGenerator(
+            name = "topic_sequence",
+            sequenceName = "topic_sequence",
+            allocationSize = 1
+    )
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "topic_sequence"
+    )
+    Long topicId;
+
+    //@Id
     String name;
     String majorCode;
 }
