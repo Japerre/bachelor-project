@@ -22,7 +22,7 @@ const Home = () => {
   
   
   return (
-    <div>
+    <div className="flex-container">
       <Subjects subjects={subjects} />
     </div>
   )

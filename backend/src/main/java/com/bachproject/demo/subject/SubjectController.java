@@ -31,8 +31,8 @@ public class SubjectController {
 
     @GetMapping(path = "/{onderwerpId}")
     //@CrossOrigin(origins = "*")
-    public Optional<Subject> getSubject(@PathVariable Long onderwerpId){
-        return subjectService.getSubject(onderwerpId);
+    public Optional<Subject> getSubject(@PathVariable Long subjectId){
+        return subjectService.getSubject(subjectId);
     }
 
     @PostMapping(path = "/create")
