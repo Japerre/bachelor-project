@@ -11,7 +11,7 @@ const Home = () => {
 
   useEffect(()=>{
     const getSubjects = async () => {
-      const data = await axios.get("http://localhost:8080/subjects", {
+      const data = await axios.get("http://localhost:8080/subjects/approvedSubjects", {
         headers: { Authorization: localStorage.getItem("token") },
       })
       //console.log(data.data)

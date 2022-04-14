@@ -62,4 +62,8 @@ public class SubjectService {
         subject.getPromotorList().add(promotor);
         subjectRepository.save(subject);
     }
+
+    public List<Subject> getApprovedSubjects() {
+        return subjectRepository.findByApprovedTrue();
+    }
 }

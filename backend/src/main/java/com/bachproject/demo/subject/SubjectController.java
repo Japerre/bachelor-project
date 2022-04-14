@@ -19,9 +19,14 @@ public class SubjectController {
     }
 
     @GetMapping
-    //@CrossOrigin(origins = "*")
     public List<Subject> getSubjects(){
         return subjectService.getSubjects();
+    }
+
+
+    @GetMapping(value = "/approvedSubjects")
+    public List<Subject> getApprovedSubjects(){
+        return subjectService.getApprovedSubjects();
     }
 
     @GetMapping(path = "/{onderwerpId}")

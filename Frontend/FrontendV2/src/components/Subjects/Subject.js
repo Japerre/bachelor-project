@@ -26,7 +26,7 @@ const Subject = ({ subject }) => {
       <header className="card-header">{subject.title}</header>
       <div className="card-body"></div>
       <div className="card-item">
-        <FaGraduationCap name="promotors"/> {promotorNames}
+        <FaGraduationCap /> {promotorNames}
       </div>
       <div className="card-item">
         {" "}
