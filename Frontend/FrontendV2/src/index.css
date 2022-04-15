@@ -28,13 +28,13 @@ nav {
   background-color: whitesmoke;
   padding: 1rem;
   border: 1px solid #777;
-  margin: 10px;
+  margin: 5px;
   border-radius: .25rem;
   position: relative;
 }
 
 .card-header {
-  font-size: 1.5rem;
+  font-size: 1.1rem;
   margin-bottom: 1.25rem;
   font-weight: bold;
 }
@@ -69,7 +69,23 @@ nav {
   flex-wrap: wrap;
   justify-content: start;
   align-items: stretch;
-  
+}
+
+.grid-container {
+  /* background-color: red; */
+  padding-left: 50px;
+  padding-right: 50px;
+  display: grid;
+  /* grid-template-columns: repeat(3, 33%); */
+  /* grid-template-columns: repeat(3, minmax(100px, 33%)); */
+  grid-template-columns: repeat(auto-fill, minmax(300px, 33%));
+  justify-content: center;
+}
+
+.subject-container {
+  background-color: hsl(0,0%,93%);
+  padding-top: 30px;
+  padding-left: 0px;
 }
 
 /* css for register.js */

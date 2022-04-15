@@ -29,7 +29,7 @@ public class SubjectController {
         return subjectService.getApprovedSubjects();
     }
 
-    @GetMapping(path = "/{onderwerpId}")
+    @GetMapping(path = "/{subjectId}")
     //@CrossOrigin(origins = "*")
     public Optional<Subject> getSubject(@PathVariable Long subjectId){
         return subjectService.getSubject(subjectId);
