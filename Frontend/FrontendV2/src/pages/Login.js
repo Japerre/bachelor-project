@@ -1,7 +1,7 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect,  } from "react";
 import axios from "axios";
 import parseJWT from "../components/Authenticate/parseJWT";
-import { UserContext } from "../components/UserContext";
+
 
 const Login = () => {
 
@@ -11,7 +11,7 @@ const Login = () => {
   const [loginStatus, setLoginStatus] = useState("");
   const [token, setToken] = useState("");
 
-  const {user, setUser} = useContext(UserContext)
+  const [user, setUser] = useState({})
 
   axios.defaults.withCredentials = true; // weet niet wat dit doet
 

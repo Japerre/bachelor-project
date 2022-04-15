@@ -1,9 +1,8 @@
 import { useForm, Controller } from "react-hook-form";
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import Select from "react-select";
-import { UserContext } from "../components/UserContext";
-import { BrowserRouter as Router, Navigate, Route, Routes, useNavigate } from "react-router-dom";
+import { BrowserRouter as Router, Navigate, Route, Routes } from "react-router-dom";
 
 const AddSubject = () => {
   const [promotorList, setPromotorList] = useState([]);
@@ -13,7 +12,7 @@ const AddSubject = () => {
   const [employerType, setEmployerType] = useState("");
   const [researchGroupList, setResearchGroupList] = useState("");
 
-  const {user, setUser} = useContext(UserContext)
+  const [user, setUser] = useState({})
 
   // fetch te user and store it if not a valid jwt redirect to /login
   useEffect( () => {

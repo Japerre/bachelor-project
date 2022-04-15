@@ -1,11 +1,10 @@
 import Subjects from "../components/Subjects/Subjects";
 import { useState, useEffect, useContext } from "react";
 import axios from "axios";
-import { UserContext } from "../components/UserContext";
 
 const Home = () => {
   const [subjects, setSubjects] = useState([]);
-  const { user, setUser } = useContext(UserContext);
+  
 
   useEffect(() => {
     const getSubjects = async () => {
