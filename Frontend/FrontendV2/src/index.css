@@ -76,11 +76,20 @@ nav {
   padding-left: 50px;
   padding-right: 50px;
   display: grid;
-  /* grid-template-columns: repeat(3, 33%); */
+  grid-template-columns: repeat(3, 33%);
   /* grid-template-columns: repeat(3, minmax(100px, 33%)); */
-  grid-template-columns: repeat(auto-fill, minmax(300px, 33%));
   justify-content: center;
 }
+
+@media only screen and (max-width: 900px) {
+  .grid-container {
+    background-color: red;
+    display: grid;
+    justify-content: center;
+    grid-template-columns: 100%
+  }
+}
+
 
 .subject-container {
   background-color: hsl(0,0%,93%);

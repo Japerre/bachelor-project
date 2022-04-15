@@ -51,3 +51,13 @@ Ibackend/src/main/java/com/bachproject/demo/subject/SubjectRepository.java,3\2\
 Nbackend/src/main/java/com/bachproject/demo/student_subject/StudentSubject.java,e\c\ec25c66a9c7213a060d0c52e5de03cad56fe58f9
 o
 ?backend/src/main/java/com/bachproject/demo/student/Student.java,d\3\d3841eabbcbd4c745687c935794bab79d11b2b86
+„
+Tbackend/src/main/java/com/bachproject/demo/authentication/AuthenticationRequest.java,6\7\67922d5db4fb599f25a1b760a86e9acbab0ca7c6
+[
++Frontend/FrontendV2/src/pages/AddSubject.js,2\b\2bafee9b49221992bfff874dbf7edad63f068ebd
+N
+Frontend/FrontendV2/src/App.js,8\8\8827bcc68524adef26697a37262e7566ea23b732
+V
+&Frontend/FrontendV2/src/pages/Login.js,b\8\b8f76fe65fd1604ff75c0f8d130feac3b0ed0b55
+U
+%Frontend/FrontendV2/src/pages/Home.js,a\4\a4b1c256c1f691815ff81d61d7580ee0aa650ea0
