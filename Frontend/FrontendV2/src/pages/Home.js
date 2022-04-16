@@ -1,5 +1,5 @@
 import Subjects from "../components/Subjects/Subjects";
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 
 const Home = () => {

@@ -42,7 +42,26 @@ public class SubjectController {
         return subjectService.addSubject(subject);
     }
 
+    @GetMapping(value = "/subjectsToReview")
+    public List<Subject> getSubjectsToReview() {
+        return subjectService.getSubjectsToReview();
+    }
 
+
+    @GetMapping(value = "/disapprovedSubjects")
+    public List<Subject> getDisapprovedSubjects() {
+        return subjectService.getDisapprovedSubjects();
+    }
+
+    @PutMapping(value = "/approve/{subjectId}")
+    public void approveSubject(@PathVariable Long subjectId) {
+        subjectService.approveSubject(subjectId);
+    }
+
+    @PutMapping(value = "/disapprove/{subjectId}")
+    public void disapproveSubject(@PathVariable Long subjectId){
+        subjectService.disapproveSubject(subjectId);
+    }
 
 
     @PutMapping(path = "/{subjectId}")

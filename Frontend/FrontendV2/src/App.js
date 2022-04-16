@@ -17,11 +17,11 @@ function App() {
         <Nav />
           <Routes>
             {/* Private Routes */}
-            <Route element={<ProtectedRoute />}>
+            {/* <Route element={<ProtectedRoute />}> */}
               <Route path="/register" element={<Register />} />
               <Route path="/addSubject" element={<AddSubject />} />
               <Route path="/approveSubjects" element={<ApproveSubjects />} />
-            </Route>
+            {/* </Route> */}
 
             {/* Public Routes */}
             <Route path="/login" element={<Login />} />

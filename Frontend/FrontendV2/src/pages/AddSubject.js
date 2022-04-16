@@ -2,7 +2,11 @@ import { useForm, Controller } from "react-hook-form";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Select from "react-select";
-import { BrowserRouter as Router, Navigate, Route, Routes } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Navigate,
+  useNavigate,
+} from "react-router-dom";
 
 const AddSubject = () => {
   const [promotorList, setPromotorList] = useState([]);
@@ -12,21 +16,24 @@ const AddSubject = () => {
   const [employerType, setEmployerType] = useState("");
   const [researchGroupList, setResearchGroupList] = useState("");
 
-  const [user, setUser] = useState({})
+  const [user, setUser] = useState({});
 
-  // fetch te user and store it if not a valid jwt redirect to /login
-  useEffect( () => {
-    if(localStorage.getItem("token")){
-      axios.get("http://localhost:8080/whoami", {
-        headers: { Authorization: localStorage.getItem("token") },
-      }).then((data) => {
-        setUser(data.data)
-      }).catch((error) => {
-        // jwt token is not valid so the user is not logged in
-        return Navigate("/login")
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:8080/whoami", {
+        headers: { authorization: localStorage.getItem("token") },
       })
-    }
-  },[])
+      .then((data) => {
+        if (data.data.role != "ROLE_PROMOTOR") navigate("/");
+        setUser(data.data);
+      })
+      .catch((error) => {
+        navigate("/login");
+      });
+  }, []);
+
 
   const fetchPromotors = async () => {
     const data = await axios.get("http://localhost:8080/promotors", {
@@ -57,7 +64,6 @@ const AddSubject = () => {
       }))
     );
   };
-
 
   const fetchTopics = async () => {
     const data = await axios.get("http://localhost:8080/topics", {
@@ -103,14 +109,13 @@ const AddSubject = () => {
         targetAudienceId: item.value,
       })),
 
-      promotorList: data.promotors.map((item) => (
-        {
-          promotorId: item.value
-        })),
+      promotorList: data.promotors.map((item) => ({
+        promotorId: item.value,
+      })),
 
       topicList: data.topics.map((item) => ({
         topicId: item.value,
-      })),
+      }))
     };
 
     console.log(subject);

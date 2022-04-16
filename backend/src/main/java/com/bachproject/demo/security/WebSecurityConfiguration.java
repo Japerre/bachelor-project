@@ -52,8 +52,8 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable() // TODO dit enablen vor meer security
                 .authorizeRequests()
-                .antMatchers("/authenticate", "/users/register", "/students/register", "/subjects/{subjectId}", "/subjects", "/targetaudience", "/promotors").permitAll()
-                .anyRequest().hasAnyRole("USER", "STUDENT", "ADMIN").and()// alles behalve /authenticate moet een user voor ingelogd zijn
+                .antMatchers("/authenticate", "/users/register", "/students/register", "/subjects/{subjectId}", "/subjects", "/targetaudience", "/promotors", "/subjects/approve/{subjectId}", "/subjects/disapprove/{subjectId}").permitAll()
+                .anyRequest().hasAnyRole("USER", "STUDENT", "ADMIN", "COORDINATOR", "PROMOTOR").and()// alles behalve /authenticate moet een user voor ingelogd zijn
                 .cors() //wtf dit moet er zeker staan !!
                 .and()
                 //.hasRole("USER") //zet dit automatisch om naar "ROLE_USER"

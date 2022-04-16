@@ -15,17 +15,15 @@ const Login = () => {
 
   axios.defaults.withCredentials = true; // weet niet wat dit doet
 
-  useEffect( () => {
-    if(localStorage.getItem("token")){
-      axios.get("http://localhost:8080/whoami", {
-        headers: { Authorization: localStorage.getItem("token") },
-      }).then((data) => {
-        setUser(data.data)
-      }).catch((error) => {
+  useEffect(() => {
+    axios.get("http://localhost:8080/whoami", {
+      headers: { authorization: localStorage.getItem("token") },
+    }).then((data) => {
+      setUser(data.data)
+    }).catch((error) => {
 
-      })
-    }
-  },[])
+    });
+  }, []);
 
   const login = (e) => {
 
@@ -55,20 +53,24 @@ const Login = () => {
   return (
     <>
       {user.userId ? (
-        <>
-          <h1>succesfully signed in as {user.firstName + " " + user.lastName}</h1>
+        <center style={{backgroundColor: "hsl(0,0%,93%)"}}>
+          <h1>first name: {user.firstName}</h1>
+          <h1>last name: {user.lastName}</h1>
+          <h1>username: {user.userName}</h1>
+          <h1>role: {user.role}</h1>
           <button
             onClick={() => {
               localStorage.clear()
               setToken("")
               window.location.reload(false)
             }}
+            style={{cursor: "pointer"}}
           >
             logout
           </button>
-        </>
+        </center>
       ) : (
-        <>
+        <div className="form-container">
           <form>
             <h1>login</h1>
             <label htmlFor="">username</label>
@@ -85,10 +87,10 @@ const Login = () => {
                 setPasswordLog(e.target.value);
               }}
             />
-            <button onClick={(e) => login(e)}>login</button>
+            <button onClick={(e) => login(e)} style={{backgroundColor: "white", cursor: "pointer"}}>login</button>
           </form>
           <h1 style={{color: "red"}}>{loginStatus}</h1>
-        </>
+        </div>
       )}
     </>
   );

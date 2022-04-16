@@ -83,7 +83,8 @@ nav {
 
 @media only screen and (max-width: 900px) {
   .grid-container {
-    background-color: red;
+    padding: 0px;
+    /* background-color: red; */
     display: grid;
     justify-content: center;
     grid-template-columns: 100%
@@ -94,7 +95,7 @@ nav {
 .subject-container {
   background-color: hsl(0,0%,93%);
   padding-top: 30px;
-  padding-left: 0px;
+  padding-bottom: 30px;
 }
 
 /* css for register.js */
@@ -125,6 +126,12 @@ form {
     justify-content: space-evenly;
     flex-grow: 1;
     padding-bottom: 1rem;
+}
+
+.form-container {
+  background-color: hsl(0,0%,93%);
+  padding: 30px;
+  margin: 30px;
 }
 
 a, a:visited {
@@ -197,3 +204,28 @@ button {
 .line {
     display: inline-block;
 }
+
+
+/* styles for approve subject page */
+
+.approve-btn {
+  color: green;
+  margin-right: 15px;
+  cursor: pointer;
+}
+
+.approve-btn:hover {
+  transition: all 0.2s ease;
+  transform: scale(1.3);
+}
+
+.remove-btn {
+  color: red;
+  cursor: pointer;
+}
+
+.remove-btn:hover {
+  transition: all 0.2s ease;
+  transform: scale(1.3);
+}
+

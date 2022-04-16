@@ -89,7 +89,7 @@ const Register = () => {
   }
 
   return (
-    <>
+    <div className="form-container">
       <h1>register</h1>
       <form onSubmit={e => registerStudent(e)}>
         <label htmlFor="role">role</label>
@@ -161,7 +161,7 @@ const Register = () => {
         )}
 
       </form>
-    </>
+    </div>
   );
 };
 
