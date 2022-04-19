@@ -2,11 +2,13 @@ package com.bachproject.demo.subject;
 
 import com.bachproject.demo.promotor.Promotor;
 import com.bachproject.demo.promotor.PromotorRepository;
+import com.bachproject.demo.targetAudience.TargetAudience;
 import com.bachproject.demo.targetAudience.TargetAudienceRepository;
 import com.bachproject.demo.topic.TopicRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -26,10 +28,6 @@ public class SubjectService {
     @Autowired
     private PromotorRepository promotorRepository;
 
-
-    public List<Subject> getSubjects() {
-        return subjectRepository.findAll();
-    }
 
     public Optional<Subject> getSubject(Long id) {
         return subjectRepository.findById(id);
@@ -79,5 +77,18 @@ public class SubjectService {
 
     public List<Subject> getSubjectsToReview() {
         return subjectRepository.findByApprovedIsNull();
+    }
+
+    public List<Subject> getSubjetsByTargetAudience(Long targetAudienceId) {
+        TargetAudience targetAudience = targetAudienceRepository.findByTargetAudienceId(targetAudienceId);
+        System.out.println(targetAudience);
+        List<Subject> subjectList = subjectRepository.findAll();
+        List<Subject> temp = new ArrayList<>();
+        for(Subject s : subjectList){
+            if(s.getTargetAudienceList().contains(targetAudience) && s.getApproved()){
+                temp.add(s);
+            }
+        }
+        return temp;
     }
 }

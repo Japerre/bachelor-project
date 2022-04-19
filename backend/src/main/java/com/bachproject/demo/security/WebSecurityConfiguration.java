@@ -9,6 +9,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -21,6 +22,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 @Configuration
 @EnableWebSecurity
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Autowired
@@ -46,15 +48,20 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
         auth.userDetailsService(userDetailsService);
     }
 
+    private static final String[] WHITELIST_PERMITALL = {"/authenticate", "/users/register", "/students/register", "/subjects/approvedSubjects", "/subjects/{subjectId}", "/targetaudience", "/promotors"};
+    private static final String[] WHITELIST_AUTHENTICATED = {""};
+    private static final String[] WHITELIST_COORDINATOR = {"/subjects/disapprove/{subjectId}", "/subjects/approve/{subjectId}"};
 
     @Override // configure authorisation
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .csrf().disable() // TODO dit enablen vor meer security
                 .authorizeRequests()
-                .antMatchers("/authenticate", "/users/register", "/students/register", "/subjects/{subjectId}", "/subjects", "/targetaudience", "/promotors", "/subjects/approve/{subjectId}", "/subjects/disapprove/{subjectId}").permitAll()
-                .anyRequest().hasAnyRole("USER", "STUDENT", "ADMIN", "COORDINATOR", "PROMOTOR").and()// alles behalve /authenticate moet een user voor ingelogd zijn
-                .cors() //wtf dit moet er zeker staan !!
+//                .antMatchers("/authenticate", "/users/register", "/students/register", "/subjects/{subjectId}", "/subjects", "/targetaudience", "/promotors",  "/subjects/disapprove/{subjectId}").permitAll()
+//                .anyRequest().hasAnyRole("USER", "STUDENT", "ADMIN", "COORDINATOR", "PROMOTOR").and()// alles behalve /authenticate moet een user voor ingelogd zijn
+//                .antMatchers(WHITELIST_PERMITALL).permitAll()
+                .anyRequest().permitAll().and()
+                .cors() // dit moet er zeker staan !!
                 .and()
                 //.hasRole("USER") //zet dit automatisch om naar "ROLE_USER"
                 .exceptionHandling()

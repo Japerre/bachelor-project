@@ -21,6 +21,6 @@ public class StudentController {
     @PostMapping("/register")
     //@CrossOrigin(origins = "*")
     public Student registerStudent(@RequestBody Student student) {
-        return studentService.registerStudentV2(student);
+        return studentService.registerStudent(student);
     }
 }

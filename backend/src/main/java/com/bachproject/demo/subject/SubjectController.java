@@ -2,8 +2,11 @@ package com.bachproject.demo.subject;
 
 import com.bachproject.demo.promotor.Promotor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.security.RolesAllowed;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,11 +19,6 @@ public class SubjectController {
     @Autowired
     public SubjectController(SubjectService subjectService){
         this.subjectService = subjectService;
-    }
-
-    @GetMapping
-    public List<Subject> getSubjects(){
-        return subjectService.getSubjects();
     }
 
 
@@ -51,6 +49,11 @@ public class SubjectController {
     @GetMapping(value = "/disapprovedSubjects")
     public List<Subject> getDisapprovedSubjects() {
         return subjectService.getDisapprovedSubjects();
+    }
+
+    @GetMapping(value = "/getSubjectsByTargetAudience/{targetAudienceId}")
+    public List<Subject> getSubjectsByTargetAudience(@PathVariable Long targetAudienceId){
+        return subjectService.getSubjetsByTargetAudience(targetAudienceId);
     }
 
     @PutMapping(value = "/approve/{subjectId}")

@@ -83,6 +83,5 @@ public class Subject {
     )
     private List<TargetAudience> targetAudienceList;
 
-    //@Column(columnDefinition = "boolean default false")
     private Boolean approved;
 }

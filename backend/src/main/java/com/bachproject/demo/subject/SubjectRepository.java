@@ -29,4 +29,7 @@ public interface SubjectRepository extends JpaRepository<Subject, Long> {
     void setApprovedFalse(@Param(value = "id") Long id);
 
     List<Subject> findByApprovedIsNull();
+
+//    @Query("select s from Subject s where s.targetAudienceList")
+//    void getSubjectsByTargetAudience(Long targetAudienceId);
 }

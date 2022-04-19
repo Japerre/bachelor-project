@@ -26,13 +26,6 @@ public class StudentService {
     }
 
     public Student registerStudent(Student student) {
-        TargetAudience targetAudience = targetAudienceRepository.findByMajorCode(student.getTargetAudience().getMajorCode());
-        student.setTargetAudience(targetAudience);
-        student.getUser().setPassword(passwordEncoder.encode(student.getUser().getPassword()));
-        return studentRepository.save(student);
-    }
-
-    public Student registerStudentV2(Student student) {
         TargetAudience targetAudience = targetAudienceRepository.findByTargetAudienceId(student.getTargetAudience().getTargetAudienceId());
         student.setTargetAudience(targetAudience);
         student.getUser().setPassword(passwordEncoder.encode(student.getUser().getPassword()));
