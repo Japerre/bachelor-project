@@ -19,15 +19,20 @@ public class SubjectController {
     }
 
     @GetMapping
-    //@CrossOrigin(origins = "*")
     public List<Subject> getSubjects(){
         return subjectService.getSubjects();
     }
 
-    @GetMapping(path = "/{onderwerpId}")
+
+    @GetMapping(value = "/approvedSubjects")
+    public List<Subject> getApprovedSubjects(){
+        return subjectService.getApprovedSubjects();
+    }
+
+    @GetMapping(path = "/{subjectId}")
     //@CrossOrigin(origins = "*")
-    public Optional<Subject> getSubject(@PathVariable Long onderwerpId){
-        return subjectService.getSubject(onderwerpId);
+    public Optional<Subject> getSubject(@PathVariable Long subjectId){
+        return subjectService.getSubject(subjectId);
     }
 
     @PostMapping(path = "/create")
@@ -37,7 +42,26 @@ public class SubjectController {
         return subjectService.addSubject(subject);
     }
 
+    @GetMapping(value = "/subjectsToReview")
+    public List<Subject> getSubjectsToReview() {
+        return subjectService.getSubjectsToReview();
+    }
 
+
+    @GetMapping(value = "/disapprovedSubjects")
+    public List<Subject> getDisapprovedSubjects() {
+        return subjectService.getDisapprovedSubjects();
+    }
+
+    @PutMapping(value = "/approve/{subjectId}")
+    public void approveSubject(@PathVariable Long subjectId) {
+        subjectService.approveSubject(subjectId);
+    }
+
+    @PutMapping(value = "/disapprove/{subjectId}")
+    public void disapproveSubject(@PathVariable Long subjectId){
+        subjectService.disapproveSubject(subjectId);
+    }
 
 
     @PutMapping(path = "/{subjectId}")

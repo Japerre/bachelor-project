@@ -6,6 +6,7 @@ import com.bachproject.demo.topic.Topic;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.stereotype.Controller;
 
 import javax.persistence.*;
 import java.util.List;
@@ -82,28 +83,6 @@ public class Subject {
     )
     private List<TargetAudience> targetAudienceList;
 
-//    @ManyToOne(
-//            cascade = CascadeType.ALL
-//    )
-//    @JoinColumn(
-//            name = "opdrachtgever_id",
-//            referencedColumnName = "opdrachtgeverId"
-//    )
-//    private Opdrachtgever opdrachtgever;
-
-
-//    @OneToOne(
-//            cascade = CascadeType.ALL,
-//            fetch = FetchType.LAZY,
-//            optional = true
-//    )
-//    @JoinColumn(
-//            name = "promotor_id",
-//            referencedColumnName = "promotorId"
-//    )
-//    @JsonBackReference
-//    private Promotor promotor;
-
-//    @OneToMany(mappedBy = "student")
-//    private Set<StudentSubject> studentSubjectSet = new HashSet<StudentSubject>();
+    //@Column(columnDefinition = "boolean default false")
+    private Boolean approved;
 }

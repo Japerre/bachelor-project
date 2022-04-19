@@ -2,6 +2,11 @@ import { useForm, Controller } from "react-hook-form";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Select from "react-select";
+import {
+  BrowserRouter as Router,
+  Navigate,
+  useNavigate,
+} from "react-router-dom";
 
 const AddSubject = () => {
   const [promotorList, setPromotorList] = useState([]);
@@ -10,6 +15,25 @@ const AddSubject = () => {
   const [selectedMajors, setSelectedMajors] = useState([]);
   const [employerType, setEmployerType] = useState("");
   const [researchGroupList, setResearchGroupList] = useState("");
+
+  const [user, setUser] = useState({});
+
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:8080/whoami", {
+        headers: { authorization: localStorage.getItem("token") },
+      })
+      .then((data) => {
+        if (data.data.role != "ROLE_PROMOTOR") navigate("/");
+        setUser(data.data);
+      })
+      .catch((error) => {
+        navigate("/login");
+      });
+  }, []);
+
 
   const fetchPromotors = async () => {
     const data = await axios.get("http://localhost:8080/promotors", {
@@ -40,21 +64,6 @@ const AddSubject = () => {
       }))
     );
   };
-
-  // const fetchTopics = async () => {
-  //   const data = await axios.get("http://localhost:8080/topics", {
-  //     headers: { authorization: localStorage.getItem("token") },
-  //   });
-  //   console.log(data.data);
-  //   setTopicList(
-  //     data.data
-  //       .filter((topic) => selectedMajors.includes(topic.majorCode))
-  //       .map((topic) => ({
-  //         label: topic.name,
-  //         value: topic.name,
-  //       }))
-  //   );
-  // };
 
   const fetchTopics = async () => {
     const data = await axios.get("http://localhost:8080/topics", {
@@ -100,14 +109,13 @@ const AddSubject = () => {
         targetAudienceId: item.value,
       })),
 
-      promotorList: data.promotors.map((item) => (
-        {
-          promotorId: item.value
-        })),
+      promotorList: data.promotors.map((item) => ({
+        promotorId: item.value,
+      })),
 
       topicList: data.topics.map((item) => ({
         topicId: item.value,
-      })),
+      }))
     };
 
     console.log(subject);

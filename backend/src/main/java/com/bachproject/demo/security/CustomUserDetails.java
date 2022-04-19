@@ -1,6 +1,7 @@
 package com.bachproject.demo.security;
 
 import com.bachproject.demo.user.User;
+import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -8,12 +9,13 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.*;
 import java.util.stream.Collectors;
 
+
+@Data
 public class CustomUserDetails implements UserDetails {
 
     private String userName;
     private String email;
     private String password;
-    private boolean active;
     private List<GrantedAuthority> authorities;
 
     public CustomUserDetails(User user) {

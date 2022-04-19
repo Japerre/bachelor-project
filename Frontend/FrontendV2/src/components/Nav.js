@@ -21,6 +21,9 @@ const Nav = () => {
         <Link style={navStyle} to="/addSubject">
           <li>add subject</li>
         </Link>
+        <Link style={navStyle} to="/approveSubjects">
+          <li>approve subjects</li>
+        </Link>
       </ul>
     </nav>
   );

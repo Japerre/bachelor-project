@@ -22,17 +22,19 @@ nav {
   list-style: none;
 }
 
+/* css for subjects */
+
 .card {
   background-color: whitesmoke;
   padding: 1rem;
   border: 1px solid #777;
-  margin: 10px;
+  margin: 5px;
   border-radius: .25rem;
   position: relative;
 }
 
 .card-header {
-  font-size: 1.5rem;
+  font-size: 1.1rem;
   margin-bottom: 1.25rem;
   font-weight: bold;
 }
@@ -60,6 +62,40 @@ nav {
 
 .btn:hover, .btn:focus {
   background: hsl(197,95%,20%);
+}
+
+.flex-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: start;
+  align-items: stretch;
+}
+
+.grid-container {
+  /* background-color: red; */
+  padding-left: 50px;
+  padding-right: 50px;
+  display: grid;
+  grid-template-columns: repeat(3, 33%);
+  /* grid-template-columns: repeat(3, minmax(100px, 33%)); */
+  justify-content: center;
+}
+
+@media only screen and (max-width: 900px) {
+  .grid-container {
+    padding: 0px;
+    /* background-color: red; */
+    display: grid;
+    justify-content: center;
+    grid-template-columns: 100%
+  }
+}
+
+
+.subject-container {
+  background-color: hsl(0,0%,93%);
+  padding-top: 30px;
+  padding-bottom: 30px;
 }
 
 /* css for register.js */
@@ -90,6 +126,12 @@ form {
     justify-content: space-evenly;
     flex-grow: 1;
     padding-bottom: 1rem;
+}
+
+.form-container {
+  background-color: hsl(0,0%,93%);
+  padding: 30px;
+  margin: 30px;
 }
 
 a, a:visited {
@@ -162,3 +204,28 @@ button {
 .line {
     display: inline-block;
 }
+
+
+/* styles for approve subject page */
+
+.approve-btn {
+  color: green;
+  margin-right: 15px;
+  cursor: pointer;
+}
+
+.approve-btn:hover {
+  transition: all 0.2s ease;
+  transform: scale(1.3);
+}
+
+.remove-btn {
+  color: red;
+  cursor: pointer;
+}
+
+.remove-btn:hover {
+  transition: all 0.2s ease;
+  transform: scale(1.3);
+}
+

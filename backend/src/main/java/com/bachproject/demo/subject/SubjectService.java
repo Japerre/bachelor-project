@@ -2,13 +2,11 @@ package com.bachproject.demo.subject;
 
 import com.bachproject.demo.promotor.Promotor;
 import com.bachproject.demo.promotor.PromotorRepository;
-import com.bachproject.demo.targetAudience.TargetAudience;
 import com.bachproject.demo.targetAudience.TargetAudienceRepository;
 import com.bachproject.demo.topic.TopicRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -61,5 +59,25 @@ public class SubjectService {
         Subject subject = subjectRepository.getById(subjectId);
         subject.getPromotorList().add(promotor);
         subjectRepository.save(subject);
+    }
+
+    public List<Subject> getApprovedSubjects() {
+        return subjectRepository.findByApprovedTrue();
+    }
+
+    public List<Subject> getDisapprovedSubjects() {
+        return subjectRepository.findByApprovedFalse();
+    }
+
+    public void approveSubject(Long subjectId) {
+        subjectRepository.setApprovedTrue(subjectId);
+    }
+
+    public void disapproveSubject(Long subjectId) {
+        subjectRepository.setApprovedFalse(subjectId);
+    }
+
+    public List<Subject> getSubjectsToReview() {
+        return subjectRepository.findByApprovedIsNull();
     }
 }

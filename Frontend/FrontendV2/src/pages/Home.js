@@ -1,31 +1,32 @@
-import Subjects from "../components/Subjects/Subjects"
-import { useState, useEffect } from "react"
-import axios from "axios"
-
-
+import Subjects from "../components/Subjects/Subjects";
+import { useState, useEffect } from "react";
+import axios from "axios";
 
 const Home = () => {
-  
   const [subjects, setSubjects] = useState([]);
+  
 
-
-  useEffect(()=>{
+  useEffect(() => {
     const getSubjects = async () => {
-      const data = await axios.get("http://localhost:8080/subjects", {
-        headers: { Authorization: localStorage.getItem("token") },
-      })
+      const data = await axios.get(
+        "http://localhost:8080/subjects/approvedSubjects",
+        {
+          headers: { Authorization: localStorage.getItem("token") },
+        }
+      );
       //console.log(data.data)
-      setSubjects(data.data)
-    }
-    getSubjects()
-  },[])
-  
-  
-  return (
-    <div>
-      <Subjects subjects={subjects} />
-    </div>
-  )
-}
+      setSubjects(data.data);
+    };
+    getSubjects();
+  }, []);
 
-export default Home
+  return (
+    <div className="subject-container">
+      <div className="grid-container">
+        <Subjects subjects={subjects} />
+      </div>
+    </div>
+  );
+};
+
+export default Home;
