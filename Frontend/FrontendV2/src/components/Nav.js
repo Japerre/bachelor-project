@@ -27,7 +27,7 @@ const Nav = () => {
         <img src="/kuleuvenLogo.png" width={200} alt="" />
       </Link>
       <ul className="nav-links">
-        {!user && (
+        {!user.userId && (
           <>
             <Link style={navStyle} to="/register">
               <li>Register</li>
