@@ -47,6 +47,10 @@ nav {
   margin-top: 1.25rem;
 }
 
+.item-right{
+    float: right;
+}
+
 .btn {
   color: white;
   background-color: hsl(197,95%,47%);
