@@ -34,11 +34,19 @@ const HomeStudent = () => {
       setSubjects(data.data);
     };
     getSubjects();
-  }, []);
+  }, [student]);
 
   return (
     <>
-    <h1>showing all subjects with target audience: {student.targetAudience.majorCode + " " + student.targetAudience.campus.name}</h1>
+      {student.targetAudience && (
+        <h1>
+          showing all subjects with target audience:{" "}
+          {student.targetAudience.majorCode +
+            " " +
+            student.targetAudience.campus.name}
+        </h1>
+      )}
+
       <div className="subject-container">
         <div className="grid-container">
           <Subjects subjects={subjects} />
