@@ -7,7 +7,6 @@ const Subjects = ({ subjects }) => {
         <Subject
           key={subject.id}
           subject={subject}
-
         />
       ))}
     </>

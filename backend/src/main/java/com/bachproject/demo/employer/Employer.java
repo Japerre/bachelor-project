@@ -22,5 +22,5 @@ public class Employer {
             generator = "employer_sequence"
     )
     private Long employerId;
-    private int type;
+    private String type;
 }

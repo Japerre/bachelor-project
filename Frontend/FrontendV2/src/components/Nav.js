@@ -44,9 +44,16 @@ const Nav = () => {
           </Link>
         )}
 
-        <Link style={navStyle} to="/approveSubjects">
-          <li>approve subjects</li>
-        </Link>
+        {user.role === "ROLE_COORDINATOR" && (
+          <>
+            <Link style={navStyle} to="/approveSubjects">
+              <li>approve subjects</li>
+            </Link>
+            <Link style={navStyle} to="/assignPromotors">
+              <li>assign promotors</li>
+            </Link>
+          </>
+        )}
       </ul>
     </nav>
   );

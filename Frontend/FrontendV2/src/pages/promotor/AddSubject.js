@@ -18,7 +18,7 @@ const AddSubject = () => {
 
   const [user, setUser] = useState({});
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   useEffect(() => {
     axios
@@ -33,7 +33,6 @@ const AddSubject = () => {
         navigate("/login");
       });
   }, []);
-
 
   const fetchPromotors = async () => {
     const data = await axios.get("http://localhost:8080/promotors", {
@@ -100,27 +99,74 @@ const AddSubject = () => {
   const onSubmit = (data) => {
     console.log(data);
 
-    const subject = {
-      title: data.title,
-      description: data.description,
-      amountOfStudents: data.amountOfStudents,
+    let subjectDTO;
+    if (employerType === "company") {
+      subjectDTO = {
+        subject: {
+          title: data.title,
+          description: data.description,
+          amountOfStudents: data.amountOfStudents,
 
-      targetAudienceList: data.targetAudiences.map((item) => ({
-        targetAudienceId: item.value,
-      })),
+          targetAudienceList: data.targetAudiences.map((item) => ({
+            targetAudienceId: item.value,
+          })),
 
-      promotorList: data.promotors.map((item) => ({
-        promotorId: item.value,
-      })),
+          promotorList: data.promotors.map((item) => ({
+            promotorId: item.value,
+          })),
 
-      topicList: data.topics.map((item) => ({
-        topicId: item.value,
-      }))
-    };
+          promotorList: data.promotors ? data.promotors.map((item) => ({
+            promotorId: item.value,
+          })) : [],
 
-    console.log(subject);
+          topicList: data.topics.map((item) => ({
+            topicId: item.value,
+          })),
+        },
+        employer: {
+          type: "company",
+        },
+        company: {
+          companyName: data.companyName,
+          website: data.website,
+          contactPersonFirstName: data.contactPersonFirstName,
+          contactPersonLastName: data.contactPersonLastName,
+          contactPersonEmail: data.contactPersonEmail,
+        },
+      };
+    } else {
+      subjectDTO = {
+        subject: {
+          title: data.title,
+          description: data.description,
+          amountOfStudents: data.amountOfStudents,
 
-    axios.post("http://localhost:8080/subjects/create", subject).then(
+          targetAudienceList: data.targetAudiences.map((item) => ({
+            targetAudienceId: item.value,
+          })),
+
+          promotorList: data.promotors ? data.promotors.map((item) => ({
+            promotorId: item.value,
+          })) : [],
+
+          topicList: data.topics.map((item) => ({
+            topicId: item.value,
+          })),
+        },
+
+        employer: {
+          type: "researchGroup",
+        },
+
+        researchGroup: {
+          researchGroupId: data.researchGroupId,
+        },
+      };
+    }
+
+    console.log(subjectDTO);
+
+    axios.post("http://localhost:8080/subjects/create", subjectDTO).then(
       (response) => {
         console.log(response);
         alert("subject posted");
@@ -143,8 +189,8 @@ const AddSubject = () => {
 
   return (
     <>
-      <h1>subject</h1>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form className="form-container" onSubmit={handleSubmit(onSubmit)}>
+        <h1>subject</h1>
         <label>Title</label>
         <input type={"text"} {...register("title", { required: true })} />
         {errors.title && <p>title is required</p>}
@@ -159,7 +205,7 @@ const AddSubject = () => {
         <Controller
           name="promotors"
           control={control}
-          //rules={{required: true}}
+          rules={{required: false}}
           render={({ field }) => (
             <Select
               placeholder="select promotor(s)"
@@ -227,16 +273,65 @@ const AddSubject = () => {
           </option>
           <option value="researchGroup">research group</option>
           <option value="company">company</option>
-          <option value="student">student</option>
         </select>
 
         {employerType === "researchGroup" && (
           <>
             <label>research group</label>
-            <select onFocus={fetchResearchGroups} {...register}>
+            <select
+              onFocus={fetchResearchGroups}
+              {...register("researchGroupId", { required: true })}
+            >
               {researchGroupList}
             </select>
-            <button>submit</button>
+            {errors.researchGroupId && (
+              <p>select a research group as employer</p>
+            )}
+            <button style={{ cursor: "pointer" }}>submit</button>
+          </>
+        )}
+
+        {employerType === "company" && (
+          <>
+            <label>company name</label>
+            <input
+              type={"text"}
+              {...register("companyName", { required: true })}
+            />
+            {errors.companyName && <p>company must have name</p>}
+            <label>website url</label>
+
+            <input
+              type={"text"}
+              {...register("website", { required: false })}
+            />
+            <label>contact person first name</label>
+
+            <input
+              type={"text"}
+              {...register("contactPersonFirstName", { required: true })}
+            />
+            <label>contact person last name</label>
+            {errors.contactPersonFirstName && (
+              <p>enter contact person credentials</p>
+            )}
+
+            <input
+              type={"text"}
+              {...register("contactPersonLastName", { required: true })}
+            />
+            <label>contact person email</label>
+            {errors.contactPersonLastName && (
+              <p>enter contact person credentials</p>
+            )}
+            <input
+              type={"email"}
+              {...register("contactPersonEmail", { required: true })}
+            />
+            {errors.contactPersonEmail && (
+              <p>enter contact person credentials</p>
+            )}
+            <button style={{ cursor: "pointer" }}>submit</button>
           </>
         )}
       </form>

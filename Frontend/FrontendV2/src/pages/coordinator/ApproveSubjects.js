@@ -127,7 +127,6 @@ const ApproveSubjects = () => {
 
   return (
     <>
-      {console.log("refresh")}
       <h1>subjects to review: </h1>
       <div className="subject-container">
         <div className="grid-container">{toReviewSubjects}</div>

@@ -1,5 +1,6 @@
 package com.bachproject.demo.subject;
 
+import com.bachproject.demo.employer.Employer;
 import com.bachproject.demo.promotor.Promotor;
 import com.bachproject.demo.targetAudience.TargetAudience;
 import com.bachproject.demo.topic.Topic;
@@ -15,7 +16,6 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-
 public class Subject {
 
     @Id
@@ -84,4 +84,8 @@ public class Subject {
     private List<TargetAudience> targetAudienceList;
 
     private Boolean approved;
+
+    @ManyToOne()
+    @JoinColumn(name="employer_id", referencedColumnName = "employerId")
+    private Employer employer;
 }

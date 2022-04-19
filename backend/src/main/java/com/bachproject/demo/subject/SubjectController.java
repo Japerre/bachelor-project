@@ -1,6 +1,9 @@
 package com.bachproject.demo.subject;
 
 import com.bachproject.demo.promotor.Promotor;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -14,7 +17,8 @@ import java.util.Optional;
 @RequestMapping(path = "/subjects")
 public class SubjectController {
 
-    private final SubjectService subjectService;
+    @Autowired
+    private SubjectService subjectService;
 
     @Autowired
     public SubjectController(SubjectService subjectService){
@@ -34,15 +38,19 @@ public class SubjectController {
     }
 
     @PostMapping(path = "/create")
-    //@CrossOrigin(origins = "*")
-    public Subject createSubject(@RequestBody Subject subject){
-        System.out.println(subject);
-        return subjectService.addSubject(subject);
+    public Subject createSubject(@RequestBody SubjectDTO subjectDTO) {
+        System.out.println(subjectDTO);
+        return subjectService.addSubject(subjectDTO);
     }
 
     @GetMapping(value = "/subjectsToReview")
     public List<Subject> getSubjectsToReview() {
         return subjectService.getSubjectsToReview();
+    }
+
+    @GetMapping(value = "/subjectsWithoutPromotor")
+    public List<Subject> getSubjectsWithoutPromotor() {
+        return subjectService.getSubjectsWithoutPromotor();
     }
 
 

@@ -8,6 +8,7 @@ import { ImCross } from "react-icons/im";
 import { Link, useParams } from "react-router-dom";
 import { IconContext } from "react-icons";
 import { useState } from "react";
+import Select from "react-select";
 
 const Subject = ({ subject, type, onApprove, onDisapprove }) => {
   const promotorNames = subject.promotorList
@@ -29,7 +30,8 @@ const Subject = ({ subject, type, onApprove, onDisapprove }) => {
     .join(", ");
 
   return (
-    <div className="card">
+    <>
+<div className="card">
       <header className="card-header">{subject.title} <FaHeart className={"item-right"}/> </header>
       <div className="card-body"></div>
       <div className="card-item">
@@ -104,6 +106,9 @@ const Subject = ({ subject, type, onApprove, onDisapprove }) => {
         )}
       </div>
     </div>
+    </>
+    
+
   );
 };
 

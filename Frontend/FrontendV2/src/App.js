@@ -9,6 +9,7 @@ import SubjectDetail from "./components/Subjects/SubjectDetail";
 import { BrowserRouter as Router, Route, Routes, useNavigate } from "react-router-dom";
 import Nav from "./components/Nav";
 import ProtectedRoute from "./components/Authenticate/ProtectedRoute";
+import AssignPromotors from "./pages/coordinator/AssignPromotors";
 
 function App() {
   
@@ -22,6 +23,7 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/addSubject" element={<AddSubject />} />
           <Route path="/approveSubjects" element={<ApproveSubjects />} />
+          <Route path="/assignPromotors" element={<AssignPromotors />} />
           {/* </Route> */}
 
           {/* Public Routes */}
