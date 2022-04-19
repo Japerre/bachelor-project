@@ -1,4 +1,4 @@
-import { FaGraduationCap } from "react-icons/fa";
+import { FaGraduationCap, FaHeart } from "react-icons/fa";
 import { FaIdCard } from "react-icons/fa";
 import { FiCrosshair, FiLogIn } from "react-icons/fi";
 import { MdTopic } from "react-icons/md";
@@ -30,7 +30,7 @@ const Subject = ({ subject, type, onApprove, onDisapprove }) => {
 
   return (
     <div className="card">
-      <header className="card-header">{subject.title}</header>
+      <header className="card-header">{subject.title} <FaHeart className={"item-right"}/> </header>
       <div className="card-body"></div>
       <div className="card-item">
         <FaGraduationCap /> {promotorNames}
