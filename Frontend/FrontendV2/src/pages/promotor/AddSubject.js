@@ -22,7 +22,7 @@ const AddSubject = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8080/whoami", {
+      .get("http://localhost:8080/whoami/user", {
         headers: { authorization: localStorage.getItem("token") },
       })
       .then((data) => {
