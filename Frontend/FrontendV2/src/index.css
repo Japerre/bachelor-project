@@ -64,7 +64,26 @@ nav {
   bottom: 10px;
 }
 
-.btn:hover, .btn:focus {
+.btn-promotor {
+  color: white;
+  background-color: hsl(197,95%,47%);
+  border: none;
+  font-size: 1.4rem;
+  border-radius: .25em;
+  cursor: pointer;
+  padding: 0.3em 0.5em;
+  position: absolute;
+  right: 10px;
+  top: 10px;
+}
+
+.btn-submit-promotors {
+  color: white;
+  background-color: hsl(197,95%,47%);
+  cursor: pointer;
+}
+
+.btn:hover, .btn:focus, .btn-promotor:hover, .btn-promotor:focus, .btn-submit-promotors:hover, .btn-submit-promotors:focus {
   background: hsl(197,95%,20%);
 }
 

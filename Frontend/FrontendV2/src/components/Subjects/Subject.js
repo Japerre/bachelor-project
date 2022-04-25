@@ -31,84 +31,87 @@ const Subject = ({ subject, type, onApprove, onDisapprove }) => {
 
   return (
     <>
-<div className="card">
-      <header className="card-header">{subject.title} <FaHeart className={"item-right"}/> </header>
-      <div className="card-body"></div>
-      <div className="card-item">
-        <FaGraduationCap /> {promotorNames}
-      </div>
-      <div className="card-item">
-        {" "}
-        <FiCrosshair /> {targetAudiences}
-      </div>
-      <div className="card-item">
-        <MdTopic />
-        {topics}
-      </div>
-      <div className="card-item">
-        {" "}
-        <TiGroup /> {subject.amountOfStudents}
-      </div>
-      <div className="card-footer">
-        <Link to={`/subject/${subject.subjectId}`}>
-          <button type="button" className="btn">
-            DETAIL
-          </button>
-        </Link>
-        {type === "toReview" && (
-          <>
-            <IconContext.Provider value={{ color: "green", size: "2em" }}>
-              <button
-                onClick={() => {
-                  onApprove(subject);
-                }}
-                className="approve-btn"
-              >
-                <BsCheckLg />
-              </button>
-            </IconContext.Provider>
-            <IconContext.Provider value={{ color: "red", size: "2em" }}>
-              <button
-                onClick={() => onDisapprove(subject)}
-                className="remove-btn"
-              >
-                <ImCross />
-              </button>
-            </IconContext.Provider>
-          </>
-        )}
-        {type === "approved" && (
-          <>
-            <IconContext.Provider value={{ color: "red", size: "2em" }}>
-              <button
-                onClick={() => onDisapprove(subject)}
-                className="remove-btn"
-              >
-                <ImCross />
-              </button>
-            </IconContext.Provider>
-          </>
-        )}
-        {type === "disapproved" && (
-          <>
-            <IconContext.Provider value={{ color: "green", size: "2em" }}>
-              <button
-                onClick={() => {
-                  onApprove(subject);
-                }}
-                className="approve-btn"
-              >
-                <BsCheckLg />
-              </button>
-              {/* <BsCheckLg onClick={() => onApprove(subject)}/> */ }
-            </IconContext.Provider>
-          </>
-        )}
-      </div>
-    </div>
-    </>
-    
+      <div className="card">
+        <header className="card-header">
+          {subject.title} <FaHeart className={"item-right"} />{" "}
+        </header>
 
+        <div className="card-body">
+          <div className="card-item">
+            <FaGraduationCap /> {promotorNames}
+          </div>
+          <div className="card-item">
+            {" "}
+            <FiCrosshair /> {targetAudiences}
+          </div>
+          <div className="card-item">
+            <MdTopic />
+            {topics}
+          </div>
+          <div className="card-item">
+            {" "}
+            <TiGroup /> {subject.amountOfStudents}
+          </div>
+        </div>
+        
+        <div className="card-footer">
+          <Link to={`/subject/${subject.subjectId}`}>
+            <button type="button" className="btn">
+              DETAIL
+            </button>
+          </Link>
+          {type === "toReview" && (
+            <>
+              <IconContext.Provider value={{ color: "green", size: "2em" }}>
+                <button
+                  onClick={() => {
+                    onApprove(subject);
+                  }}
+                  className="approve-btn"
+                >
+                  <BsCheckLg />
+                </button>
+              </IconContext.Provider>
+              <IconContext.Provider value={{ color: "red", size: "2em" }}>
+                <button
+                  onClick={() => onDisapprove(subject)}
+                  className="remove-btn"
+                >
+                  <ImCross />
+                </button>
+              </IconContext.Provider>
+            </>
+          )}
+          {type === "approved" && (
+            <>
+              <IconContext.Provider value={{ color: "red", size: "2em" }}>
+                <button
+                  onClick={() => onDisapprove(subject)}
+                  className="remove-btn"
+                >
+                  <ImCross />
+                </button>
+              </IconContext.Provider>
+            </>
+          )}
+          {type === "disapproved" && (
+            <>
+              <IconContext.Provider value={{ color: "green", size: "2em" }}>
+                <button
+                  onClick={() => {
+                    onApprove(subject);
+                  }}
+                  className="approve-btn"
+                >
+                  <BsCheckLg />
+                </button>
+                {/* <BsCheckLg onClick={() => onApprove(subject)}/> */}
+              </IconContext.Provider>
+            </>
+          )}
+        </div>
+      </div>
+    </>
   );
 };
 

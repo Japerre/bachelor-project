@@ -37,7 +37,5 @@ o
 ?backend/src/main/java/com/bachproject/demo/subject/Subject.java,8\7\87f38fa42297ee72693b962d593dc43d0869b652
 g
 7Frontend/FrontendV2/src/components/Subjects/Subjects.js,0\d\0d1b6080c2b75970064ff3545c7e463835b9f95c
-f
-6Frontend/FrontendV2/src/components/Subjects/Subject.js,4\6\46462e5313019faed9a71e8cf44e7fda59642596
 l
 <Frontend/FrontendV2/src/pages/coordinator/ApproveSubjects.js,8\c\8c66f0fb1b5ab22f95974beb04e8e877b87a1f42

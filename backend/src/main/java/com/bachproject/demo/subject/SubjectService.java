@@ -140,4 +140,14 @@ public class SubjectService {
         }
         return subjectsWithoutPromotor;
     }
+
+    public Subject assignPromotors(Long subjectId, List<Long> promotorIdList) {
+        Subject subject = subjectRepository.getById(subjectId);
+        List<Promotor> promotorList = new ArrayList<>();
+        for(Long id : promotorIdList){
+            promotorList.add(promotorRepository.getById(id));
+        }
+        subject.setPromotorList(promotorList);
+        return subjectRepository.save(subject);
+    }
 }
