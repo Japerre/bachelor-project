@@ -52,12 +52,15 @@ const Nav = () => {
 
         {user.role === "ROLE_COORDINATOR" && (
           <>
-            <Link style={navStyle} to="/approveSubjects">
-              <li>approve subjects</li>
-            </Link>
-            <Link style={navStyle} to="/assignPromotors">
-              <li>assign promotors</li>
-            </Link>
+              <Link style={navStyle} to="/approveSubjects">
+                  <li>approve subjects</li>
+              </Link>
+              <Link style={navStyle} to="/assignPromotors">
+                  <li>assign promotors</li>
+              </Link>
+              <Link style={navStyle} to="/assignSubjects">
+                    <li>Assign subject to Student</li>
+              </Link>
           </>
         )}
         {user.role === "ROLE_ADMIN" && (
