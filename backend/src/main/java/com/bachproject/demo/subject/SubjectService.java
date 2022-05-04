@@ -8,20 +8,17 @@ import com.bachproject.demo.promotor.Promotor;
 import com.bachproject.demo.promotor.PromotorRepository;
 import com.bachproject.demo.researchGroup.ResearchGroup;
 import com.bachproject.demo.researchGroup.ResearchGroupRepository;
+import com.bachproject.demo.student.Student;
+import com.bachproject.demo.student.StudentRepository;
+import com.bachproject.demo.student_subject.StudentSubject;
+import com.bachproject.demo.student_subject.StudentSubjectRepository;
 import com.bachproject.demo.targetAudience.TargetAudience;
 import com.bachproject.demo.targetAudience.TargetAudienceRepository;
 import com.bachproject.demo.topic.TopicRepository;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -47,6 +44,12 @@ public class SubjectService {
 
     @Autowired
     private ResearchGroupRepository researchGroupRepository;
+
+    @Autowired
+    private StudentSubjectRepository studentSubjectRepository;
+
+    @Autowired
+    private StudentRepository studentRepository;
 
 
     public Optional<Subject> getSubject(Long id) {
@@ -118,8 +121,8 @@ public class SubjectService {
 
     public List<Subject> getSubjetsByTargetAudience(Long targetAudienceId) {
         TargetAudience targetAudience = targetAudienceRepository.findByTargetAudienceId(targetAudienceId);
-        System.out.println(targetAudience);
         List<Subject> subjectList = subjectRepository.findAll();
+        System.out.println(subjectList.size());
         List<Subject> temp = new ArrayList<>();
         for(Subject s : subjectList){
             if(s.getApproved() != null && s.getTargetAudienceList().contains(targetAudience) && s.getApproved()){
@@ -153,5 +156,43 @@ public class SubjectService {
 
     public void deleteSubject(Long subjectId) {
         subjectRepository.deleteById(subjectId);
+    }
+
+    public List<SubjectForStudent> getSubjectForStudent(Long studentId) {
+        //favorites in the join table StudentSubject
+        List<Subject> favorites = studentSubjectRepository.findAllByStudentStudentIdAndFavoriteTrue(studentId).stream()
+                .map(studentSubject -> studentSubject.getSubject())
+                .toList();
+        //not favorites in the join table StudentSubject
+        List<Subject> notFavorites = studentSubjectRepository.findAllByStudentStudentIdAndFavoriteFalse(studentId).stream()
+                .map(studentSubject -> studentSubject.getSubject())
+                .toList();
+
+        List<Long> subjectIdInJoinTableList = new ArrayList<>();
+        List<SubjectForStudent> subjects = new ArrayList<>();
+        for(Subject s : favorites){
+            subjects.add(new SubjectForStudent(s,true));
+            subjectIdInJoinTableList.add(s.getSubjectId());
+        }
+        for(Subject s : notFavorites){
+            subjects.add(new SubjectForStudent(s, false));
+            subjectIdInJoinTableList.add(s.getSubjectId());
+        }
+
+        //subjects not in the join table and with the right target audience
+        List<Subject> notInJoinTable = getSubjetsByTargetAudience(studentRepository.getById(studentId).getTargetAudience().getTargetAudienceId())
+                .stream()
+                .filter(subject -> !subjectIdInJoinTableList.contains(subject.getSubjectId()))
+                .toList();
+        for(Subject s : notInJoinTable){
+            Student student = studentRepository.getById(studentId);
+            StudentSubject studentSubject = new StudentSubject();
+            studentSubject.setStudent(student);
+            studentSubject.setSubject(s);
+            studentSubject.setFavorite(false);
+            studentSubjectRepository.save(studentSubject);
+            subjects.add(new SubjectForStudent(s, false));
+        }
+        return subjects;
     }
 }

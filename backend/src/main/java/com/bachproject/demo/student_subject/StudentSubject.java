@@ -2,6 +2,7 @@ package com.bachproject.demo.student_subject;
 
 import com.bachproject.demo.student.Student;
 import com.bachproject.demo.subject.Subject;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -10,6 +11,7 @@ import javax.persistence.*;
 @Entity
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 public class StudentSubject {
 
     @Id
@@ -33,7 +35,6 @@ public class StudentSubject {
     private Subject subject;
 
     private int amountOfStars;
-
-    private boolean favorite;
+    private Boolean favorite;
 
 }

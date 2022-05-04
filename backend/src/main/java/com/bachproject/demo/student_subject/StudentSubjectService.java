@@ -32,9 +32,19 @@ public class StudentSubjectService {
         return studentSubjectRepository.save(studentSubject);
     }
 
-    public void setFavorite(Long subjectId, Long studentId) {
-        StudentSubject studentSubject = studentSubjectRepository.findByStudentStudentIdAndSubjectSubjectId(subjectId, studentId);
-        studentSubject.setFavorite(true);
+    public void toggleFavorite(Long subjectId, Long studentId) {
+        StudentSubject studentSubject = studentSubjectRepository.findByStudentStudentIdAndSubjectSubjectId(studentId, subjectId);
+        if(studentSubject!=null){
+            studentSubject.setFavorite(!studentSubject.getFavorite());
+        } else{
+            Subject subject = subjectRepository.getById(subjectId);
+            Student student = studentRepository.getById(studentId);
+            studentSubject = new StudentSubject();
+            studentSubject.setSubject(subject);
+            studentSubject.setStudent(student);
+            studentSubject.setFavorite(true);
+        }
+
         studentSubjectRepository.save(studentSubject);
     }
 

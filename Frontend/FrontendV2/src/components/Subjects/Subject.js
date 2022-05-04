@@ -7,9 +7,17 @@ import { BsCheckLg } from "react-icons/bs";
 import { ImCross } from "react-icons/im";
 import { Link, useParams } from "react-router-dom";
 import { IconContext } from "react-icons";
-import { AiFillStar, AiOutlineStar } from "react-icons/ai"
+import { AiFillStar, AiOutlineStar } from "react-icons/ai";
+import { useState } from "react";
 
-const Subject = ({ subject, type, onApprove, onDisapprove, onDelete }) => {
+const Subject = ({
+  subject,
+  type,
+  onApprove,
+  onDisapprove,
+  onDelete,
+  onFavorite,
+}) => {
   const promotorNames = subject.promotorList
     .map((promotor) => {
       return promotor.user.firstName + " " + promotor.user.lastName;
@@ -28,13 +36,32 @@ const Subject = ({ subject, type, onApprove, onDisapprove, onDelete }) => {
     })
     .join(", ");
 
+  const [refresh, setRefresh] = useState(0);
+
   return (
     <>
       <div className="card">
         <header className="card-header">
-          {subject.title} 
-          {/* {type==="student" && <AiOutlineStar className={"item-right"} />} */}
-          {type==="student" && <AiFillStar className={"item-right"} color="gold" />}
+          {subject.title}
+          {type === "student" && subject.favorite === false && (
+            <AiOutlineStar
+              className={"item-right"}
+              onClick={() => {
+                onFavorite(subject.subjectId);
+                subject.favorite=true
+              }}
+            />
+          )}
+          {type === "student" && subject.favorite === true && (
+            <AiFillStar
+              className={"item-right"}
+              color="gold"
+              onClick={() => {
+                onFavorite(subject.subjectId);
+                subject.favorite=false
+              }}
+            />
+          )}
         </header>
 
         <div className="card-body">
@@ -54,7 +81,7 @@ const Subject = ({ subject, type, onApprove, onDisapprove, onDelete }) => {
             <TiGroup /> {subject.amountOfStudents}
           </div>
         </div>
-        
+
         <div className="card-footer">
           <Link to={`/subject/${subject.subjectId}`}>
             <button type="button" className="btn">
@@ -108,7 +135,9 @@ const Subject = ({ subject, type, onApprove, onDisapprove, onDelete }) => {
                 </button>
                 {/* <BsCheckLg onClick={() => onApprove(subject)}/> */}
               </IconContext.Provider>
-              <button onClick={() => onDelete(subject.subjectId)}>PERMANENT DELETE</button>
+              <button onClick={() => onDelete(subject.subjectId)}>
+                PERMANENT DELETE
+              </button>
             </>
           )}
         </div>

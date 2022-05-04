@@ -1,6 +1,6 @@
 import Subject from "./Subject";
 
-const Subjects = ({ subjects, type }) => {
+const Subjects = ({ subjects, type, onFavorite }) => {
   return (
     <>
       {subjects.map((subject) => (
@@ -8,6 +8,7 @@ const Subjects = ({ subjects, type }) => {
           key={subject.id}
           subject={subject}
           type={type}
+          onFavorite={onFavorite}
         />
       ))}
     </>

@@ -1,6 +1,7 @@
 package com.bachproject.demo.subject;
 
 import com.bachproject.demo.promotor.Promotor;
+import com.bachproject.demo.student_subject.StudentSubject;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.security.RolesAllowed;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @RestController
 @RequestMapping(path = "/subjects")
@@ -82,6 +84,11 @@ public class SubjectController {
     @DeleteMapping(value = "/deleteSubject/{subjectId}")
     public void deleteSubject(@PathVariable Long subjectId){
         subjectService.deleteSubject(subjectId);
+    }
+
+    @GetMapping(value = "/getSubjectsForStudent/{studentId}")
+    public List<SubjectForStudent> getSubjectsForStudent(@PathVariable Long studentId){
+        return subjectService.getSubjectForStudent(studentId);
     }
 
 }

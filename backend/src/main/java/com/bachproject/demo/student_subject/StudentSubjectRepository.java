@@ -12,6 +12,8 @@ public interface StudentSubjectRepository extends JpaRepository<StudentSubject, 
     public StudentSubject findByStudentStudentIdAndSubjectSubjectId(Long studentId, Long subjectId);
 
     public List<StudentSubject> findAllByStudentStudentIdAndFavoriteTrue(Long studentId);
+    public List<StudentSubject> findAllByStudentStudentIdAndFavoriteFalse(Long studentId);
+
 
     public List<StudentSubject> findAllByStudentStudentId(Long studentId);
 }

@@ -23,23 +23,38 @@ const HomeStudent = () => {
       });
   }, []);
 
+  const getSubjects = async () => {
+    const data = await axios.get(
+      `http://localhost:8080/subjects/getSubjectsForStudent/${student.studentId}`,
+      {
+        headers: { Authorization: localStorage.getItem("token") },
+      }
+    );
+    const subjects = [];
+    for (let i = 0; i < data.data.length; i++) {
+      const subject = data.data[i].subject;
+      subject.favorite = data.data[i].favorite;
+      subjects.push(subject);
+    }
+    console.log(subjects);
+    setSubjects(subjects);
+  };
+
   useEffect(() => {
-    const getSubjects = async () => {
-      const data = await axios.get(
-        `http://localhost:8080/subjects/getSubjectsByTargetAudience/${student.targetAudience.targetAudienceId}`,
-        {
-          headers: { Authorization: localStorage.getItem("token") },
-        }
-      );
-      setSubjects(data.data);
-    };
     getSubjects();
   }, [student]);
 
+  const [refresh, setRefresh] = useState(0)
 
-  const onFavorite = () => {
-    
-  }
+  const onFavorite = async (subjectId) => {
+    const data = await axios.put(
+      `http://localhost:8080/studentPreferences/toggleFavorite/${subjectId}/${4}`,
+      {
+        headers: { Authorization: localStorage.getItem("token") },
+      }
+    );
+    setRefresh(refresh+1)
+  };
 
   return (
     <>
@@ -54,7 +69,7 @@ const HomeStudent = () => {
 
       <div className="subject-container">
         <div className="grid-container">
-          <Subjects subjects={subjects} type="student" />
+          <Subjects subjects={subjects} type="student" onFavorite={onFavorite} />
         </div>
       </div>
     </>

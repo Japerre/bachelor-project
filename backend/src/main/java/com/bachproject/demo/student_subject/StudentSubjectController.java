@@ -2,7 +2,6 @@ package com.bachproject.demo.student_subject;
 
 import com.bachproject.demo.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,17 +20,13 @@ public class StudentSubjectController {
 
     @PostMapping(value = "/setPreference")
     public StudentSubject setPreference (@RequestBody StudentSubject studentSubject) {
-
         studentSubject = studentSubjectService.saveNewPreference(studentSubject);
-        //System.out.println(studentSubject);
         return studentSubject;
-
-        //return studentSubject;
     }
 
-    @PutMapping(value = "/setFavorite/{subjectId}/{studentId}")
-    public void setFavorite(@PathVariable("subjectId") Long subjectId, @PathVariable("studentId") Long studentId){
-        studentSubjectService.setFavorite(subjectId, studentId);
+    @PutMapping(value = "/toggleFavorite/{subjectId}/{studentId}")
+    public void toggleFavorite(@PathVariable("subjectId") Long subjectId, @PathVariable("studentId") Long studentId){
+        studentSubjectService.toggleFavorite(subjectId, studentId);
     }
 
     @GetMapping(value = "/getFavoriteSubjects/{studentId}")
