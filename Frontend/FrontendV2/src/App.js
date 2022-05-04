@@ -16,8 +16,8 @@ import Nav from "./components/Nav";
 import ProtectedRoute from "./components/Authenticate/ProtectedRoute";
 import AssignPromotors from "./pages/coordinator/AssignPromotors";
 import AssignSubjectToStudent from "./pages/coordinator/AssignSubjectToStudent";
-// import Users from "./pages/admin/Users";
-// import Favorites from "./pages/student/Favorites";
+import Users from "./pages/admin/Users";
+import Favorites from "./pages/student/Favorites";
 
 function App() {
   return (
@@ -41,10 +41,10 @@ function App() {
           {/* </Route> */}
 
           {/* admin */}
-          {/*<Route path="/admin/users" element={<Users/>} />*/}
+          <Route path="/admin/users" element={<Users/>} />
 
           {/* student */}
-          {/*<Route path="/student/favorites" element={<Favorites />} />*/}
+          <Route path="/student/favorites" element={<Favorites />} />
         </Routes>
       </div>
     </Router>
