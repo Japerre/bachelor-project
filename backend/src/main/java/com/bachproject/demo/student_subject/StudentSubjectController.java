@@ -1,13 +1,14 @@
 package com.bachproject.demo.student_subject;
 
+import com.bachproject.demo.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
+@RequestMapping("/studentPreferences")
 public class StudentSubjectController {
 
     @Autowired
@@ -21,6 +22,21 @@ public class StudentSubjectController {
         return studentSubject;
 
         //return studentSubject;
+    }
+
+    @PutMapping(value = "/setFavorite/{subjectId}/{studentId}")
+    public void setFavorite(@PathVariable("subjectId") Long subjectId, @PathVariable("studentId") Long studentId){
+        studentSubjectService.setFavorite(subjectId, studentId);
+    }
+
+    @GetMapping(value = "/getFavoriteSubjects/{studentId}")
+    public List<Subject> getFavoriteSubjects(@PathVariable Long studentId){
+        return studentSubjectService.getFavoriteSubjects(studentId);
+    }
+
+    @GetMapping(value = "/getSubjects/{studentId}")
+    public List<StudentSubject> getSubjectsByStudentId(@PathVariable Long studentId){
+        return studentSubjectService.getSubjectsByStudentId(studentId);
     }
 
 }

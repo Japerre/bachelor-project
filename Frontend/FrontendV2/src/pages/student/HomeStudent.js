@@ -36,6 +36,11 @@ const HomeStudent = () => {
     getSubjects();
   }, [student]);
 
+
+  const onFavorite = () => {
+    
+  }
+
   return (
     <>
       {student.targetAudience && (
@@ -49,7 +54,7 @@ const HomeStudent = () => {
 
       <div className="subject-container">
         <div className="grid-container">
-          <Subjects subjects={subjects} />
+          <Subjects subjects={subjects} type="student" />
         </div>
       </div>
     </>

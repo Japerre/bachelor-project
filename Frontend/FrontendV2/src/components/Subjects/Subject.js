@@ -7,10 +7,9 @@ import { BsCheckLg } from "react-icons/bs";
 import { ImCross } from "react-icons/im";
 import { Link, useParams } from "react-router-dom";
 import { IconContext } from "react-icons";
-import { useState } from "react";
-import Select from "react-select";
+import { AiFillStar, AiOutlineStar } from "react-icons/ai"
 
-const Subject = ({ subject, type, onApprove, onDisapprove }) => {
+const Subject = ({ subject, type, onApprove, onDisapprove, onDelete }) => {
   const promotorNames = subject.promotorList
     .map((promotor) => {
       return promotor.user.firstName + " " + promotor.user.lastName;
@@ -33,7 +32,9 @@ const Subject = ({ subject, type, onApprove, onDisapprove }) => {
     <>
       <div className="card">
         <header className="card-header">
-          {subject.title} <FaHeart className={"item-right"} />{" "}
+          {subject.title} 
+          {/* {type==="student" && <AiOutlineStar className={"item-right"} />} */}
+          {type==="student" && <AiFillStar className={"item-right"} color="gold" />}
         </header>
 
         <div className="card-body">
@@ -107,6 +108,7 @@ const Subject = ({ subject, type, onApprove, onDisapprove }) => {
                 </button>
                 {/* <BsCheckLg onClick={() => onApprove(subject)}/> */}
               </IconContext.Provider>
+              <button onClick={() => onDelete(subject.subjectId)}>PERMANENT DELETE</button>
             </>
           )}
         </div>

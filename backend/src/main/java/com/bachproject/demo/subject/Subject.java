@@ -34,7 +34,7 @@ public class Subject {
     private int amountOfStudents;
 
     @ManyToMany(
-            cascade = CascadeType.ALL
+            cascade = {CascadeType.PERSIST, CascadeType.REFRESH}
     )
     @JoinTable(
             name = "subject_promotor",
@@ -51,7 +51,7 @@ public class Subject {
 
 
     @ManyToMany(
-            cascade = CascadeType.ALL
+            cascade = {CascadeType.PERSIST, CascadeType.REFRESH}
     )
     @JoinTable(
             name = "subject_topic",
@@ -68,7 +68,7 @@ public class Subject {
 
 
     @ManyToMany(
-            cascade = CascadeType.ALL
+            cascade = {CascadeType.PERSIST, CascadeType.REFRESH}
     )
     @JoinTable(
             name = "subject_targetAudience",

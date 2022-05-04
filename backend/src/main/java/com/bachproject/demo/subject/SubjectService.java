@@ -122,7 +122,7 @@ public class SubjectService {
         List<Subject> subjectList = subjectRepository.findAll();
         List<Subject> temp = new ArrayList<>();
         for(Subject s : subjectList){
-            if(s.getTargetAudienceList().contains(targetAudience) && s.getApproved()){
+            if(s.getApproved() != null && s.getTargetAudienceList().contains(targetAudience) && s.getApproved()){
                 temp.add(s);
             }
         }
@@ -149,5 +149,9 @@ public class SubjectService {
         }
         subject.setPromotorList(promotorList);
         return subjectRepository.save(subject);
+    }
+
+    public void deleteSubject(Long subjectId) {
+        subjectRepository.deleteById(subjectId);
     }
 }

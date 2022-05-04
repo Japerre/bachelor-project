@@ -7,16 +7,15 @@ import {
   Routes,
   useNavigate,
 } from "react-router-dom";
-import Subject from "../../components/Subjects/Subject"
+import Subject from "../../components/Subjects/Subject";
 
 const ApproveSubjects = () => {
   const [toReviewSubjects, setToReviewSubjects] = useState([]);
-  const [approvedSubjects, setApprovedSubjects] = useState([])
-  const [disapprovedSubjects, setDisapprovedSubjects] = useState([])
+  const [approvedSubjects, setApprovedSubjects] = useState([]);
+  const [disapprovedSubjects, setDisapprovedSubjects] = useState([]);
   const [refresh, setRefresh] = useState(0);
 
-
-  // authentication 
+  // authentication
   const [user, setUser] = useState({});
   const navigate = useNavigate();
   useEffect(() => {
@@ -53,15 +52,13 @@ const ApproveSubjects = () => {
         alert("subject succesfully disapproved!");
         setRefresh(refresh + 1);
       });
-  }
+  };
 
-  useEffect(()=> {
+  useEffect(() => {
     fetchToReviewSubjects();
     fetchApprovedSubjects();
     fetchDisapprovedSubjects();
-  },[refresh])
-
-  
+  }, [refresh]);
 
   const fetchToReviewSubjects = () => {
     axios
@@ -115,15 +112,24 @@ const ApproveSubjects = () => {
               subject={subject}
               type="disapproved"
               onApprove={approveSubject}
+              onDelete={deleteSubject}
             />
           ))
         );
       });
   };
 
-  
-
-  
+  const deleteSubject = (subjectId) => {
+    axios
+      .delete(`http://localhost:8080/subjects/deleteSubject/${subjectId}`, {
+        headers: { authorization: localStorage.getItem("token") },
+      })
+      .then((res) => {
+        alert("success");
+        setRefresh(refresh + 1);
+      })
+      .catch((err) => alert(err));
+  };
 
   return (
     <>

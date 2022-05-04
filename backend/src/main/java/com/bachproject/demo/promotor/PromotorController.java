@@ -12,7 +12,7 @@ public class PromotorController {
     @Autowired
     PromotorService promotorService;
 
-    @PostMapping
+    @PostMapping("/register")
     public Promotor createNewPromotor(@RequestBody Promotor promotor){
         System.out.println(promotor);
         return promotorService.createNewPromotor(promotor);

@@ -30,6 +30,8 @@ public interface SubjectRepository extends JpaRepository<Subject, Long> {
 
     List<Subject> findByApprovedIsNull();
 
+    List<Subject> findAllBySubjectIdIn(List<Long> subjectIdList);
+
 //    @Query("select s from Subject s where s.targetAudienceList")
 //    void getSubjectsByTargetAudience(Long targetAudienceId);
 }

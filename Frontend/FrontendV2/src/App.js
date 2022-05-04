@@ -6,30 +6,42 @@ import Home from "./pages/anyRole/Home";
 import AddSubject from "./pages/promotor/AddSubject";
 import ApproveSubjects from "./pages/coordinator/ApproveSubjects";
 import SubjectDetail from "./components/Subjects/SubjectDetail";
-import { BrowserRouter as Router, Route, Routes, useNavigate } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  useNavigate,
+} from "react-router-dom";
 import Nav from "./components/Nav";
 import ProtectedRoute from "./components/Authenticate/ProtectedRoute";
 import AssignPromotors from "./pages/coordinator/AssignPromotors";
+import Users from "./pages/admin/Users";
+import Favorites from "./pages/student/Favorites";
 
 function App() {
-  
   return (
     <Router>
       <div>
         <Nav />
         <Routes>
-          {/* Private Routes */}
-          {/* <Route element={<ProtectedRoute />}> */}
-          <Route path="/register" element={<Register />} />
-          <Route path="/addSubject" element={<AddSubject />} />
-          <Route path="/approveSubjects" element={<ApproveSubjects />} />
-          <Route path="/assignPromotors" element={<AssignPromotors />} />
-          {/* </Route> */}
-
-          {/* Public Routes */}
+          {/* any role */}
           <Route path="/login" element={<Login />} />
           <Route path="/" element={<Home />} />
+          <Route path="/register" element={<Register />} />
           <Route path="/subject/:id" element={<SubjectDetail />} />
+
+          {/* promotor */}
+          <Route path="/addSubject" element={<AddSubject />} />
+
+          {/* coordinator */}
+          <Route path="/approveSubjects" element={<ApproveSubjects />} />
+          <Route path="/assignPromotors" element={<AssignPromotors />} />
+
+          {/* admin */}
+          <Route path="/admin/users" element={<Users/>} />
+
+          {/* student */}
+          <Route path="/student/favorites" element={<Favorites />} />
         </Routes>
       </div>
     </Router>

@@ -54,7 +54,4 @@ public class Student {
     //@Transient als je targetAudience niet wil opslaan in de DB
     private TargetAudience targetAudience;
 
-//    @OneToMany(mappedBy = "student")
-//    private Set<StudentSubject> studentSubjectSet = new HashSet<StudentSubject>();
-
 }

@@ -74,16 +74,14 @@ public class SubjectController {
         subjectService.disapproveSubject(subjectId);
     }
 
-
-//    @PutMapping(path = "/{subjectId}")
-//    //@CrossOrigin(origins = "*")
-//    public void addPromotor(@PathVariable Long subjectId, @RequestBody Promotor promotor){
-//        subjectService.addPromotor(subjectId, promotor);
-//    }
-
     @PutMapping(path = "/assignPromotorsToSubject/{subjectId}")
     public Subject assignPromotorsToSubject(@PathVariable Long subjectId, @RequestBody List<Long> promotorIdList){
         return subjectService.assignPromotors(subjectId, promotorIdList);
+    }
+
+    @DeleteMapping(value = "/deleteSubject/{subjectId}")
+    public void deleteSubject(@PathVariable Long subjectId){
+        subjectService.deleteSubject(subjectId);
     }
 
 }

@@ -38,6 +38,12 @@ const Nav = () => {
           <li>login</li>
         </Link>
 
+        {user.role === "ROLE_STUDENT" && (
+          <Link style={navStyle} to="/student/favorites">
+            <li>favorites</li>
+          </Link>
+        )}
+
         {user.role === "ROLE_PROMOTOR" && (
           <Link style={navStyle} to="/addSubject">
             <li>add subject</li>
@@ -51,6 +57,13 @@ const Nav = () => {
             </Link>
             <Link style={navStyle} to="/assignPromotors">
               <li>assign promotors</li>
+            </Link>
+          </>
+        )}
+        {user.role === "ROLE_ADMIN" && (
+          <>
+            <Link style={navStyle} to="/admin/users">
+              <li>users</li>
             </Link>
           </>
         )}

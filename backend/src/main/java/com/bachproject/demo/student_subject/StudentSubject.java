@@ -34,4 +34,6 @@ public class StudentSubject {
 
     private int amountOfStars;
 
+    private boolean favorite;
+
 }
