@@ -25,12 +25,18 @@ const AssignSubjectToStudent = () => {
     useEffect(()=>{
         const getSubjects = () => {
             axios
-                .get("http://localhost:8080/getSelectedSubjects", {
+                .get("http://localhost:8080/studentPreferences/getSelectedSubjects", {
                     headers: {authorization: localStorage.getItem("token")},
                 }).then((data) => {
-                setSelectedSubjects(data.data.map(
-                    <StudentSubject/>
-                ))
+                    setSelectedSubjects(data.data.map((studentSubject)=>(
+                        console.log(studentSubject),
+                        <StudentSubject
+                            key = {studentSubject.subject.id}
+                            studentSubject={studentSubject}
+                        />
+                        )
+                    )
+                )
             }).catch((error) => {
                 console.log(error)
             })
@@ -40,6 +46,7 @@ const AssignSubjectToStudent = () => {
 
   return (
     <main>
+        <h1>Subjects without a student: </h1>
         <div className="subject-container">
             <div className="grid-container">{selectedSubjects}</div>
         </div>
