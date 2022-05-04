@@ -14,6 +14,11 @@ public class StudentSubjectController {
     @Autowired
     StudentSubjectService studentSubjectService;
 
+    @GetMapping("/getSelectedSubjects")
+    public List<StudentSubject> getSelectedSubjects(){
+        return studentSubjectService.getSelectedSubjects();
+    }
+
     @PostMapping(value = "/setPreference")
     public StudentSubject setPreference (@RequestBody StudentSubject studentSubject) {
 

@@ -50,4 +50,8 @@ public class StudentSubjectService {
     public List<StudentSubject> getSubjectsByStudentId(Long studentId) {
         return studentSubjectRepository.findAllByStudentStudentId(studentId);
     }
+
+    public List<StudentSubject> getSelectedSubjects() {
+        return studentSubjectRepository.findAll();
+    }
 }
