@@ -11,7 +11,6 @@ const Nav = () => {
         headers: { authorization: localStorage.getItem("token") },
       })
       .then((data) => {
-        console.log(data.data);
         setUser(data.data);
       })
       .catch((error) => {});

@@ -312,6 +312,10 @@ footer{
     bottom: 10%;
     height: 2.5rem;
 }
+.footer-link{
+    padding: 10px;
+    background-color: hsl(197,95%,47%);;
+}
 .footer-left{
     float: left;
     display: inline-block;

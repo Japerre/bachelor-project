@@ -20,6 +20,7 @@ import Users from "./pages/admin/Users";
 import Favorites from "./pages/student/Favorites";
 
 function App() {
+
   return (
     <Router>
       <div>
