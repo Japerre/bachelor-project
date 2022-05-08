@@ -36,5 +36,6 @@ public class StudentSubject {
 
     private int amountOfStars;
     private Boolean favorite;
+    private Boolean inCart;
 
 }

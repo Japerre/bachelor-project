@@ -8,6 +8,7 @@ import { ImCross } from "react-icons/im";
 import {Link, useHistory, useParams} from "react-router-dom";
 import { IconContext } from "react-icons";
 import { AiFillStar, AiOutlineStar } from "react-icons/ai";
+import { BsCartCheck, BsCartCheckFill } from "react-icons/bs"
 import { useState } from "react";
 
 const Subject = ({
@@ -63,6 +64,18 @@ const Subject = ({
                 onFavorite(subject.subjectId);
                 subject.favorite=false
               }}
+            />
+          )}
+
+          {type === "cart" && subject.inCart === false && (
+            <BsCartCheck 
+              className="item-right"
+            />
+          )}
+
+          {type === "cart" && subject.inCart === true && (
+            <BsCartCheckFill
+              className="item-right"
             />
           )}
         </header>

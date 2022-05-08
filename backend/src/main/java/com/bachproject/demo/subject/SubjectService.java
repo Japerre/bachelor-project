@@ -160,23 +160,19 @@ public class SubjectService {
 
     public List<SubjectForStudent> getSubjectForStudent(Long studentId) {
         //favorites in the join table StudentSubject
-        List<Subject> favorites = studentSubjectRepository.findAllByStudentStudentIdAndFavoriteTrue(studentId).stream()
-                .map(studentSubject -> studentSubject.getSubject())
-                .toList();
+        List<StudentSubject> favorites = studentSubjectRepository.findAllByStudentStudentIdAndFavoriteTrue(studentId);
         //not favorites in the join table StudentSubject
-        List<Subject> notFavorites = studentSubjectRepository.findAllByStudentStudentIdAndFavoriteFalse(studentId).stream()
-                .map(studentSubject -> studentSubject.getSubject())
-                .toList();
+        List<StudentSubject> notFavorites = studentSubjectRepository.findAllByStudentStudentIdAndFavoriteFalse(studentId);
 
         List<Long> subjectIdInJoinTableList = new ArrayList<>();
         List<SubjectForStudent> subjects = new ArrayList<>();
-        for(Subject s : favorites){
-            subjects.add(new SubjectForStudent(s,true));
-            subjectIdInJoinTableList.add(s.getSubjectId());
+        for(StudentSubject s : favorites){
+            subjects.add(new SubjectForStudent(s));
+            subjectIdInJoinTableList.add(s.getSubject().getSubjectId());
         }
-        for(Subject s : notFavorites){
-            subjects.add(new SubjectForStudent(s, false));
-            subjectIdInJoinTableList.add(s.getSubjectId());
+        for(StudentSubject s : notFavorites){
+            subjects.add(new SubjectForStudent(s));
+            subjectIdInJoinTableList.add(s.getSubject().getSubjectId());
         }
 
         //subjects not in the join table and with the right target audience
@@ -190,9 +186,19 @@ public class SubjectService {
             studentSubject.setStudent(student);
             studentSubject.setSubject(s);
             studentSubject.setFavorite(false);
+            studentSubject.setInCart(false);
             studentSubjectRepository.save(studentSubject);
-            subjects.add(new SubjectForStudent(s, false));
+            subjects.add(new SubjectForStudent(studentSubject));
         }
         return subjects;
+    }
+
+
+    public List<SubjectForStudent> getFavoriteSubjects(Long studentId) {
+        List<StudentSubject> subjectsInCart = studentSubjectRepository.findAllByStudentStudentIdAndFavoriteTrue(studentId);
+        List<SubjectForStudent> subjectForStudentList = subjectsInCart.stream()
+                .map(studentSubject -> new SubjectForStudent(studentSubject))
+                .toList();
+        return subjectForStudentList;
     }
 }

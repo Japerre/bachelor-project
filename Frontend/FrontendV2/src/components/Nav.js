@@ -38,9 +38,14 @@ const Nav = () => {
         </Link>
 
         {user.role === "ROLE_STUDENT" && (
+          <>
           <Link style={navStyle} to="/student/favorites">
             <li>favorites</li>
           </Link>
+          <Link style={navStyle} to="/student/selection">
+            <li>selection</li>
+          </Link>
+          </>
         )}
 
         {user.role === "ROLE_PROMOTOR" && (

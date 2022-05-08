@@ -91,4 +91,9 @@ public class SubjectController {
         return subjectService.getSubjectForStudent(studentId);
     }
 
+    @GetMapping(value = "/getFavoriteSubjects/{studentId}")
+    public List<SubjectForStudent> getFavoriteSubjects(@PathVariable Long studentId){
+        return subjectService.getFavoriteSubjects(studentId);
+    }
+
 }

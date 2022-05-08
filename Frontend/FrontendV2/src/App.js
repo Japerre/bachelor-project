@@ -1,5 +1,4 @@
 import React, { useMemo, useState, useEffect } from "react";
-import axios from "axios";
 import Register from "./pages/anyRole/Register";
 import Login from "./pages/anyRole/Login";
 import Home from "./pages/anyRole/Home";
@@ -18,6 +17,7 @@ import AssignPromotors from "./pages/coordinator/AssignPromotors";
 import AssignSubjectToStudent from "./pages/coordinator/AssignSubjectToStudent";
 import Users from "./pages/admin/Users";
 import Favorites from "./pages/student/Favorites";
+import Selection from "./pages/student/Selection";
 
 function App() {
 
@@ -46,6 +46,7 @@ function App() {
 
           {/* student */}
           <Route path="/student/favorites" element={<Favorites />} />
+          <Route path="/student/selection" element={<Selection />} />
         </Routes>
       </div>
     </Router>
