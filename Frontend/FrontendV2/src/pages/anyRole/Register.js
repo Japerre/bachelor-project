@@ -16,9 +16,8 @@ const Register = () => {
   let emailPromotor = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@promotor.kuleuven.be/);
   let emailError;
 
-
-
   const [role, setRole] = useState('');
+  const [users, setUsers] = useState([])
   const [pending, setPending ] = useState('');
   const [targetAudienceId, setTargetAudienceId] = useState(0);
   const [researchGroupId, setResearchGroupId] = useState(0);
@@ -45,6 +44,20 @@ const Register = () => {
             }))
         );
     };
+    const fetchUsers = async () => {
+        const data = await axios.get("http://localhost:8080/users");
+        console.log(data.data)
+        setUsers(
+            data.data.map((user) => ({
+                value: user.userName
+            }))
+        )
+
+    }
+
+    useEffect(() => {
+      fetchUsers()
+    },[])
 
 
     const onSubmit = (data) => {
@@ -120,19 +133,25 @@ const Register = () => {
                         if(!emailStudent.test(userName)){
                             emailError = "Use a student email"
                             return "Use a student email"
+
                         }
                     }
                     if (role == "ROLE_PROMOTOR"){
                         if (!emailPromotor.test(userName)){
-                            emailError = "Use a promotor email"
+                            console.log("Use a promotor email")
                             return "Use a promotor email"
                         }
+                    }
+                    if (users.filter(function (user){return user.value === userName})){
+                        console.log("Username is already taken")
+                        return "Username is already taken"
                     }
                 }
                 }
             )}
-        />
-        {errors.userName && <p className={"errmsg"}>Use a valid Kuleuven email</p>}
+        />{
+      }
+        {errors.userName && <p className={"errmsg"}>Use a valid Kuleuven email / not used email</p>}
 
         <label htmlFor="password">Enter password</label>
         <input
