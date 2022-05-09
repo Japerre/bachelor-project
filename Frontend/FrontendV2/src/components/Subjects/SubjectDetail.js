@@ -6,6 +6,7 @@ import axios from "axios"
 import {MdTopic} from "react-icons/md";
 import {FiCrosshair} from "react-icons/fi";
 import {TiGroup} from "react-icons/ti";
+import Button from "../Button";
 
 const SubjectDetail = () => {
 
@@ -22,11 +23,11 @@ const SubjectDetail = () => {
 
     useEffect(() => {
         const subject = fetchSubject()
-    }, [])
+    }, [nextSubject, prevSubject])
 
     useEffect(() => {
         findNextPrevSubject()
-    },[subject])
+    })
 
     const fetchSubject = async () => {
         axios.get(`http://localhost:8080/subjects/${id}`, {
@@ -99,14 +100,15 @@ const SubjectDetail = () => {
             <footer className="footer">
                 <div className="footer-right" >
                     {nextSubject &&
-                        <Link to={`/subject/${nextSubject.subjectId}`} onClick={() => window.location.reload()} className={"footer-link"} state={{subjects}} >
+                        <Link to={`/subject/${nextSubject.subjectId}`} className={"footer-link"} state={{subjects}} >
                             {nextSubject.title} <FaLongArrowAltRight />
-                        </Link>}
+                        </Link>
+                    }
 
                 </div>
                 <div className="footer-left">
                     {prevSubject &&
-                        <Link to={`/subject/${prevSubject.subjectId}`} onClick={() => window.location.reload()} className={"footer-link"} state={{subjects}} >
+                        <Link to={`/subject/${prevSubject.subjectId}`} className={"footer-link"} state={{subjects}} >
                             <FaLongArrowAltLeft /> {prevSubject.title}
                         </Link>}
 
