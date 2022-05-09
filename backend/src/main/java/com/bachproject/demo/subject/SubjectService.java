@@ -176,6 +176,7 @@ public class SubjectService {
         }
 
         //subjects not in the join table and with the right target audience
+        //place them in join table and add to subjects
         List<Subject> notInJoinTable = getSubjetsByTargetAudience(studentRepository.getById(studentId).getTargetAudience().getTargetAudienceId())
                 .stream()
                 .filter(subject -> !subjectIdInJoinTableList.contains(subject.getSubjectId()))
