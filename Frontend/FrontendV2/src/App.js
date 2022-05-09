@@ -18,6 +18,7 @@ import AssignSubjectToStudent from "./pages/coordinator/AssignSubjectToStudent";
 import Users from "./pages/admin/Users";
 import Favorites from "./pages/student/Favorites";
 import Selection from "./pages/student/Selection";
+import PromotorDetail from "./pages/student/PromotorDetail";
 
 function App() {
 
@@ -31,6 +32,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/register" element={<Register />} />
           <Route path="/subject/:id" element={<SubjectDetail />} />
+          <Route path="/promotors/:id" element={<PromotorDetail />} />
 
           {/* promotor */}
           <Route path="/addSubject" element={<AddSubject />} />

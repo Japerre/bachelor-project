@@ -16,10 +16,6 @@ const Nav = () => {
       .catch((error) => {});
   }, []);
 
-  const navStyle = {
-    color: "white",
-  };
-
   return (
     <nav>
       <Link to="/">
@@ -28,48 +24,48 @@ const Nav = () => {
       <ul className="nav-links">
         {!user.userId && (
           <>
-            <Link style={navStyle} to="/register">
+            <Link to="/register">
               <li>Register</li>
             </Link>
           </>
         )}
-        <Link style={navStyle} to="/login">
+        <Link to="/login">
           <li>login</li>
         </Link>
 
         {user.role === "ROLE_STUDENT" && (
           <>
-          <Link style={navStyle} to="/student/favorites">
+          <Link to="/student/favorites">
             <li>favorites</li>
           </Link>
-          <Link style={navStyle} to="/student/selection">
+          <Link to="/student/selection">
             <li>selection</li>
           </Link>
           </>
         )}
 
         {user.role === "ROLE_PROMOTOR" && (
-          <Link style={navStyle} to="/addSubject">
+          <Link  to="/addSubject">
             <li>add subject</li>
           </Link>
         )}
 
         {user.role === "ROLE_COORDINATOR" && (
           <>
-              <Link style={navStyle} to="/approveSubjects">
+              <Link  to="/approveSubjects">
                   <li>approve subjects</li>
               </Link>
-              <Link style={navStyle} to="/assignPromotors">
+              <Link  to="/assignPromotors">
                   <li>assign promotors</li>
               </Link>
-              <Link style={navStyle} to="/assignSubjects">
+              <Link  to="/assignSubjects">
                     <li>Assign subject to Student</li>
               </Link>
           </>
         )}
         {user.role === "ROLE_ADMIN" && (
           <>
-            <Link style={navStyle} to="/admin/users">
+            <Link  to="/admin/users">
               <li>users</li>
             </Link>
           </>

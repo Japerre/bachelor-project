@@ -1,20 +1,18 @@
 import {useState, useEffect} from "react"
 import {Link, useLocation, useParams} from "react-router-dom"
-import {FaGraduationCap, FaLongArrowAltLeft} from "react-icons/fa"
-import {FaLongArrowAltRight} from "react-icons/fa"
+import {FaGraduationCap, FaLongArrowAltLeft, FaLongArrowAltRight} from "react-icons/fa"
 import axios from "axios"
 import {MdTopic} from "react-icons/md";
 import {FiCrosshair} from "react-icons/fi";
 import {TiGroup} from "react-icons/ti";
-import Button from "../Button";
 
 const SubjectDetail = () => {
 
     const [subject, setSubject] = useState({})
     const [nextSubject, setNextSubject] = useState({})
     const [prevSubject, setPrevSubject] = useState({})
-    const [promotorList, setPromotorNames] = useState('')
-    const [topicsList, setTopicsList] = useState('')
+    const [promotorList, setPromotorNames] = useState([])
+    const [topicsList, setTopicsList] = useState([])
     const [targetAudienceList,setTargetAudienceList] = useState('')
     const id = useParams().id
     const location = useLocation()
@@ -36,9 +34,13 @@ const SubjectDetail = () => {
             setSubject(data.data);
             const promotorNames = data.data.promotorList
                 .map((promotor) => {
-                    return promotor.user.firstName + " " + promotor.user.lastName;
-                })
-                .join(", ");
+                    return <Link
+                        to={`/promotors/${promotor.promotorId}`}
+                        state={{promotor}}
+                        className={"subject-link-promotor"}>
+                        {promotor.user.firstName + " " + promotor.user.lastName}
+                    </Link>;
+                });
             setPromotorNames(promotorNames);
             const topics = data.data.topicList
                 .map((topic) => {
