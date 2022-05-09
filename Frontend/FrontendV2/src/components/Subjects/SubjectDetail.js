@@ -1,25 +1,32 @@
 import {useState, useEffect} from "react"
-import {Link, NavLink, useParams} from "react-router-dom"
+import {Link, useLocation, useParams} from "react-router-dom"
 import {FaGraduationCap, FaLongArrowAltLeft} from "react-icons/fa"
 import {FaLongArrowAltRight} from "react-icons/fa"
 import axios from "axios"
 import {MdTopic} from "react-icons/md";
 import {FiCrosshair} from "react-icons/fi";
 import {TiGroup} from "react-icons/ti";
-import {render} from "react-dom";
 
 const SubjectDetail = () => {
 
     const [subject, setSubject] = useState({})
+    const [nextSubject, setNextSubject] = useState({})
+    const [prevSubject, setPrevSubject] = useState({})
     const [promotorList, setPromotorNames] = useState('')
     const [topicsList, setTopicsList] = useState('')
     const [targetAudienceList,setTargetAudienceList] = useState('')
     const id = useParams().id
+    const location = useLocation()
+    const subjects = location.state.subjects
 
 
     useEffect(() => {
         const subject = fetchSubject()
     }, [])
+
+    useEffect(() => {
+        findNextPrevSubject()
+    },[subject])
 
     const fetchSubject = async () => {
         axios.get(`http://localhost:8080/subjects/${id}`, {
@@ -45,8 +52,25 @@ const SubjectDetail = () => {
                 .join(", ");
             setTargetAudienceList(targetAudiences);
         });
-
     };
+    function indexOfObject( arr, key, value ) {
+        let j = -1
+        const result = arr.some(function(obj, i) {
+            j++
+            return obj[key] == value
+        })
+        if (!result) {
+            return -1
+        } else {
+            return j
+        }
+    }
+    function findNextPrevSubject() {
+        const currentIndex = indexOfObject(subjects,"subjectId", id)
+        setNextSubject(subjects[currentIndex+1])
+        setPrevSubject(subjects[currentIndex-1])
+    }
+
     return (
 
         <>
@@ -74,15 +98,18 @@ const SubjectDetail = () => {
             </div>
             <footer className="footer">
                 <div className="footer-right" >
-                    <NavLink to={`/`} className={"footer-link"} >
-                        Next:
-                    </NavLink>
+                    {nextSubject &&
+                        <Link to={`/subject/${nextSubject.subjectId}`} onClick={() => window.location.reload()} className={"footer-link"} state={{subjects}} >
+                            {nextSubject.title} <FaLongArrowAltRight />
+                        </Link>}
 
                 </div>
                 <div className="footer-left">
-                    <NavLink to={`/`} className={"footer-link"} >
-                        Previous:
-                    </NavLink>
+                    {prevSubject &&
+                        <Link to={`/subject/${prevSubject.subjectId}`} onClick={() => window.location.reload()} className={"footer-link"} state={{subjects}} >
+                            <FaLongArrowAltLeft /> {prevSubject.title}
+                        </Link>}
+
                 </div>
             </footer>
         </>

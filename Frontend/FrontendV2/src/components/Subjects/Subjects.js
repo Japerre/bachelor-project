@@ -6,8 +6,8 @@ const Subjects = ({ subjects, type, onFavorite }) => {
       {subjects.map((subject) => (
         <Subject
           key={subject.id}
-          subject={subject}
           subjects={subjects}
+          subject={subject}
           type={type}
           onFavorite={onFavorite}
         />

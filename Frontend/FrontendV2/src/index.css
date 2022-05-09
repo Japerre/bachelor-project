@@ -313,6 +313,7 @@ footer{
     height: 2.5rem;
 }
 .footer-link{
+    text-decoration: none;
     padding: 10px;
     background-color: hsl(197,95%,47%);;
 }

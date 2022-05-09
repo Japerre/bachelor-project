@@ -5,7 +5,7 @@ import { MdTopic } from "react-icons/md";
 import { TiGroup } from "react-icons/ti";
 import { BsCheckLg } from "react-icons/bs";
 import { ImCross } from "react-icons/im";
-import {Link, useHistory, useParams} from "react-router-dom";
+import {Link, useHistory, useLocation, useParams} from "react-router-dom";
 import { IconContext } from "react-icons";
 import { AiFillStar, AiOutlineStar } from "react-icons/ai";
 import { BsCartCheck, BsCartCheckFill } from "react-icons/bs"
@@ -19,8 +19,6 @@ const Subject = ({
   onDisapprove,
   onDelete,
   onFavorite,
-
-
 }) => {
   const promotorNames = subject.promotorList
     .map((promotor) => {
@@ -41,7 +39,6 @@ const Subject = ({
     .join(", ");
 
   const [refresh, setRefresh] = useState(0);
-
   return (
     <>
       <div className="card">
@@ -79,7 +76,6 @@ const Subject = ({
             />
           )}
         </header>
-
         <div className="card-body">
           <div className="card-item">
             <FaGraduationCap /> {promotorNames}
@@ -99,8 +95,7 @@ const Subject = ({
         </div>
 
         <div className="card-footer">
-          {console.log(subjects)}
-          <Link to={{pathname:`/subject/${subject.subjectId}`, state:subjects}}>
+          <Link to={`/subject/${subject.subjectId}`} state={{subjects}}>
             <button type="button" className="btn">
               DETAIL
             </button>
