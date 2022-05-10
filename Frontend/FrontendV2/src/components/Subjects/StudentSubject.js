@@ -5,6 +5,7 @@ const StudentSubject = ({ studentSubject }) => {
       <main>
           <div className="card">
               <header className="card-header">{studentSubject.subject.title}</header>
+              <p>Student: {studentSubject.student.naam}</p>
           </div>
       </main>
   )

@@ -71,6 +71,7 @@ const ApproveSubjects = () => {
             <Subject
               key={subject.subjectId}
               subject={subject}
+              subjects={data.data}
               type="toReview"
               onApprove={approveSubject}
               onDisapprove={disapproveSubject}
@@ -91,6 +92,7 @@ const ApproveSubjects = () => {
             <Subject
               key={subject.subjectId}
               subject={subject}
+              subjects={data.data}
               type="approved"
               onDisapprove={disapproveSubject}
             />
@@ -110,6 +112,7 @@ const ApproveSubjects = () => {
             <Subject
               key={subject.subjectId}
               subject={subject}
+              subjects={data.data}
               type="disapproved"
               onApprove={approveSubject}
               onDelete={deleteSubject}

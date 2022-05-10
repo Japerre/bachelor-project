@@ -1,10 +1,13 @@
 import {useState, useEffect} from "react"
-import {Link, useLocation, useParams} from "react-router-dom"
+import {Link, useLocation, useNavigate, useParams} from "react-router-dom"
 import {FaGraduationCap, FaLongArrowAltLeft, FaLongArrowAltRight} from "react-icons/fa"
 import axios from "axios"
 import {MdTopic} from "react-icons/md";
 import {FiCrosshair} from "react-icons/fi";
 import {TiGroup} from "react-icons/ti";
+import {IconContext} from "react-icons";
+import {BsCheckLg} from "react-icons/bs";
+import {ImCross} from "react-icons/im";
 
 const SubjectDetail = () => {
 
@@ -18,7 +21,20 @@ const SubjectDetail = () => {
     const location = useLocation()
     const subjects = location.state.subjects
 
-
+    const [user, setUser] = useState({});
+    const navigate = useNavigate();
+    useEffect(() => {
+        axios
+            .get("http://localhost:8080/whoami/user", {
+                headers: { authorization: localStorage.getItem("token") },
+            })
+            .then((data) => {
+                setUser(data.data);
+            })
+            .catch((error) => {
+                navigate("/login");
+            });
+    }, []);
     useEffect(() => {
         const subject = fetchSubject()
     }, [nextSubject, prevSubject])
@@ -56,9 +72,10 @@ const SubjectDetail = () => {
             setTargetAudienceList(targetAudiences);
         });
     };
-    function indexOfObject( arr, key, value ) {
+
+    function indexOfObject(arr, key, value) {
         let j = -1
-        const result = arr.some(function(obj, i) {
+        const result = arr.some(function (obj, i) {
             j++
             return obj[key] == value
         })
@@ -68,37 +85,43 @@ const SubjectDetail = () => {
             return j
         }
     }
+
     function findNextPrevSubject() {
-        const currentIndex = indexOfObject(subjects,"subjectId", id)
-        setNextSubject(subjects[currentIndex+1])
-        setPrevSubject(subjects[currentIndex-1])
+        const currentIndex = indexOfObject(subjects, "subjectId", id)
+        setNextSubject(subjects[currentIndex + 1])
+        setPrevSubject(subjects[currentIndex - 1])
     }
 
     return (
-
         <>
-            <div className="subject-detail-title-description">
-                <h1 className="align-text-lef">{subject.title}</h1>
-                <div className="subject-detail-description">
+            <div className={"grid-container"}>
+                <div className="subject-detail-title-description">
+                    <h1 className="align-text-lef">{subject.title}</h1>
+                    <div className="subject-detail-description">
+                        <p>
+                            {subject.description}
+                        </p>
+                    </div>
+
+
+                </div>
+                <div className="subject-detail-extra-info">
                     <p>
-                        {subject.description}
+                        <FaGraduationCap /> Promotor:   {promotorList}
                     </p>
+                    <p>
+                        <MdTopic /> Topics: {topicsList}
+                    </p>
+                    <p>
+                        <FiCrosshair /> TargetAudience: {targetAudienceList}
+                    </p>
+                    <p>
+                        <TiGroup /> {subject.amountOfStudents}
+                    </p>
+                    {console.log(subject)}
                 </div>
             </div>
-            <div className="subject-detail-extra-info">
-                <p>
-                    <FaGraduationCap /> Promotor:   {promotorList}
-                </p>
-                <p>
-                    <MdTopic /> Topics: {topicsList}
-                </p>
-                <p>
-                    <FiCrosshair /> TargetAudience: {targetAudienceList}
-                </p>
-                <p>
-                    <TiGroup /> {subject.amountOfStudents}
-                </p>
-            </div>
+
             <footer className="footer">
                 <div className="footer-right" >
                     {nextSubject &&
@@ -113,7 +136,6 @@ const SubjectDetail = () => {
                         <Link to={`/subject/${prevSubject.subjectId}`} className={"footer-link"} state={{subjects}} >
                             <FaLongArrowAltLeft /> {prevSubject.title}
                         </Link>}
-
                 </div>
             </footer>
         </>
