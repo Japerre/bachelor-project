@@ -125,28 +125,31 @@ const Register = () => {
           </select>
           {errors.role && <p className={"errmsg"}>A role is required</p>}
         <label htmlFor="userName">email</label>
+
         <input
             type={"email"}
             {...register("userName",
-                {validate: (userName) => {
-                    if (role == "ROLE_STUDENT"){
-                        if(!emailStudent.test(userName)){
-                            emailError = "Use a student email"
-                            return "Use a student email"
+                {
+                    validate: (userName) => {
+                        if (role == "ROLE_STUDENT") {
+                            if (!emailStudent.test(userName)) {
+                                emailError = "Use a student email"
+                                return "Use a student email"
 
+                            }
+                        }
+                        if (role == "ROLE_PROMOTOR") {
+                            if (!emailPromotor.test(userName)) {
+                                console.log("Use a promotor email")
+                                return "Use a promotor email"
+                            }
+                        }
+                        if (users.length > 0 && typeof users.find(user => user.value === userName) !== "undefined") {
+                            console.log(userName)
+                            console.log("Username is already taken")
+                            return "Username is already taken"
                         }
                     }
-                    if (role == "ROLE_PROMOTOR"){
-                        if (!emailPromotor.test(userName)){
-                            console.log("Use a promotor email")
-                            return "Use a promotor email"
-                        }
-                    }
-                    if (users.filter(function (user){return user.value === userName})){
-                        console.log("Username is already taken")
-                        return "Username is already taken"
-                    }
-                }
                 }
             )}
         />{
