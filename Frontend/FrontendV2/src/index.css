@@ -116,6 +116,7 @@ nav {
 
 .grid-container {
   /* background-color: red; */
+  display: grid;
   padding-left: 50px;
   padding-right: 50px;
   grid-template-columns: repeat(3, 33%);
