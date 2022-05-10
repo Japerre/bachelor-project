@@ -29,6 +29,11 @@ public class StudentSubjectController {
         studentSubjectService.toggleFavorite(subjectId, studentId);
     }
 
+    @PutMapping(value = "/toggleInCart/{subjectId}/{studentId}")
+    public void toggleInCart(@PathVariable("subjectId") Long subjectId, @PathVariable("studentId") Long studentId) throws Exception {
+        studentSubjectService.toggleInCart(subjectId, studentId);
+    }
+
     @GetMapping(value = "/getFavoriteSubjects/{studentId}")
     public List<Subject> getFavoriteSubjects(@PathVariable Long studentId){
         return studentSubjectService.getFavoriteSubjects(studentId);
@@ -38,5 +43,7 @@ public class StudentSubjectController {
     public List<StudentSubject> getSubjectsByStudentId(@PathVariable Long studentId){
         return studentSubjectService.getSubjectsByStudentId(studentId);
     }
+
+
 
 }

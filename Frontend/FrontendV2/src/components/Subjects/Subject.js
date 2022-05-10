@@ -5,11 +5,12 @@ import { MdTopic } from "react-icons/md";
 import { TiGroup } from "react-icons/ti";
 import { BsCheckLg } from "react-icons/bs";
 import { ImCross } from "react-icons/im";
-import {Link, useHistory, useLocation, useParams} from "react-router-dom";
+import { Link, useHistory, useLocation, useParams } from "react-router-dom";
 import { IconContext } from "react-icons";
 import { AiFillStar, AiOutlineStar } from "react-icons/ai";
-import { BsCartCheck, BsCartCheckFill } from "react-icons/bs"
+import { BsCartCheck, BsCartCheckFill } from "react-icons/bs";
 import { useState } from "react";
+import axios from "axios";
 
 const Subject = ({
   subject,
@@ -19,6 +20,7 @@ const Subject = ({
   onDisapprove,
   onDelete,
   onFavorite,
+  student,
 }) => {
   const promotorNames = subject.promotorList
     .map((promotor) => {
@@ -39,6 +41,23 @@ const Subject = ({
     .join(", ");
 
   const [refresh, setRefresh] = useState(0);
+
+  const onCartClick = async () => {
+    let error = false;
+    try {
+      await axios.put(
+        `http://localhost:8080/studentPreferences/toggleInCart/${subject.subjectId}/${student.studentId}`,
+        {
+          headers: { Authorization: localStorage.getItem("token") },
+        }
+      );
+    } catch (err) {
+      alert("there can be a maximum of 3 subjects in your cart");
+      error = true;
+    }
+    return error;
+  };
+
   return (
     <>
       <div className="card">
@@ -47,9 +66,11 @@ const Subject = ({
           {type === "student" && subject.favorite === false && (
             <AiOutlineStar
               className={"item-right"}
+              style={{cursor: "pointer"}}
               onClick={() => {
                 onFavorite(subject.subjectId);
-                subject.favorite=true
+                subject.favorite = true;
+                setRefresh(refresh + 1);
               }}
             />
           )}
@@ -57,22 +78,39 @@ const Subject = ({
             <AiFillStar
               className={"item-right"}
               color="gold"
+              style={{cursor: "pointer"}}
               onClick={() => {
                 onFavorite(subject.subjectId);
-                subject.favorite=false
+                subject.favorite = false;
+                setRefresh(refresh + 1);
               }}
             />
           )}
 
           {type === "cart" && subject.inCart === false && (
-            <BsCartCheck 
+            <BsCartCheck
               className="item-right"
+              style={{cursor: "pointer"}}
+              onClick={() => {
+                onCartClick().then((res) => {
+                  if(!res) {
+                    subject.inCart = true;
+                    setRefresh(refresh + 1);
+                  }
+                });
+              }}
             />
           )}
 
           {type === "cart" && subject.inCart === true && (
             <BsCartCheckFill
               className="item-right"
+              style={{cursor: "pointer"}}
+              onClick={() => {
+                onCartClick();
+                subject.inCart = false;
+                setRefresh(refresh + 1);
+              }}
             />
           )}
         </header>
@@ -95,7 +133,7 @@ const Subject = ({
         </div>
 
         <div className="card-footer">
-          <Link to={`/subject/${subject.subjectId}`} state={{subjects}}>
+          <Link to={`/subject/${subject.subjectId}`} state={{ subjects }}>
             <button type="button" className="btn">
               DETAIL
             </button>

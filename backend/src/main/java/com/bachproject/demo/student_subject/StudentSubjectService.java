@@ -35,6 +35,10 @@ public class StudentSubjectService {
     public void toggleFavorite(Long subjectId, Long studentId) {
         StudentSubject studentSubject = studentSubjectRepository.findByStudentStudentIdAndSubjectSubjectId(studentId, subjectId);
         if(studentSubject!=null){
+            //if we defavorite a subject it can not stay in your cart
+            if(studentSubject.getFavorite()){
+                studentSubject.setInCart(false);
+            }
             studentSubject.setFavorite(!studentSubject.getFavorite());
         } else{
             Subject subject = subjectRepository.getById(subjectId);
@@ -46,6 +50,24 @@ public class StudentSubjectService {
         }
 
         studentSubjectRepository.save(studentSubject);
+    }
+
+    public void toggleInCart(Long subjectId, Long studentId) throws Exception {
+        StudentSubject studentSubject = studentSubjectRepository.findByStudentStudentIdAndSubjectSubjectId(studentId, subjectId);
+        System.out.println("studentSubject = " + studentSubject);
+        Long amountInCart = studentSubjectRepository.countByStudentStudentIdAndInCartTrue(studentId);
+        System.out.println("amountInCart = " + amountInCart);
+        if(studentSubject!=null){
+            //we can always put less than 3 in the cart
+            if(studentSubject.getInCart()){
+                studentSubject.setInCart(!studentSubject.getInCart());
+            }
+            else if(amountInCart < 3){
+                studentSubject.setInCart(!studentSubject.getInCart());
+            }
+            else throw new Exception("you can't have more than 3 subjects in your cart");
+            studentSubjectRepository.save(studentSubject);
+        }
     }
 
     public List<Subject> getFavoriteSubjects(Long studentId) {
@@ -64,4 +86,6 @@ public class StudentSubjectService {
     public List<StudentSubject> getSelectedSubjects() {
         return studentSubjectRepository.findAll();
     }
+
+
 }

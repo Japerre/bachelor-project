@@ -16,4 +16,6 @@ public interface StudentSubjectRepository extends JpaRepository<StudentSubject, 
 
     public List<StudentSubject> findAllByStudentStudentId(Long studentId);
 
+    public Long countByStudentStudentIdAndInCartTrue(Long studentId);
+
 }

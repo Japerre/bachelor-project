@@ -35,7 +35,7 @@ const Favorites = () => {
       subject.inCart = data.data[i].inCart;
       subjects.push(subject);
     }
-    console.log(data.data)
+    console.log(data.data);
     setSubjects(subjects);
   };
 
@@ -43,16 +43,14 @@ const Favorites = () => {
     getSubjects();
   }, [student]);
 
-  const onCartClick = async (subjectId) => {
-    const data = await axios.put('')
-  }
+  const [refresh, setRefresh] = useState(0);
 
   return (
     <>
       <h1>favorites</h1>
       <div className="subject-container">
         <div className="grid-container">
-          <Subjects subjects={subjects} type="cart" />
+          <Subjects subjects={subjects} type="cart" student={student} />
         </div>
       </div>
     </>
