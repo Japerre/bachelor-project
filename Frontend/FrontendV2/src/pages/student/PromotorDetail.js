@@ -28,8 +28,8 @@ const PromotorDetail = () => {
             });
     }, []);
     const location = useLocation()
-    console.log(location)
     const promotor = location.state.promotor
+    const employer = location.state.employer
     console.log(promotor)
     const sendEmail = (data) => {
         const entry = {
@@ -50,38 +50,41 @@ const PromotorDetail = () => {
     }
     return(
       <>
-          <div className="promotor-details-card">
-              <h2>Promotor name: {promotor.user.firstName + " " + promotor.user.lastName} </h2>
-          </div>
-          <div className="promotor-contact-form-card">
-              <h2>Contact the promotor</h2>
-              <div className="contact-promotor-form">
-                  <form onSubmit={handleSubmit(sendEmail)}>
-                      {/*<Controller*/}
-                      {/*    shouldUnregister={true}*/}
-                      {/*    name="emailSubject"*/}
-                      {/*    rules={{required: false}}*/}
-                      {/*    control={control}*/}
-                      {/*    render={({field}) => (*/}
-                      {/*        //TODO: Hier komt dan de onderwerpen uit de opleiding van de student met enkel de promotor*/}
-                      {/*        <Select*/}
-                      {/*            placeholder="Select a subject for the email"*/}
-                      {/*            options={targetAudienceList}*/}
-                      {/*            onFocus={fetchTargetAudienceList}*/}
-                      {/*            {...field}*/}
-                      {/*        />*/}
-                      {/*  )}*/}
-                      {/*/>*/}
-                      <label>Message</label>
-                      <textarea
-                          rows="8"
-                          {...register("message", {required: true})}
-                      />
-                      <button>submit</button>
-                  </form>
+          <div className={"promotor-grid-container"}>
+              <div className="promotor-details-card">
+                  <h2>Promotor name: {promotor.user.firstName + " " + promotor.user.lastName} </h2>
+                  <h3>{promotor.user.userName}</h3>
+                  <p>-- Research Group: {promotor.researchGroup.name}</p>
+              </div>
+              <div className="promotor-contact-form-card">
+                  <h2>Contact the promotor</h2>
+                  <div className="contact-promotor-form">
+                      <form onSubmit={handleSubmit(sendEmail)}>
+                          {/*<Controller*/}
+                          {/*    shouldUnregister={true}*/}
+                          {/*    name="emailSubject"*/}
+                          {/*    rules={{required: false}}*/}
+                          {/*    control={control}*/}
+                          {/*    render={({field}) => (*/}
+                          {/*        //TODO: Hier komt dan de onderwerpen uit de opleiding van de student met enkel de promotor*/}
+                          {/*        <Select*/}
+                          {/*            placeholder="Select a subject for the email"*/}
+                          {/*            options={targetAudienceList}*/}
+                          {/*            onFocus={fetchTargetAudienceList}*/}
+                          {/*            {...field}*/}
+                          {/*        />*/}
+                          {/*  )}*/}
+                          {/*/>*/}
+                          <label>Message</label>
+                          <textarea
+                              rows="8"
+                              {...register("message", {required: true})}
+                          />
+                          <button>submit</button>
+                      </form>
+                  </div>
               </div>
           </div>
-
       </>
   )
 }

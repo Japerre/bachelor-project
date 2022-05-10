@@ -94,7 +94,7 @@ const SubjectDetail = () => {
 
     return (
         <>
-            <div className={"grid-container"}>
+            <div className={"detail-grid-container"}>
                 <div className="subject-detail-title-description">
                     <h1 className="align-text-lef">{subject.title}</h1>
                     <div className="subject-detail-description">
@@ -102,8 +102,6 @@ const SubjectDetail = () => {
                             {subject.description}
                         </p>
                     </div>
-
-
                 </div>
                 <div className="subject-detail-extra-info">
                     <p>
@@ -118,7 +116,9 @@ const SubjectDetail = () => {
                     <p>
                         <TiGroup /> {subject.amountOfStudents}
                     </p>
-                    {console.log(subject)}
+                </div>
+                <div className="subject-detail-employer-info">
+
                 </div>
             </div>
 

@@ -2,6 +2,7 @@ import {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import StudentSubject from "../../components/Subjects/StudentSubject";
 import axios from "axios";
+import studentSubject from "../../components/Subjects/StudentSubject";
 
 const AssignSubjectToStudent = () => {
     // authentication
@@ -21,7 +22,6 @@ const AssignSubjectToStudent = () => {
                 navigate("/login");
             });
     }, []);
-
     useEffect(()=>{
         const getSubjects = () => {
             axios
@@ -29,7 +29,6 @@ const AssignSubjectToStudent = () => {
                     headers: {authorization: localStorage.getItem("token")},
                 }).then((data) => {
                     setSelectedSubjects(data.data.map((studentSubject)=>(
-                        console.log(studentSubject),
                         <StudentSubject
                             key = {studentSubject.subject.id}
                             studentSubject={studentSubject}
