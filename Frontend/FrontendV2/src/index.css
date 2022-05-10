@@ -1,7 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap');
 
-
-
 body {
   font-family: 'Poppins', sans-serif;
 }
@@ -101,7 +99,6 @@ nav {
   /* background-color: red; */
   padding-left: 50px;
   padding-right: 50px;
-  display: grid;
   grid-template-columns: repeat(3, 33%);
   /* grid-template-columns: repeat(3, minmax(100px, 33%)); */
   justify-content: center;
@@ -115,6 +112,16 @@ nav {
     justify-content: center;
     grid-template-columns: 100%
   }
+    .subject-detail-title-description{
+        position: absolute /*relative and fixed elements also works*/;
+        left: 0;
+        right: 0;
+    }
+    .subject-detail-extra-info{
+        position: absolute /*relative and fixed elements also works*/;
+        left: 0;
+        right: 0;
+    }
 }
 
 
@@ -277,11 +284,12 @@ button {
   background-color: lightgray;
 }
 .subject-detail-title-description{
+    display: grid;
     margin-left: 30px;
     margin-right: 30px;
     margin-top: 30px;
     background-color: lightgrey;
-    width: 60%;
+    width: 50%;
     float: left;
 }
 .subject-detail-extra-info{
