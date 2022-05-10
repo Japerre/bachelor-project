@@ -47,8 +47,8 @@ public class StudentSubjectService {
             studentSubject.setSubject(subject);
             studentSubject.setStudent(student);
             studentSubject.setFavorite(true);
+            studentSubject.setInCart(false);
         }
-
         studentSubjectRepository.save(studentSubject);
     }
 
@@ -88,4 +88,9 @@ public class StudentSubjectService {
     }
 
 
+    public List<Subject> getSubjectsInCart(Long studentId) {
+        return studentSubjectRepository.findAllByStudentStudentIdAndInCartTrue(studentId).stream()
+                .map(studentSubject -> studentSubject.getSubject())
+                .toList();
+    }
 }

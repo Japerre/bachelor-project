@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 const HomeStudent = () => {
   const [subjects, setSubjects] = useState([]);
-  const [subjectList, setSubjectList] = useState([])
+  const [subjectList, setSubjectList] = useState([]);
 
   // authentication
   const [student, setStudent] = useState({});
@@ -37,7 +37,7 @@ const HomeStudent = () => {
       subject.favorite = data.data[i].favorite;
       subjects.push(subject);
     }
-    setSubjectList(subjects)
+    setSubjectList(subjects);
     setSubjects(subjects);
   };
 
@@ -59,17 +59,21 @@ const HomeStudent = () => {
 
   const filterSubjects = (e) => {
     const value = e.target.value.toLowerCase();
-    console.log(subjectList)
-    const filteredSubjects = subjectList.filter((subject) => (
-      `${subject.title} ${subject.description} ${JSON.stringify(subject.promotorList)} ${JSON.stringify(subject.topicList)}} `.toLowerCase().includes(value)
-    ));
-    setSubjects(filteredSubjects)
+    console.log(subjectList);
+    const filteredSubjects = subjectList.filter((subject) =>
+      `${subject.title} ${JSON.stringify(
+        subject.promotorList
+      )} ${JSON.stringify(subject.topicList)}} `
+        .toLowerCase()
+        .includes(value)
+    );
+    setSubjects(filteredSubjects);
   };
 
   return (
     <>
       {student.targetAudience && (
-        <h1>
+        <h1 style={{ textAlign: "center" }}>
           showing all subjects with target audience:
           {student.targetAudience.majorCode +
             " " +
@@ -77,7 +81,13 @@ const HomeStudent = () => {
         </h1>
       )}
 
-      <input placeholder="search" onInput={filterSubjects} />
+      <div className="search">
+        <input
+          className="searchbar"
+          placeholder="search on title, topics, promotors..."
+          onInput={filterSubjects}
+        />
+      </div>
 
       <div className="subject-container">
         <div className="grid-container">

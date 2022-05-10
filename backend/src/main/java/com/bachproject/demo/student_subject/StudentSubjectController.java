@@ -44,6 +44,11 @@ public class StudentSubjectController {
         return studentSubjectService.getSubjectsByStudentId(studentId);
     }
 
+    @GetMapping(value = "/getSubjectsInCart/{studentId}")
+    public List<Subject> getSubjectsInCart(@PathVariable Long studentId){
+        return studentSubjectService.getSubjectsInCart(studentId);
+    }
+
 
 
 }
