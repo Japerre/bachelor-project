@@ -5,6 +5,7 @@ import axios from "axios"
 import {MdTopic} from "react-icons/md";
 import {FiCrosshair} from "react-icons/fi";
 import {TiGroup} from "react-icons/ti";
+import {BiWorld, BiEnvelope} from "react-icons/bi";
 import {IconContext} from "react-icons";
 import {BsCheckLg} from "react-icons/bs";
 import {ImCross} from "react-icons/im";
@@ -17,6 +18,7 @@ const SubjectDetail = () => {
     const [promotorList, setPromotorNames] = useState([])
     const [topicsList, setTopicsList] = useState([])
     const [targetAudienceList,setTargetAudienceList] = useState('')
+    const [employer, setEmployer] = useState({})
     const id = useParams().id
     const location = useLocation()
     const subjects = location.state.subjects
@@ -70,6 +72,7 @@ const SubjectDetail = () => {
                 })
                 .join(", ");
             setTargetAudienceList(targetAudiences);
+            fetchEmployer(data.data)
         });
     };
 
@@ -90,6 +93,29 @@ const SubjectDetail = () => {
         const currentIndex = indexOfObject(subjects, "subjectId", id)
         setNextSubject(subjects[currentIndex + 1])
         setPrevSubject(subjects[currentIndex - 1])
+    }
+
+    const fetchEmployer = async (subjectData) => {
+        console.log(subjectData.employer.employerId)
+        if (subjectData.employer.type === "company") {
+            axios.get("http://localhost:8080/companies/getCompanies", {
+                headers: {authorization: localStorage.getItem("token")},
+            }).then((data) => {
+                setEmployer(data.data.find(company => company.employer.employerId))
+            }).catch((error) => {
+                console.log(error)
+            })
+
+        } else if (subjectData.employer.type === "researchGroup") {
+            axios.get("http://localhost:8080/researchGroups/getResearchGroups", {
+                headers: {authorization: localStorage.getItem("token")},
+            }).then((data) => {
+                console.log(data.data)
+                setEmployer(data.data.find(researchGroup => researchGroup?.employer?.employerId === subjectData?.employer?.employerId))
+            }).catch((error) => {
+                console.log(error)
+            })
+        }
     }
 
     return (
@@ -118,23 +144,43 @@ const SubjectDetail = () => {
                     </p>
                 </div>
                 <div className="subject-detail-employer-info">
+                    {employer?.researchGroupId && (
+                        <div>
+                            <h2>Research group: {employer.name}</h2>
+                        </div>
+                    )}
+                    {employer?.companyId && (
+                        <div>
+                            <h2>Company: {employer.companyName}</h2>
+                            <h4>Contact person: {employer.contactPersonFirstName +" "+employer.contactPersonLastName}</h4>
+                            <p>
+                                <BiEnvelope /> {employer.contactPersonEmail}
+                            </p>
+                            <p> <BiWorld/> <a href={employer.website}  target="_blank">{employer.website}</a> </p>
 
+                        </div>
+                    )}
                 </div>
             </div>
 
             <footer className="footer">
                 <div className="footer-right" >
                     {nextSubject &&
-                        <Link to={`/subject/${nextSubject.subjectId}`} className={"footer-link"} state={{subjects}} >
-                            {nextSubject.title} <FaLongArrowAltRight />
+                        <Link to={`/subject/${nextSubject.subjectId}`} state={{subjects}} >
+                            <div className={"footer-link"}>
+                                {nextSubject.title} <FaLongArrowAltRight />
+                            </div>
+
                         </Link>
                     }
 
                 </div>
                 <div className="footer-left">
                     {prevSubject &&
-                        <Link to={`/subject/${prevSubject.subjectId}`} className={"footer-link"} state={{subjects}} >
-                            <FaLongArrowAltLeft /> {prevSubject.title}
+                        <Link to={`/subject/${prevSubject.subjectId}`} state={{subjects}} >
+                            <div className={"footer-link"}>
+                                <FaLongArrowAltLeft /> {prevSubject.title}
+                            </div>
                         </Link>}
                 </div>
             </footer>

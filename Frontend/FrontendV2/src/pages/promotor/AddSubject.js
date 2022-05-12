@@ -77,7 +77,7 @@ const AddSubject = () => {
   };
 
   const fetchResearchGroups = async () => {
-    const data = await axios.get("http://localhost:8080/researchGroups", {
+    const data = await axios.get("http://localhost:8080/researchGroups/getResearchGroups", {
       headers: { authorization: localStorage.getItem("token") },
     });
     setResearchGroupList(

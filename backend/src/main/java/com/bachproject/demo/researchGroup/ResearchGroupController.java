@@ -17,7 +17,7 @@ public class ResearchGroupController {
         return researchGroupService.createResearchGroup(researchGroup);
     }
 
-    @GetMapping
+    @GetMapping(value = "/getResearchGroups")
     public List<ResearchGroup> getResearchGroups(){
         return researchGroupService.getResearchGroups();
     }
