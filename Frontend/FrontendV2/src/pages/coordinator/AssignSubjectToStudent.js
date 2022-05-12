@@ -4,11 +4,15 @@ import StudentSubject from "../../components/Subjects/StudentSubject";
 import axios from "axios";
 import studentSubject from "../../components/Subjects/StudentSubject";
 
+
 const AssignSubjectToStudent = () => {
     // authentication
     const [user, setUser] = useState({});
-    const [selectedSubjects, setSelectedSubjects] = useState([])
+    const [subjectsToAssign, setSubjectsToAssign] = useState([])
+    const [studentSubjects, setStudentSubjects] = useState([])
     const navigate = useNavigate();
+    let subjectArray = [];
+    let studentArray = [];
     useEffect(() => {
         axios
             .get("http://localhost:8080/whoami/user", {
@@ -22,20 +26,30 @@ const AssignSubjectToStudent = () => {
                 navigate("/login");
             });
     }, []);
+
+    function fetchSubjectsStudents(data) {
+        for (const subject of data) {
+            if (!subjectArray.filter(e => e.subjectId === subject.subject.subjectId).length > 0) {
+                subjectArray.push(subject.subject)
+            }
+        }
+    }
+
     useEffect(()=>{
         const getSubjects = () => {
             axios
                 .get("http://localhost:8080/studentPreferences/getSelectedSubjects", {
                     headers: {authorization: localStorage.getItem("token")},
                 }).then((data) => {
-                    setSelectedSubjects(data.data.map((studentSubject)=>(
+                fetchSubjectsStudents(data.data)
+                setSubjectsToAssign(subjectArray.map((subject) => (
                         <StudentSubject
-                            key = {studentSubject.subject.id}
-                            studentSubject={studentSubject}
+                            key={subject.subjectId}
+                            subject={subject}
+                            studentSubjects = {data.data}
                         />
-                        )
                     )
-                )
+                ))
             }).catch((error) => {
                 console.log(error)
             })
@@ -47,7 +61,9 @@ const AssignSubjectToStudent = () => {
     <main>
         <h1>Subjects without a student: </h1>
         <div className="subject-container">
-            <div className="grid-container">{selectedSubjects}</div>
+            <div className="grid-container">
+                {subjectsToAssign}
+            </div>
         </div>
     </main>
   );
