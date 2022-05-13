@@ -21,6 +21,7 @@ const Subject = ({
   onDelete,
   onFavorite,
   student,
+  refreshParent
 }) => {
   const promotorNames = subject.promotorList
     .map((promotor) => {
@@ -70,7 +71,7 @@ const Subject = ({
               onClick={() => {
                 onFavorite(subject.subjectId);
                 subject.favorite = true;
-                setRefresh(refresh + 1);
+                // setRefresh(refresh + 1);
               }}
             />
           )}
@@ -82,7 +83,7 @@ const Subject = ({
               onClick={() => {
                 onFavorite(subject.subjectId);
                 subject.favorite = false;
-                setRefresh(refresh + 1);
+                // setRefresh(refresh + 1);
               }}
             />
           )}

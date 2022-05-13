@@ -1,6 +1,6 @@
 import Subject from "./Subject";
 
-const Subjects = ({ subjects, type, onFavorite, onCartClick, student }) => {
+const Subjects = ({ subjects, type, onFavorite, onCartClick, student, refreshParent }) => {
   return (
     <>
       {subjects.map((subject) => (
@@ -12,6 +12,7 @@ const Subjects = ({ subjects, type, onFavorite, onCartClick, student }) => {
           onFavorite={onFavorite}
           onCartClick={onCartClick}
           student={student}
+          refreshParent={refreshParent}
         />
       ))}
     </>

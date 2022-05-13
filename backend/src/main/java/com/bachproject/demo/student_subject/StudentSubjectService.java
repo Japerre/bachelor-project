@@ -3,6 +3,7 @@ package com.bachproject.demo.student_subject;
 import com.bachproject.demo.student.Student;
 import com.bachproject.demo.student.StudentRepository;
 import com.bachproject.demo.subject.Subject;
+import com.bachproject.demo.subject.SubjectForStudent;
 import com.bachproject.demo.subject.SubjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,6 +39,7 @@ public class StudentSubjectService {
             //if we defavorite a subject it can not stay in your cart
             if(studentSubject.getFavorite()){
                 studentSubject.setInCart(false);
+                studentSubject.setAmountOfStars(0);
             }
             studentSubject.setFavorite(!studentSubject.getFavorite());
         } else{
@@ -48,6 +50,7 @@ public class StudentSubjectService {
             studentSubject.setStudent(student);
             studentSubject.setFavorite(true);
             studentSubject.setInCart(false);
+            studentSubject.setSubmitted(false);
         }
         studentSubjectRepository.save(studentSubject);
     }
@@ -61,6 +64,7 @@ public class StudentSubjectService {
             //we can always put less than 3 in the cart
             if(studentSubject.getInCart()){
                 studentSubject.setInCart(!studentSubject.getInCart());
+                studentSubject.setAmountOfStars(0);
             }
             else if(amountInCart < 3){
                 studentSubject.setInCart(!studentSubject.getInCart());
@@ -88,9 +92,23 @@ public class StudentSubjectService {
     }
 
 
-    public List<Subject> getSubjectsInCart(Long studentId) {
+    public List<SubjectForStudent> getSubjectsInCart(Long studentId) {
         return studentSubjectRepository.findAllByStudentStudentIdAndInCartTrue(studentId).stream()
-                .map(studentSubject -> studentSubject.getSubject())
+                .map(studentSubject -> new SubjectForStudent(studentSubject))
                 .toList();
+    }
+
+    public void setAmountOfStars(Long subjectId, Long studentId, int amtOfStars) {
+        StudentSubject studentSubject = studentSubjectRepository.findByStudentStudentIdAndSubjectSubjectId(studentId, subjectId);
+        studentSubject.setAmountOfStars(amtOfStars);
+        studentSubjectRepository.save(studentSubject);
+    }
+
+    public void submitSelection(List<Long> subjectIdList) {
+        List<StudentSubject> studentSubjects = studentSubjectRepository.findAllBySubjectSubjectIdIn(subjectIdList);
+        for(StudentSubject s : studentSubjects){
+            s.setSubmitted(true);
+            studentSubjectRepository.save(s);
+        }
     }
 }

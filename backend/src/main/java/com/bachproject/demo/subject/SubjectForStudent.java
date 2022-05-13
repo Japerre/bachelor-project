@@ -18,10 +18,14 @@ public class SubjectForStudent {
     private Subject subject;
     private boolean favorite;
     private boolean inCart;
+    private boolean submitted;
+    private int amountOfStars;
 
     public SubjectForStudent(StudentSubject studentSubject) {
         this.subject = studentSubject.getSubject();
         this.favorite = studentSubject.getFavorite();
         this.inCart = studentSubject.getInCart();
+        this.submitted = studentSubject.getSubmitted();
+        this.amountOfStars = studentSubject.getAmountOfStars();
     }
 }

@@ -1,6 +1,7 @@
 package com.bachproject.demo.student_subject;
 
 import com.bachproject.demo.subject.Subject;
+import com.bachproject.demo.subject.SubjectForStudent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -45,10 +46,18 @@ public class StudentSubjectController {
     }
 
     @GetMapping(value = "/getSubjectsInCart/{studentId}")
-    public List<Subject> getSubjectsInCart(@PathVariable Long studentId){
+    public List<SubjectForStudent> getSubjectsInCart(@PathVariable Long studentId){
         return studentSubjectService.getSubjectsInCart(studentId);
     }
 
+    @PutMapping(value = "/setAmountOfStars/{subjectId}/{studentId}/{amtOfStars}")
+    public void setAmountOfStars(@PathVariable("subjectId") Long subjectId, @PathVariable("studentId") Long studentId, @PathVariable("amtOfStars") int amtOfStars){
+        studentSubjectService.setAmountOfStars(subjectId, studentId, amtOfStars);
+    }
 
+    @PutMapping(value = "/submitSelection")
+    public void submitSelection(@RequestBody List<Long> subjectIdList){
+        studentSubjectService.submitSelection(subjectIdList);
+    }
 
 }

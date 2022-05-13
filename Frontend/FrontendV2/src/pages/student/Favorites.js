@@ -33,6 +33,7 @@ const Favorites = () => {
     for (let i = 0; i < data.data.length; i++) {
       const subject = data.data[i].subject;
       subject.inCart = data.data[i].inCart;
+      subject.amountOfStars = data.data[i].amountOfStars;
       subjects.push(subject);
     }
     console.log(data.data);

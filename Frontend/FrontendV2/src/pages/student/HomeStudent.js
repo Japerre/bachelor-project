@@ -41,10 +41,6 @@ const HomeStudent = () => {
     setSubjects(subjects);
   };
 
-  useEffect(() => {
-    getSubjects();
-  }, [student]);
-
   const [refresh, setRefresh] = useState(0);
 
   const onFavorite = async (subjectId) => {
@@ -54,8 +50,16 @@ const HomeStudent = () => {
         headers: { Authorization: localStorage.getItem("token") },
       }
     );
+    refreshParent();
+  };
+
+  const refreshParent = () => {
     setRefresh(refresh + 1);
   };
+
+  useEffect(() => {
+    getSubjects();
+  }, [student]);
 
   const filterSubjects = (e) => {
     const value = e.target.value.toLowerCase();
@@ -95,6 +99,7 @@ const HomeStudent = () => {
             subjects={subjects}
             type="student"
             onFavorite={onFavorite}
+            refreshParent={refreshParent}
           />
         </div>
       </div>
