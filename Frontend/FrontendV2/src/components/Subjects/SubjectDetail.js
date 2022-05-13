@@ -6,9 +6,6 @@ import {MdTopic} from "react-icons/md";
 import {FiCrosshair} from "react-icons/fi";
 import {TiGroup} from "react-icons/ti";
 import {BiWorld, BiEnvelope} from "react-icons/bi";
-import {IconContext} from "react-icons";
-import {BsCheckLg} from "react-icons/bs";
-import {ImCross} from "react-icons/im";
 
 const SubjectDetail = () => {
 
@@ -22,9 +19,11 @@ const SubjectDetail = () => {
     const id = useParams().id
     const location = useLocation()
     const subjects = location.state.subjects
-
     const [user, setUser] = useState({});
     const navigate = useNavigate();
+
+    let amountOfStudents;
+
     useEffect(() => {
         axios
             .get("http://localhost:8080/whoami/user", {

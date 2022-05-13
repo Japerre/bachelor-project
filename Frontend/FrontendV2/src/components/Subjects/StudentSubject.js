@@ -16,14 +16,14 @@ const StudentSubject = ({ subject, studentSubjects }) => {
     useEffect(() =>{
         findAllStudents()
     },[])
-    function findAllStudents(){
+    function findAllStudents() {
         for (const studentSubject of studentSubjects) {
             if (studentSubject.subject.subjectId === subject.subjectId) {
                 studentsArray.push(studentSubject.student)
             }
         }
         setStudents(studentsArray.map((student) => ({
-                label: student.user.firstName + " " + student.user.lastName ,
+                label: student.user.firstName + " " + student.user.lastName,
                 value: student.studentId,
             }
         )))
@@ -31,17 +31,19 @@ const StudentSubject = ({ subject, studentSubjects }) => {
   return(
       <main>
           <div className="card">
+
               <header className="card-header">{subject.title}</header>
+              <p>Amount of students: {subject.amountOfStudents}</p>
               <form>
-                  {console.log(students)}
                   <Controller
                       shouldUnregister={true}
                       name="student"
-                      rules={{ required: false }}
+                      rules={{ required: false, max: subject.amountOfStudents }}
                       control={control}
                       render={({ field }) => (
                           <Select
                               placeholder = "Select a student"
+                              isMulti
                               options={students}
                               {...field}
                           />
