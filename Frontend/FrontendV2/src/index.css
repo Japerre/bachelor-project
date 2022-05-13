@@ -471,6 +471,10 @@ Link{
 li{
     color: white;
 }
+.list-item-assigned-students{
+    margin-left: 30px;
+    color:black;
+}
 
 
 

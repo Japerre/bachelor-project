@@ -9,10 +9,12 @@ const AssignSubjectToStudent = () => {
     // authentication
     const [user, setUser] = useState({});
     const [subjectsToAssign, setSubjectsToAssign] = useState([])
-    const [studentSubjects, setStudentSubjects] = useState([])
+    const [assignedSubjects, setAssignedSubjects] = useState([])
+
     const navigate = useNavigate();
-    let subjectArray = [];
-    let studentArray = [];
+    let subjectToAssignArray = [];
+    let assignedSubjectArray = [];
+
     useEffect(() => {
         axios
             .get("http://localhost:8080/whoami/user", {
@@ -29,32 +31,44 @@ const AssignSubjectToStudent = () => {
 
     function fetchSubjectsStudents(data) {
         for (const subject of data) {
-            if (!subjectArray.filter(e => e.subjectId === subject.subject.subjectId).length > 0 && subject.submitted) {
-                subjectArray.push(subject.subject)
+            if (!subjectToAssignArray.filter(e => e.subjectId === subject.subject.subjectId).length > 0 && !subject.subject.submitted) {
+                subjectToAssignArray.push(subject.subject)
+            } else if(!subjectToAssignArray.filter(e => e.subjectId === subject.subject.subjectId).length > 0 && subject.subject.submitted){
+                assignedSubjectArray.push(subject.subject)
+                console.log(assignedSubjectArray);
             }
         }
     }
 
+    const getSubjectsToAssign = () => {
+        axios
+            .get("http://localhost:8080/studentPreferences/getSelectedSubjects", {
+                headers: {authorization: localStorage.getItem("token")},
+            }).then((data) => {
+            fetchSubjectsStudents(data.data)
+            setSubjectsToAssign(subjectToAssignArray.map((subjectToAssign) => (
+                    <StudentSubject
+                        key={subjectToAssign.subjectId}
+                        subject={subjectToAssign}
+                        studentSubjects = {data.data}
+                    />
+                )
+            ))
+            setAssignedSubjects(assignedSubjectArray.map((assignedSubject) => (
+                    <StudentSubject
+                        key={assignedSubject.subjectId}
+                        subject={assignedSubject}
+                        studentSubjects = {data.data}
+                    />
+                )
+            ))
+        }).catch((error) => {
+            console.log(error)
+        })
+    };
+
     useEffect(()=>{
-        const getSubjects = () => {
-            axios
-                .get("http://localhost:8080/studentPreferences/getSelectedSubjects", {
-                    headers: {authorization: localStorage.getItem("token")},
-                }).then((data) => {
-                fetchSubjectsStudents(data.data)
-                setSubjectsToAssign(subjectArray.map((subject) => (
-                        <StudentSubject
-                            key={subject.subjectId}
-                            subject={subject}
-                            studentSubjects = {data.data}
-                        />
-                    )
-                ))
-            }).catch((error) => {
-                console.log(error)
-            })
-        };
-        getSubjects();
+        getSubjectsToAssign();
     },[])
 
   return (
@@ -63,6 +77,12 @@ const AssignSubjectToStudent = () => {
         <div className="subject-container">
             <div className="grid-container">
                 {subjectsToAssign}
+            </div>
+        </div>
+        <h1>Assigned Subjects: </h1>
+        <div className="subject-container">
+            <div className="grid-container">
+                {assignedSubjects}
             </div>
         </div>
     </main>

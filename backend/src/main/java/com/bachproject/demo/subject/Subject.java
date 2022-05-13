@@ -84,6 +84,7 @@ public class Subject {
     private List<TargetAudience> targetAudienceList;
 
     private Boolean approved;
+    private Boolean submitted;
 
     @ManyToOne()
     @JoinColumn(name="employer_id", referencedColumnName = "employerId")

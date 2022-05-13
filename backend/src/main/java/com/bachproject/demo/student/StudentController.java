@@ -1,6 +1,8 @@
 package com.bachproject.demo.student;
 
+import com.bachproject.demo.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,5 +24,10 @@ public class StudentController {
     //@CrossOrigin(origins = "*")
     public Student registerStudent(@RequestBody Student student) {
         return studentService.registerStudent(student);
+    }
+
+    @PutMapping(path ="/assignedSubject/{studentId}")
+    public Student assignSubject(@PathVariable Long studentId, @RequestBody Subject subject){
+        return studentService.assignSubject(studentId, subject);
     }
 }
