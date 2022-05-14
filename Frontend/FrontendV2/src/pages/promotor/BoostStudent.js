@@ -4,23 +4,23 @@ import { useNavigate } from "react-router-dom";
 import Subjects from "../../components/Subjects/Subjects";
 
 const BoostStudent = () => {
-  const [user, setUser] = useState({});
+  //authentication
+  const [promotor, setPromotor] = useState({});
   const navigate = useNavigate();
   useEffect(() => {
     axios
-      .get("http://localhost:8080/whoami/user", {
+      .get("http://localhost:8080/whoami/promotor", {
         headers: { authorization: localStorage.getItem("token") },
       })
       .then((data) => {
-        if (data.data.role != "ROLE_PROMOTOR") navigate("/");
-        setUser(data.data);
+        setPromotor(data.data);
       })
       .catch((error) => {
         navigate("/login");
       });
   }, []);
 
-  const [subjectsForPromotor, setSubjectsForPromotor] = useState([])
+  const [subjectsForPromotor, setSubjectsForPromotor] = useState([]);
 
   const fetchSubjectsForPromotor = async () => {
     const data = await axios.get(
@@ -29,12 +29,12 @@ const BoostStudent = () => {
         headers: { authorization: localStorage.getItem("token") },
       }
     );
-    console.log(data.data)
+    console.log(data.data);
   };
 
-  useState(()=>{
-    fetchSubjectsForPromotor()
-  },[user])
+  useState(() => {
+    fetchSubjectsForPromotor();
+  }, [promotor]);
 
   return (
     <div className="subject-container">
