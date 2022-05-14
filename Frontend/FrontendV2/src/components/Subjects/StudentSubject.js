@@ -23,23 +23,27 @@ const StudentSubject = ({ subject,studentSubjects }) => {
     function findAllStudents() {
         for (const studentSubject of studentSubjects) {
             if (studentSubject.subject.subjectId === subject.subjectId) {
-                if (!studentSubject.student.assignedSubjects) {
-                    studentsArray.push(studentSubject.student)
-                } else if(studentSubject.student.assignedSubjects && studentSubject.subject.subjectId === subject.subjectId){
-                    assignedStudentsArray.push(studentSubject.student);
+                if (!studentSubject.student.assignedSubject) {
+                    studentsArray.push(studentSubject)
+                } else if(studentSubject.student.assignedSubject && studentSubject.subject.subjectId === subject.subjectId){
+                    console.log(assignedStudentsArray)
+                    console.log(studentSubject.student)
+                    assignedStudentsArray.push(studentSubject);
                 }
             }
         }
-        setStudents(studentsArray.map((student) => (
+        setStudents(studentsArray.map((studentSubject) => (
             {
-                label: student.user.firstName + " " + student.user.lastName,
-                value: student.studentId,
+                label: studentSubject.student.user.firstName + " " + studentSubject.student.user.lastName+" | stars: "+studentSubject.amountOfStars+ " | boosted:",
+                value: studentSubject.student.studentId,
             }
         )))
-        setAssignedStudents(assignedStudentsArray.map((student) => (
+        setAssignedStudents(assignedStudentsArray.map((studentSubject) => (
             {
-                label: student.user.firstName + " " + student.user.lastName,
-                value: student.studentId,
+                label: studentSubject.student.user.firstName + " " + studentSubject.student.user.lastName,
+                amountOfStars: studentSubject.amountOfStars,
+                //boosted: studentSubject.boosted
+                value: studentSubject.student.studentId,
             }
         )))
     }
@@ -62,6 +66,13 @@ const StudentSubject = ({ subject,studentSubjects }) => {
         }
     }
 
+    function deleteAssigment(subject) {
+        for (const assignedStudent of assignedStudents){
+            axios
+                .put(`http://localhost:8080/students/assignedSubject/${assignedStudent.value}`)
+        }
+    }
+
     return (
             <main>
                 <div className="card">
@@ -71,7 +82,7 @@ const StudentSubject = ({ subject,studentSubjects }) => {
                     <form onSubmit={handleSubmit(onSubmit)}>
                         <Controller
                             shouldUnregister={true}
-                            name="assignedStudents"
+                            name="assignedSubject"
                             rules={{required: false}}
                             control={control}
                             render={({field}) => (
@@ -79,7 +90,6 @@ const StudentSubject = ({ subject,studentSubjects }) => {
                                     placeholder="Select a student"
                                     isMulti
                                     options={students}
-                                    isOptionDisabled={(option) => option.alreadyAssigned}
                                     {...field}
                                 />
                             )}
@@ -90,12 +100,13 @@ const StudentSubject = ({ subject,studentSubjects }) => {
                     {(subject.submitted && (
                         <div>
                             <p>Students:</p>
-
-                            <p>{assignedStudents.map((assignedStudent) => (
-                                <li className={"list-item-assigned-students"}>
-                                    {assignedStudent.label}
-                                </li>
-                            ))}</p>
+                                <p>{assignedStudents.map((assignedStudent) => (
+                                    <div className={"card"}>
+                                        <p>{assignedStudent.label}</p>
+                                        <p>Amount of stars: {assignedStudent.amountOfStars}</p>
+                                    </div>
+                                ))}</p>
+                            <button className={"remove-btn-studentSubject"} >Delete Assigment</button>
                         </div>
                     ))}
                 </div>

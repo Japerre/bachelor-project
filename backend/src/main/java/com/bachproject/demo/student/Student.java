@@ -61,5 +61,5 @@ public class Student {
             name ="subject_id",
             referencedColumnName = "subjectId"
     )
-    private Subject assignedSubjects;
+    private Subject assignedSubject;
 }

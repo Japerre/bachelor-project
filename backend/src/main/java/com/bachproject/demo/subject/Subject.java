@@ -2,6 +2,7 @@ package com.bachproject.demo.subject;
 
 import com.bachproject.demo.employer.Employer;
 import com.bachproject.demo.promotor.Promotor;
+import com.bachproject.demo.student.Student;
 import com.bachproject.demo.targetAudience.TargetAudience;
 import com.bachproject.demo.topic.Topic;
 import lombok.AllArgsConstructor;
@@ -89,4 +90,5 @@ public class Subject {
     @ManyToOne()
     @JoinColumn(name="employer_id", referencedColumnName = "employerId")
     private Employer employer;
+
 }

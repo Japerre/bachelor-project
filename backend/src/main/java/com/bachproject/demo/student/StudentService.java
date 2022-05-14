@@ -40,7 +40,7 @@ public class StudentService {
     public Student assignSubject(Long studentId, Subject subject) {
         Student student = studentRepository.getById(studentId);
         subject.setSubmitted(true);
-        student.setAssignedSubjects(subject);
+        student.setAssignedSubject(subject);
         subjectRepository.save(subject);
         return studentRepository.save(student);
     }

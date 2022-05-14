@@ -33,7 +33,7 @@ const AssignSubjectToStudent = () => {
         for (const subject of data) {
             if (!subjectToAssignArray.filter(e => e.subjectId === subject.subject.subjectId).length > 0 && !subject.subject.submitted) {
                 subjectToAssignArray.push(subject.subject)
-            } else if(!subjectToAssignArray.filter(e => e.subjectId === subject.subject.subjectId).length > 0 && subject.subject.submitted){
+            } else if(!assignedSubjectArray.filter(e => e.subjectId === subject.subject.subjectId).length > 0 && subject.subject.submitted){
                 assignedSubjectArray.push(subject.subject)
                 console.log(assignedSubjectArray);
             }
