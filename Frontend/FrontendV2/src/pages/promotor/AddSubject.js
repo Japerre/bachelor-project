@@ -2,11 +2,7 @@ import { useForm, Controller } from "react-hook-form";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Select from "react-select";
-import {
-  BrowserRouter as Router,
-  Navigate,
-  useNavigate,
-} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const AddSubject = () => {
   const [promotorList, setPromotorList] = useState([]);
@@ -77,9 +73,12 @@ const AddSubject = () => {
   };
 
   const fetchResearchGroups = async () => {
-    const data = await axios.get("http://localhost:8080/researchGroups/getResearchGroups", {
-      headers: { authorization: localStorage.getItem("token") },
-    });
+    const data = await axios.get(
+      "http://localhost:8080/researchGroups/getResearchGroups",
+      {
+        headers: { authorization: localStorage.getItem("token") },
+      }
+    );
     setResearchGroupList(
       data.data.map((group) => (
         <option key={group.researchGroupId} value={group.researchGroupId}>
@@ -115,9 +114,11 @@ const AddSubject = () => {
             promotorId: item.value,
           })),
 
-          promotorList: data.promotors ? data.promotors.map((item) => ({
-            promotorId: item.value,
-          })) : [],
+          promotorList: data.promotors
+            ? data.promotors.map((item) => ({
+                promotorId: item.value,
+              }))
+            : [],
 
           topicList: data.topics.map((item) => ({
             topicId: item.value,
@@ -145,9 +146,11 @@ const AddSubject = () => {
             targetAudienceId: item.value,
           })),
 
-          promotorList: data.promotors ? data.promotors.map((item) => ({
-            promotorId: item.value,
-          })) : [],
+          promotorList: data.promotors
+            ? data.promotors.map((item) => ({
+                promotorId: item.value,
+              }))
+            : [],
 
           topicList: data.topics.map((item) => ({
             topicId: item.value,
@@ -205,7 +208,7 @@ const AddSubject = () => {
         <Controller
           name="promotors"
           control={control}
-          rules={{required: false}}
+          rules={{ required: false }}
           render={({ field }) => (
             <Select
               placeholder="select promotor(s)"

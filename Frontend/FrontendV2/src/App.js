@@ -19,6 +19,7 @@ import Users from "./pages/admin/Users";
 import Favorites from "./pages/student/Favorites";
 import Selection from "./pages/student/Selection";
 import PromotorDetail from "./pages/student/PromotorDetail";
+import BoostStudent from "./pages/promotor/BoostStudent";
 
 function App() {
 
@@ -36,6 +37,7 @@ function App() {
 
           {/* promotor */}
           <Route path="/addSubject" element={<AddSubject />} />
+          <Route path="/promotor/boostStudent" element={<BoostStudent />} />
 
           {/* coordinator */}
           <Route path="/approveSubjects" element={<ApproveSubjects />} />

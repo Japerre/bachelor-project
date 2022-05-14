@@ -38,5 +38,6 @@ public class StudentSubject {
     private Boolean favorite;
     private Boolean inCart;
     private Boolean submitted;
+    private Boolean boosted;
 
 }

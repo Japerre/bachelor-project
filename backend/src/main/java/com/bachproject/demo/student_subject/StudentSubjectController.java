@@ -1,6 +1,7 @@
 package com.bachproject.demo.student_subject;
 
 import com.bachproject.demo.subject.Subject;
+import com.bachproject.demo.subject.SubjectForPromotor;
 import com.bachproject.demo.subject.SubjectForStudent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -14,25 +15,11 @@ public class StudentSubjectController {
     @Autowired
     StudentSubjectService studentSubjectService;
 
+    // getmappings
+
     @GetMapping("/getSelectedSubjects")
     public List<StudentSubject> getSelectedSubjects(){
         return studentSubjectService.getSelectedSubjects();
-    }
-
-    @PostMapping(value = "/setPreference")
-    public StudentSubject setPreference (@RequestBody StudentSubject studentSubject) {
-        studentSubject = studentSubjectService.saveNewPreference(studentSubject);
-        return studentSubject;
-    }
-
-    @PutMapping(value = "/toggleFavorite/{subjectId}/{studentId}")
-    public void toggleFavorite(@PathVariable("subjectId") Long subjectId, @PathVariable("studentId") Long studentId){
-        studentSubjectService.toggleFavorite(subjectId, studentId);
-    }
-
-    @PutMapping(value = "/toggleInCart/{subjectId}/{studentId}")
-    public void toggleInCart(@PathVariable("subjectId") Long subjectId, @PathVariable("studentId") Long studentId) throws Exception {
-        studentSubjectService.toggleInCart(subjectId, studentId);
     }
 
     @GetMapping(value = "/getFavoriteSubjects/{studentId}")
@@ -48,6 +35,31 @@ public class StudentSubjectController {
     @GetMapping(value = "/getSubjectsInCart/{studentId}")
     public List<SubjectForStudent> getSubjectsInCart(@PathVariable Long studentId){
         return studentSubjectService.getSubjectsInCart(studentId);
+    }
+
+    @GetMapping(value = "/getSubjectsForPromotor/{promotorId}")
+    public List<SubjectForPromotor> getSubjectsForPromotor(@PathVariable Long promotorId){
+        return studentSubjectService.getSubjectsForPromotor(promotorId);
+    }
+
+    // postmappings
+
+    @PostMapping(value = "/setPreference")
+    public StudentSubject setPreference (@RequestBody StudentSubject studentSubject) {
+        studentSubject = studentSubjectService.saveNewPreference(studentSubject);
+        return studentSubject;
+    }
+
+    // putmappings
+
+    @PutMapping(value = "/toggleFavorite/{subjectId}/{studentId}")
+    public void toggleFavorite(@PathVariable("subjectId") Long subjectId, @PathVariable("studentId") Long studentId){
+        studentSubjectService.toggleFavorite(subjectId, studentId);
+    }
+
+    @PutMapping(value = "/toggleInCart/{subjectId}/{studentId}")
+    public void toggleInCart(@PathVariable("subjectId") Long subjectId, @PathVariable("studentId") Long studentId) throws Exception {
+        studentSubjectService.toggleInCart(subjectId, studentId);
     }
 
     @PutMapping(value = "/setAmountOfStars/{subjectId}/{studentId}/{amtOfStars}")

@@ -27,46 +27,63 @@ const Nav = () => {
             <Link to="/register">
               <li>Register</li>
             </Link>
+            <Link to="/login">
+              <li>login</li>
+            </Link>
           </>
         )}
-        <Link to="/login">
-          <li>login</li>
-        </Link>
 
         {user.role === "ROLE_STUDENT" && (
           <>
-          <Link to="/student/favorites">
-            <li>favorites</li>
-          </Link>
-          <Link to="/student/selection">
-            <li>selection</li>
-          </Link>
+            <Link to="/student/favorites">
+              <li>favorites</li>
+            </Link>
+            <Link to="/student/selection">
+              <li>selection</li>
+            </Link>
+            <Link to="/login">
+              <li>logout</li>
+            </Link>
           </>
         )}
 
         {user.role === "ROLE_PROMOTOR" && (
-          <Link  to="/addSubject">
-            <li>add subject</li>
-          </Link>
+          <>
+            <Link to="/addSubject">
+              <li>add subject</li>
+            </Link>
+            <Link to="/login">
+              <li>logout</li>
+            </Link>
+            <Link to="/promotor/boostStudent">
+              <li>boost student</li>
+            </Link>
+          </>
         )}
 
         {user.role === "ROLE_COORDINATOR" && (
           <>
-              <Link  to="/approveSubjects">
-                  <li>approve subjects</li>
-              </Link>
-              <Link  to="/assignPromotors">
-                  <li>assign promotors</li>
-              </Link>
-              <Link  to="/assignSubjects">
-                    <li>Assign subject to Student</li>
-              </Link>
+            <Link to="/approveSubjects">
+              <li>approve subjects</li>
+            </Link>
+            <Link to="/assignPromotors">
+              <li>assign promotors</li>
+            </Link>
+            <Link to="/assignSubjects">
+              <li>Assign subject to Student</li>
+            </Link>
+            <Link to="/login">
+              <li>logout</li>
+            </Link>
           </>
         )}
         {user.role === "ROLE_ADMIN" && (
           <>
-            <Link  to="/admin/users">
+            <Link to="/admin/users">
               <li>users</li>
+            </Link>
+            <Link to="/login">
+              <li>logout</li>
             </Link>
           </>
         )}
