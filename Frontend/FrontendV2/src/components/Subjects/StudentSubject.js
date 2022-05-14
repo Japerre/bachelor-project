@@ -78,7 +78,7 @@ const StudentSubject = ({ subject,studentSubjects }) => {
                 <div className="card">
                     <header className="card-header">{subject.title}</header>
                     <p>Amount of students: {subject.amountOfStudents}</p>
-                    {(!subject.submitted && (
+                    {(!subject.assigned && (
                     <form onSubmit={handleSubmit(onSubmit)}>
                         <Controller
                             shouldUnregister={true}
@@ -97,7 +97,7 @@ const StudentSubject = ({ subject,studentSubjects }) => {
                         <button>submit</button>
                     </form>
                     ))}
-                    {(subject.submitted && (
+                    {(subject.assigned && (
                         <div>
                             <p>Students:</p>
                                 <p>{assignedStudents.map((assignedStudent) => (

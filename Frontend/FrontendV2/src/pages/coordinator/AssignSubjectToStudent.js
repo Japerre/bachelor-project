@@ -31,9 +31,9 @@ const AssignSubjectToStudent = () => {
 
     function fetchSubjectsStudents(data) {
         for (const subject of data) {
-            if (!subjectToAssignArray.filter(e => e.subjectId === subject.subject.subjectId).length > 0 && !subject.subject.submitted) {
+            if (!subjectToAssignArray.filter(e => e.subjectId === subject.subject.subjectId).length > 0 && !subject.subject.assigned) {
                 subjectToAssignArray.push(subject.subject)
-            } else if(!assignedSubjectArray.filter(e => e.subjectId === subject.subject.subjectId).length > 0 && subject.subject.submitted){
+            } else if(!assignedSubjectArray.filter(e => e.subjectId === subject.subject.subjectId).length > 0 && subject.subject.assigned){
                 assignedSubjectArray.push(subject.subject)
                 console.log(assignedSubjectArray);
             }
