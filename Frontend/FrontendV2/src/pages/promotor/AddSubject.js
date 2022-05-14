@@ -12,18 +12,16 @@ const AddSubject = () => {
   const [employerType, setEmployerType] = useState("");
   const [researchGroupList, setResearchGroupList] = useState("");
 
-  const [user, setUser] = useState({});
-
+  //authentication
+  const [promotor, setPromotor] = useState({});
   const navigate = useNavigate();
-
   useEffect(() => {
     axios
-      .get("http://localhost:8080/whoami/user", {
+      .get("http://localhost:8080/whoami/promotor", {
         headers: { authorization: localStorage.getItem("token") },
       })
       .then((data) => {
-        if (data.data.role != "ROLE_PROMOTOR") navigate("/");
-        setUser(data.data);
+        setPromotor(data.data)
       })
       .catch((error) => {
         navigate("/login");
