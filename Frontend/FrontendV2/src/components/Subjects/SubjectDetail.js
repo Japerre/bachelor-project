@@ -100,7 +100,8 @@ const SubjectDetail = () => {
             axios.get("http://localhost:8080/companies/getCompanies", {
                 headers: {authorization: localStorage.getItem("token")},
             }).then((data) => {
-                setEmployer(data.data.find(company => company.employer.employerId))
+                console.log(data.data)
+                setEmployer(data.data.find(company => company?.employer?.employerId === subjectData?.employer?.employerId ))
             }).catch((error) => {
                 console.log(error)
             })
