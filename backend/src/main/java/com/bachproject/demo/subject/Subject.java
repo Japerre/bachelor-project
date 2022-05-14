@@ -86,6 +86,7 @@ public class Subject {
 
     private Boolean approved;
     private Boolean assigned;
+    private Boolean boosted;
 
     @ManyToOne()
     @JoinColumn(name="employer_id", referencedColumnName = "employerId")

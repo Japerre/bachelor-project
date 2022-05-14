@@ -22,6 +22,11 @@ public class StudentSubjectController {
         return studentSubjectService.getSelectedSubjects();
     }
 
+    @GetMapping(value ="/getSelectedSubjects/{subjectId}/{studentId}")
+    public StudentSubject getSelectedSubject(@PathVariable("subjectId") Long subjectId, @PathVariable("studentId") Long studentId){
+        return studentSubjectService.getSelectedSubject(subjectId,studentId);
+    }
+
     @GetMapping(value = "/getFavoriteSubjects/{studentId}")
     public List<Subject> getFavoriteSubjects(@PathVariable Long studentId){
         return studentSubjectService.getFavoriteSubjects(studentId);
@@ -70,6 +75,11 @@ public class StudentSubjectController {
     @PutMapping(value = "/submitSelection")
     public void submitSelection(@RequestBody List<Long> subjectIdList){
         studentSubjectService.submitSelection(subjectIdList);
+    }
+
+    @PutMapping(value = "/boostStudent/{subjectId}/{studentId}")
+    public void boostStudent(@PathVariable("subjectId") Long subjectId, @PathVariable("studentId") Long studentId){
+        studentSubjectService.boostStudent(subjectId,studentId);
     }
 
 }

@@ -138,4 +138,17 @@ public class StudentSubjectService {
         }
         return subjectForPromotorList;
     }
+
+    public void boostStudent(Long subjectId, Long studentId) {
+        StudentSubject studentSubject = studentSubjectRepository.findByStudentStudentIdAndSubjectSubjectId(studentId, subjectId);
+        Subject subject = subjectRepository.getById(subjectId);
+        studentSubject.setBoosted(true);
+        subject.setBoosted(true);
+        studentSubjectRepository.save(studentSubject);
+        subjectRepository.save(subject);
+    }
+
+    public StudentSubject getSelectedSubject(Long subjectId, Long studentId) {
+        return studentSubjectRepository.findByStudentStudentIdAndSubjectSubjectId(studentId, subjectId);
+    }
 }
