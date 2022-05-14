@@ -25,9 +25,7 @@ const StudentSubject = ({ subject,studentSubjects }) => {
             if (studentSubject.subject.subjectId === subject.subjectId) {
                 if (!studentSubject.student.assignedSubject) {
                     studentsArray.push(studentSubject)
-                } else if(studentSubject.student.assignedSubject && studentSubject.subject.subjectId === subject.subjectId){
-                    console.log(assignedStudentsArray)
-                    console.log(studentSubject.student)
+                } else if(studentSubject.student.assignedSubject.subjectId === subject.subjectId){
                     assignedStudentsArray.push(studentSubject);
                 }
             }
@@ -46,11 +44,12 @@ const StudentSubject = ({ subject,studentSubjects }) => {
                 value: studentSubject.student.studentId,
             }
         )))
+        console.log(assignedStudentsArray)
+        assignedStudentsArray = [];
     }
 
     const onSubmit = (data) => {
-        setAssignedStudents(data.assignedStudents)
-        for (const assignedStudent of data.assignedStudents) {
+        for (const assignedStudent of data.assignedSubject) {
             console.log(assignedStudent.value)
             axios
                 .put(`http://localhost:8080/students/assignedSubject/${assignedStudent.value}`, subject)
