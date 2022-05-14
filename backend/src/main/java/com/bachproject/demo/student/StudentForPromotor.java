@@ -11,6 +11,7 @@ public class StudentForPromotor {
     private String lastName;
     private TargetAudience targetAudience;
     private int amountOfStars;
+    private Boolean boosted;
 
     public StudentForPromotor(StudentSubject studentSubject){
         studentId = studentSubject.getStudent().getStudentId();
@@ -18,5 +19,6 @@ public class StudentForPromotor {
         lastName = studentSubject.getStudent().getUser().getLastName();
         targetAudience = studentSubject.getStudent().getTargetAudience();
         amountOfStars = studentSubject.getAmountOfStars();
+        boosted = studentSubject.getBoosted();
     }
 }

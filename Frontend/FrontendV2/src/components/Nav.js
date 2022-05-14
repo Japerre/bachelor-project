@@ -52,11 +52,11 @@ const Nav = () => {
             <Link to="/addSubject">
               <li>add subject</li>
             </Link>
-            <Link to="/login">
-              <li>logout</li>
-            </Link>
             <Link to="/promotor/boostStudent">
               <li>boost student</li>
+            </Link>
+            <Link to="/login">
+              <li>logout</li>
             </Link>
           </>
         )}

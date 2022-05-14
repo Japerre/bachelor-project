@@ -321,7 +321,7 @@ button {
   cursor: pointer;
 }
 
-.remove-btn:hover .remove-btn-studentSubject:hover {
+.remove-btn:hover, .remove-btn-studentSubject:hover {
   transition: all 0.2s ease;
   transform: scale(1.3);
 }
