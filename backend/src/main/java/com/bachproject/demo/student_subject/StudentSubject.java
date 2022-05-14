@@ -35,9 +35,13 @@ public class StudentSubject {
     private Subject subject;
 
     private int amountOfStars;
+    @Column(columnDefinition = "boolean default false")
     private Boolean favorite;
+    @Column(columnDefinition = "boolean default false")
     private Boolean inCart;
+    @Column(columnDefinition = "boolean default false")
     private Boolean submitted;
+    @Column(columnDefinition = "boolean default false")
     private Boolean boosted;
 
 }
