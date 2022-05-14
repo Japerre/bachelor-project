@@ -7,6 +7,7 @@ const StudentSubject = ({subject, studentSubjects}) => {
 
     const [assignedStudents, setAssignedStudents] = useState([])
     const [students, setStudents] = useState([])
+
     let studentsArray = [];
     let assignedStudentsArray = [];
 
@@ -44,8 +45,6 @@ const StudentSubject = ({subject, studentSubjects}) => {
                 value: studentSubject.student.studentId,
             }
         )))
-        console.log(assignedStudentsArray)
-        assignedStudentsArray = [];
     }
 
     const onSubmit = (data) => {
@@ -79,7 +78,7 @@ const StudentSubject = ({subject, studentSubjects}) => {
                     alert("Operation Failed")
                 })
         }
-
+    }
         return (
             <main>
                 <div className="card">
@@ -122,6 +121,5 @@ const StudentSubject = ({subject, studentSubjects}) => {
 
         )
 
-    }
 }
 export default StudentSubject
