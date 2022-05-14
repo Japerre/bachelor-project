@@ -22,7 +22,7 @@ const StudentSubject = ({ subject,studentSubjects }) => {
 
     function findAllStudents() {
         for (const studentSubject of studentSubjects) {
-            if (studentSubject.subject.subjectId === subject.subjectId && studentSubject.submitted) {
+            if (studentSubject.subject.subjectId === subject.subjectId && studentSubject.submitted && studentSubject.amountOfStars) {
                 if (!studentSubject.student.assignedSubject) {
                     studentsArray.push(studentSubject)
                 } else if(studentSubject.student.assignedSubject.subjectId === subject.subjectId){
