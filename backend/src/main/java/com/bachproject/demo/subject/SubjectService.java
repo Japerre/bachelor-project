@@ -188,6 +188,8 @@ public class SubjectService {
             studentSubject.setSubject(s);
             studentSubject.setFavorite(false);
             studentSubject.setInCart(false);
+            studentSubject.setSubmitted(false);
+            studentSubject.setBoosted(false);
             studentSubjectRepository.save(studentSubject);
             subjects.add(new SubjectForStudent(studentSubject));
         }
