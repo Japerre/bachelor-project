@@ -151,4 +151,10 @@ public class StudentSubjectService {
     public StudentSubject getSelectedSubject(Long subjectId, Long studentId) {
         return studentSubjectRepository.findByStudentStudentIdAndSubjectSubjectId(studentId, subjectId);
     }
+
+    public Student getBoostedStudent(Long subjectId) {
+        StudentSubject studentSubject = studentSubjectRepository.findBySubjectSubjectIdAndBoostedTrue(subjectId);
+        Student student = studentRepository.getById(studentSubject.getStudent().getStudentId());
+        return student;
+    }
 }

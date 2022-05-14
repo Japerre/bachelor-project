@@ -24,18 +24,20 @@ const SubjectDetail = () => {
 
     let amountOfStudents;
 
-    useEffect(() => {
-        axios
-            .get("http://localhost:8080/whoami/user", {
-                headers: { authorization: localStorage.getItem("token") },
-            })
-            .then((data) => {
-                setUser(data.data);
-            })
-            .catch((error) => {
-                navigate("/login");
-            });
-    }, []);
+    // useEffect(() => {
+    //     axios
+    //         .get("http://localhost:8080/whoami/user", {
+    //             headers: { authorization: localStorage.getItem("token") },
+    //         })
+    //         .then((data) => {
+    //             setUser(data.data);
+    //         })
+    //         .catch((error) => {
+    //             navigate("/login");
+    //         });
+    // }, []);
+
+
     useEffect(() => {
         const subject = fetchSubject()
     }, [nextSubject, prevSubject])
