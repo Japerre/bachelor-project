@@ -84,7 +84,7 @@ public class SubjectService {
 
         if(subjectDTO.getEmployer().getType().equals("researchGroup")){
             ResearchGroup researchGroup = researchGroupRepository.getById(subjectDTO.getResearchGroup().getResearchGroupId());
-            researchGroup.setEmployer(employer);
+            researchGroup.setEmployer((List<Employer>) employer);
             researchGroupRepository.save(researchGroup);
         }
 

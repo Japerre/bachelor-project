@@ -113,7 +113,8 @@ const SubjectDetail = () => {
                 headers: {authorization: localStorage.getItem("token")},
             }).then((data) => {
                 console.log(data.data)
-                setEmployer(data.data.find(researchGroup => researchGroup?.employer?.employerId === subjectData?.employer?.employerId))
+                console.log(data.data.find(researchGroup => researchGroup?.employer.find(employer => employer?.employerId === subjectData?.employer?.employerId)))
+                setEmployer(data.data.find(researchGroup => researchGroup?.employer.find(employer => employer?.employerId === subjectData?.employer?.employerId)))
             }).catch((error) => {
                 console.log(error)
             })
@@ -170,7 +171,7 @@ const SubjectDetail = () => {
                     {nextSubject &&
                         <Link to={`/subject/${nextSubject.subjectId}`} state={{subjects}} >
                             <div className={"footer-link"}>
-                                {nextSubject.title} <FaLongArrowAltRight />
+                                Next Subject <FaLongArrowAltRight />
                             </div>
 
                         </Link>
@@ -181,7 +182,7 @@ const SubjectDetail = () => {
                     {prevSubject &&
                         <Link to={`/subject/${prevSubject.subjectId}`} state={{subjects}} >
                             <div className={"footer-link"}>
-                                <FaLongArrowAltLeft /> {prevSubject.title}
+                                <FaLongArrowAltLeft /> Previous Subject
                             </div>
                         </Link>}
                 </div>
