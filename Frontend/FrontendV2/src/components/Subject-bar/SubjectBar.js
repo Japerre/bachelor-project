@@ -6,9 +6,8 @@ import Star2 from "./stars/Star2";
 import Star3 from "./stars/Star3";
 import axios from "axios";
 
-const SubjectBar = ({ subject,student, refreshParent,submitted }) => {
-  
-  const [refresh, setRefresh] = useState(0)
+const SubjectBar = ({ subject, student, refreshParent, submitted }) => {
+  const [refresh, setRefresh] = useState(0);
 
   const onStarClick = async (amountOfStars) => {
     const data = await axios.put(
@@ -17,18 +16,24 @@ const SubjectBar = ({ subject,student, refreshParent,submitted }) => {
         headers: { Authorization: localStorage.getItem("token") },
       }
     );
-    refreshParent()
-  }
+    refreshParent();
+  };
 
   return (
     <div className="subject-bar">
-      {subject.title}
-      <div className="item-right" style={{background: "red"}}>
-        {subject.amountOfStars == 0 && <Star0 onStarClick={onStarClick} submitted={submitted}/>}
-        {subject.amountOfStars == 1 && <Star1 onStarClick={onStarClick} submitted={submitted}/>}
-        {subject.amountOfStars == 2 && <Star2 onStarClick={onStarClick} submitted={submitted}/>}
-        {subject.amountOfStars == 3 && <Star3 onStarClick={onStarClick} submitted={submitted}/>}
-      </div>
+      <div>{subject.title}</div>
+      {subject.amountOfStars == 0 && (
+        <Star0 onStarClick={onStarClick} submitted={submitted} />
+      )}
+      {subject.amountOfStars == 1 && (
+        <Star1 onStarClick={onStarClick} submitted={submitted} />
+      )}
+      {subject.amountOfStars == 2 && (
+        <Star2 onStarClick={onStarClick} submitted={submitted} />
+      )}
+      {subject.amountOfStars == 3 && (
+        <Star3 onStarClick={onStarClick} submitted={submitted} />
+      )}
     </div>
   );
 };

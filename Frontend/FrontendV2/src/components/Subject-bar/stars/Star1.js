@@ -4,13 +4,13 @@ const Star1 = ({ onStarClick, submitted }) => {
   return (
     <>
       {submitted ? (
-        <div>
+        <div className="star-div">
           <AiFillStar size={25} color="gold" />
           <AiOutlineStar size={25} />
           <AiOutlineStar size={25} />
         </div>
       ) : (
-        <div>
+        <div className="star-div">
           <AiFillStar
             size={25}
             onClick={() => onStarClick(1)}

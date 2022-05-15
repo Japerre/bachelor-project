@@ -15,6 +15,7 @@ const AssignedSubject = () => {
         headers: { authorization: localStorage.getItem("token") },
       })
       .then((data) => {
+        console.log(data.data)
         setStudent(data.data);
       })
       .catch((error) => {
@@ -24,13 +25,13 @@ const AssignedSubject = () => {
 
   return (
     <div className="selection-container">
-      {student.assignedSubject && student.assignedSubject === null && (
+      {!student.assignedSubject && (
         <div className="message-div">
           <center>You have not been assigned a subject yet.</center>
         </div>
       )}
 
-      {student.assignedSubject && student.assignedSubject !== null && (
+      {student.assignedSubject && (
         <>
           <div className="message-div" style={{ background: "green" }}>
             <center>You have been assigned to the following subject.</center>

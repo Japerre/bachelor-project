@@ -417,9 +417,15 @@ footer{
 }
 
 .subject-bar{
-  position: relative;
+  /* position: relative; */
+  display: flex;
+  justify-content: space-between;
   background-color: hsl(0,0%,94%);
   padding: 10px;
+}
+
+.star-div{
+  flex-shrink: 0;
 }
 
 .subject-bar-container{
