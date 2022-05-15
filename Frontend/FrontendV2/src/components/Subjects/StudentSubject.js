@@ -64,10 +64,11 @@ const StudentSubject = ({subject, studentSubjects}) => {
         }
     }
 
-    function deleteAssigment(subject) {
+    function deleteAssigment() {
         for (const assignedStudent of assignedStudents) {
+            console.log(subject)
             axios
-                .put(`http://localhost:8080/students/assignedSubject/${assignedStudent.value}/${subject.id}`)
+                .put(`http://localhost:8080/students/eraseAssignment/${assignedStudent.value}/${subject.subjectId}`)
                 .then((response) => {
                     console.log(response);
                     alert("Assigment has been erased");
@@ -80,11 +81,12 @@ const StudentSubject = ({subject, studentSubjects}) => {
         }
     }
         return (
+            ((students.length !== 0 || subject.assigned )&& (
             <main>
                 <div className="card">
                     <header className="card-header">{subject.title}</header>
                     <p>Amount of students: {subject.amountOfStudents}</p>
-                    {(!subject.assigned && (
+                    {(!subject.assigned && students &&(
                         <form onSubmit={handleSubmit(onSubmit)}>
                             <Controller
                                 shouldUnregister={true}
@@ -113,12 +115,12 @@ const StudentSubject = ({subject, studentSubjects}) => {
                                         <p>Amount of stars: {assignedStudent.amountOfStars}</p>
                                     </div>
                             ))}</p>
-                            <button className={"remove-btn-studentSubject"}>Delete Assigment</button>
+                            <button className={"remove-btn-studentSubject"} onClick={deleteAssigment}>Delete Assigment</button>
                         </div>
                     ))}
                 </div>
             </main>
-
+            ))
         )
 
 }

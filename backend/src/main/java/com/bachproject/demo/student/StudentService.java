@@ -44,4 +44,13 @@ public class StudentService {
         subjectRepository.save(subject);
         return studentRepository.save(student);
     }
+
+    public void eraseAssignedSubject(Long assignedStudentId, Long subjectId) {
+        Student student = studentRepository.getById(assignedStudentId);
+        Subject subject = subjectRepository.getById(subjectId);
+        subject.setAssigned(false);
+        student.setAssignedSubject(null);
+        subjectRepository.save(subject);
+        studentRepository.save(student);
+    }
 }

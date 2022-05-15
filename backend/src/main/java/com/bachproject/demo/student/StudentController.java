@@ -30,4 +30,8 @@ public class StudentController {
     public Student assignSubject(@PathVariable Long studentId, @RequestBody Subject subject){
         return studentService.assignSubject(studentId, subject);
     }
+    @PutMapping(path="/eraseAssignment/{assignedStudentId}/{subjectId}")
+    public void eraseAssignedSubject(@PathVariable("assignedStudentId") Long assignedStudentId, @PathVariable("subjectId") Long subjectId){
+        studentService.eraseAssignedSubject(assignedStudentId,subjectId);
+    }
 }
