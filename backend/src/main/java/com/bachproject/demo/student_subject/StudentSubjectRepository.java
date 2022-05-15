@@ -24,4 +24,6 @@ public interface StudentSubjectRepository extends JpaRepository<StudentSubject, 
 
     public List<StudentSubject> findAllBySubmittedTrue();
 
+    public StudentSubject findBySubjectSubjectIdAndBoostedTrue(Long subjectId);
+
 }

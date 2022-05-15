@@ -35,7 +35,7 @@ const Register = () => {
         );
     };
     const fetchResearchGroup = async () => {
-        const data = await axios.get("http://localhost:8080/researchGroups");
+        const data = await axios.get("http://localhost:8080/researchGroups/getResearchGroups");
         console.log(data);
         setResearchGroupList(
             data.data.map((researchGroup) => ({
@@ -208,7 +208,7 @@ const Register = () => {
                         />
                   )}
                   />
-                  <button>submit</button>
+                  <button style={{cursor: "pointer"}}>submit</button>
               </>
           }
           {role === "ROLE_PROMOTOR" &&
@@ -228,7 +228,7 @@ const Register = () => {
                         />
                   )}
                   />
-                  <button>submit</button>
+                  <button style={{cursor: "pointer"}}>submit</button>
               </>
           }
 

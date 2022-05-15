@@ -456,6 +456,7 @@ footer{
   padding: 50px;
   background-color: hsl(194,72%,40%);
   color: white;
+  font-size: 1.25rem;
 }
 
 a {

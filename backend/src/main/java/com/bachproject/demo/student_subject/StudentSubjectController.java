@@ -1,5 +1,6 @@
 package com.bachproject.demo.student_subject;
 
+import com.bachproject.demo.student.Student;
 import com.bachproject.demo.subject.Subject;
 import com.bachproject.demo.subject.SubjectForPromotor;
 import com.bachproject.demo.subject.SubjectForStudent;
@@ -45,6 +46,11 @@ public class StudentSubjectController {
     @GetMapping(value = "/getSubjectsForPromotor/{promotorId}")
     public List<SubjectForPromotor> getSubjectsForPromotor(@PathVariable Long promotorId){
         return studentSubjectService.getSubjectsForPromotor(promotorId);
+    }
+
+    @GetMapping(value = "/getBoostedStudent/{subjectId}")
+    public Student getBoostedStudent(@PathVariable("subjectId") Long subjectId){
+        return studentSubjectService.getBoostedStudent(subjectId);
     }
 
     // postmappings

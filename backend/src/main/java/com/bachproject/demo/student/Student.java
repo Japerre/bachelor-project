@@ -53,7 +53,6 @@ public class Student {
             referencedColumnName = "TargetAudienceId"
     )
 
-    //@Transient als je targetAudience niet wil opslaan in de DB
     private TargetAudience targetAudience;
 
     @ManyToOne()

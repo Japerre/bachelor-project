@@ -31,6 +31,8 @@ public class Subject {
     )
     private Long subjectId;
     private String title;
+
+    @Column(columnDefinition = "TEXT")
     private String description;
     private int amountOfStudents;
 
