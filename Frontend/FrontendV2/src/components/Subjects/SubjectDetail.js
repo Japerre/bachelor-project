@@ -57,7 +57,7 @@ const SubjectDetail = () => {
                         to={`/promotors/${promotor.promotorId}`}
                         state={{promotor}}
                         className={"subject-link-promotor"}>
-                        {promotor.user.firstName + " " + promotor.user.lastName}
+                        {promotor.user.firstName + " " + promotor.user.lastName +" "}
                     </Link>;
                 });
             setPromotorNames(promotorNames);
