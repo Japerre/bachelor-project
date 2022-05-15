@@ -24,7 +24,7 @@ const AssignedSubject = () => {
 
   return (
     <div className="selection-container">
-      {student.assignedSubject && student.assignedSubject === null && (
+      {!student.assignedSubject && student.assignedSubject === null && (
         <div className="message-div">
           <center>You have not been assigned a subject yet.</center>
         </div>
