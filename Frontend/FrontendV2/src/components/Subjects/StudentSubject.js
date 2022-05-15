@@ -63,6 +63,10 @@ const StudentSubject = ({subject, studentSubjects}) => {
                 })
         }
     }
+    function validateStudents(data){
+        console.log(data)
+
+    }
 
     function deleteAssigment() {
         for (const assignedStudent of assignedStudents) {
@@ -91,7 +95,11 @@ const StudentSubject = ({subject, studentSubjects}) => {
                             <Controller
                                 shouldUnregister={true}
                                 name="assignedSubject"
-                                rules={{required: false}}
+                                rules={{required: false, validate: (value) => {
+                                        if (value.length !== subject.amountOfStudents){
+                                            return "Select "+ subject.amountOfStudents+" student(s)"
+                                        }
+                                    }}}
                                 control={control}
                                 render={({field}) => (
                                     <Select
@@ -103,13 +111,14 @@ const StudentSubject = ({subject, studentSubjects}) => {
                                 )}
                             />
                             <button>submit</button>
+                            {errors.assignedSubject && <p className={"errmsg"}>{errors.assignedSubject.message}</p>}
                         </form>
+
                     ))}
                     {(subject.assigned && (
                         <div>
                             <p>Students:</p>
                             <p>{assignedStudents.map((assignedStudent) => (
-                                console.log(assignedStudent),
                                     <div className={"card"}>
                                         <p>{assignedStudent.label}</p>
                                         <p>Amount of stars: {assignedStudent.amountOfStars}</p>
