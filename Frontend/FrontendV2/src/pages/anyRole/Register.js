@@ -168,7 +168,7 @@ const Register = () => {
         {}
         {errors.userName && (
           <p className={"errmsg"}>
-            Use a valid Kuleuven email / not used email
+            {errors.userName.message}
           </p>
         )}
 
@@ -189,6 +189,7 @@ const Register = () => {
             },
           })}
         />
+        {console.log(errors)}
         {errors.password2 && <p className={"errmsg"}>Passwords do not match</p>}
         <label htmlFor="firstName">first name</label>
         <input type="text" {...register("firstName", { required: true })} />

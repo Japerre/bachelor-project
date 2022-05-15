@@ -194,13 +194,13 @@ const AddSubject = () => {
         <h1>subject</h1>
         <label>Title</label>
         <input type={"text"} {...register("title", { required: true })} />
-        {errors.title && <p>title is required</p>}
+        {errors.title && <p className={"errmsg"}>title is required</p>}
         <label>Description</label>
         <textarea
           rows="4"
           {...register("description", { required: true })}
         ></textarea>
-        {errors.description && <p>discription is required</p>}
+        {errors.description && <p className={"errmsg"}>description is required</p>}
 
         <label>promotors</label>
         <Controller
@@ -234,24 +234,25 @@ const AddSubject = () => {
             />
           )}
         />
-        {errors.targetAudiences && <p>select at least one target audience</p>}
+        {console.log(errors)}
+        {errors.targetAudiences && <p className={"errmsg"} >select at least one target audience</p>}
 
         <label>topics</label>
-        <Controller
-          name="topics"
-          rules={{ required: false }}
-          control={control}
-          render={({ field }) => (
-            <Select
-              placeholder="select topics"
-              isMulti
-              options={topicList}
-              onFocus={fetchTopics}
-              {...field}
-            />
-          )}
-        />
-        {errors.topics && <p>select at least one topic</p>}
+          <Controller
+            name="topics"
+            rules={{ required: false }}
+            control={control}
+            render={({ field }) => (
+              <Select
+                placeholder="select topics"
+                isMulti
+                options={topicList}
+                onFocus={fetchTopics}
+                {...field}
+              />
+            )}
+          />
+        {errors.topics && <p className={"errmsg"}>select at least one topic</p>}
 
         <label>amount of students</label>
         <input
@@ -261,7 +262,7 @@ const AddSubject = () => {
           placeholder="1-3 students"
           {...register("amountOfStudents", { required: true, min: 1, max: 3 })}
         />
-        {errors.amountOfStudents && <p>select 1, 2 or 3 students</p>}
+        {errors.amountOfStudents && <p className={"errmsg"}>select 1, 2 or 3 students</p>}
 
         <h1>employer</h1>
         <label>type of employer</label>
@@ -286,7 +287,7 @@ const AddSubject = () => {
               {researchGroupList}
             </select>
             {errors.researchGroupId && (
-              <p>select a research group as employer</p>
+              <p className={"errmsg"}>select a research group as employer</p>
             )}
             <button style={{ cursor: "pointer" }}>submit</button>
           </>
@@ -299,38 +300,40 @@ const AddSubject = () => {
               type={"text"}
               {...register("companyName", { required: true })}
             />
-            {errors.companyName && <p>company must have name</p>}
-            <label>website url</label>
+            {errors.companyName && <p className={"errmsg"}>company must have name</p>}
 
+            <label>website url</label>
             <input
               type={"text"}
               {...register("website", { required: false })}
             />
+
             <label>contact person first name</label>
 
             <input
               type={"text"}
               {...register("contactPersonFirstName", { required: true })}
             />
-            <label>contact person last name</label>
             {errors.contactPersonFirstName && (
-              <p>enter contact person credentials</p>
+                <p className={"errmsg"}>enter contact person credentials</p>
             )}
 
+            <label>contact person last name</label>
             <input
               type={"text"}
               {...register("contactPersonLastName", { required: true })}
             />
-            <label>contact person email</label>
             {errors.contactPersonLastName && (
-              <p>enter contact person credentials</p>
+                <p className={"errmsg"}>enter contact person credentials</p>
             )}
+
+            <label>contact person email</label>
             <input
               type={"email"}
               {...register("contactPersonEmail", { required: true })}
             />
             {errors.contactPersonEmail && (
-              <p>enter contact person credentials</p>
+                <p className={"errmsg"}>enter contact person credentials</p>
             )}
             <button style={{ cursor: "pointer" }}>submit</button>
           </>
