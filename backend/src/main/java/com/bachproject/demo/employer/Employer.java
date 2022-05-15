@@ -23,4 +23,6 @@ public class Employer {
     )
     private Long employerId;
     private String type;
+
+
 }
