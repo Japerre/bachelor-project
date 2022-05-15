@@ -21,7 +21,7 @@ const Subject = ({
   onDelete,
   onFavorite,
   student,
-  refreshParent
+  refreshParent,
 }) => {
   const promotorNames = subject.promotorList
     .map((promotor) => {
@@ -62,59 +62,57 @@ const Subject = ({
   return (
     <>
       <div className="card">
-        <header className="card-header">
-          {subject.title}
-          {type === "student" && subject.favorite === false && (
-            <AiOutlineStar
-              className={"item-right"}
-              style={{cursor: "pointer"}}
-              onClick={() => {
-                onFavorite(subject.subjectId);
-                subject.favorite = true;
-                // setRefresh(refresh + 1);
-              }}
-            />
-          )}
-          {type === "student" && subject.favorite === true && (
-            <AiFillStar
-              className={"item-right"}
-              color="gold"
-              style={{cursor: "pointer"}}
-              onClick={() => {
-                onFavorite(subject.subjectId);
-                subject.favorite = false;
-                // setRefresh(refresh + 1);
-              }}
-            />
-          )}
+        {type === "student" && subject.favorite === false && (
+          <AiOutlineStar
+            className={"item-right"}
+            style={{ cursor: "pointer" }}
+            onClick={() => {
+              onFavorite(subject.subjectId);
+              subject.favorite = true;
+              // setRefresh(refresh + 1);
+            }}
+          />
+        )}
+        {type === "student" && subject.favorite === true && (
+          <AiFillStar
+            className={"item-right"}
+            color="gold"
+            style={{ cursor: "pointer" }}
+            onClick={() => {
+              onFavorite(subject.subjectId);
+              subject.favorite = false;
+              // setRefresh(refresh + 1);
+            }}
+          />
+        )}
 
-          {type === "cart" && subject.inCart === false && (
-            <BsCartCheck
-              className="item-right"
-              style={{cursor: "pointer"}}
-              onClick={() => {
-                onCartClick().then((res) => {
-                  if(!res) {
-                    subject.inCart = true;
-                    setRefresh(refresh + 1);
-                  }
-                });
-              }}
-            />
-          )}
+        {type === "cart" && subject.inCart === false && (
+          <BsCartCheck
+            className="item-right"
+            style={{ cursor: "pointer" }}
+            onClick={() => {
+              onCartClick().then((res) => {
+                if (!res) {
+                  subject.inCart = true;
+                  setRefresh(refresh + 1);
+                }
+              });
+            }}
+          />
+        )}
 
-          {type === "cart" && subject.inCart === true && (
-            <BsCartCheckFill
-              className="item-right"
-              style={{cursor: "pointer"}}
-              onClick={() => {
-                onCartClick();
-                subject.inCart = false;
-                setRefresh(refresh + 1);
-              }}
-            />
-          )}
-        </header>
+        {type === "cart" && subject.inCart === true && (
+          <BsCartCheckFill
+            className="item-right"
+            style={{ cursor: "pointer" }}
+            onClick={() => {
+              onCartClick();
+              subject.inCart = false;
+              setRefresh(refresh + 1);
+            }}
+          />
+        )}
+        <header className="card-header">{subject.title}</header>
         <div className="card-body">
           <div className="card-item">
             <FaGraduationCap /> {promotorNames}
@@ -186,9 +184,9 @@ const Subject = ({
                 </button>
                 {/* <BsCheckLg onClick={() => onApprove(subject)}/> */}
               </IconContext.Provider>
-              <button onClick={() => onDelete(subject.subjectId)}>
+              {/* <button onClick={() => onDelete(subject.subjectId)}>
                 PERMANENT DELETE
-              </button>
+              </button> */}
             </>
           )}
         </div>

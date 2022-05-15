@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import SubjectBar from "../../components/Subject-bar/SubjectBar";
+import { Link } from "react-router-dom";
 
 const Selection = () => {
   // authentication
@@ -63,7 +64,7 @@ const Selection = () => {
     } else {
       alert("every subject must have at least 1 star");
     }
-    refreshParent()
+    refreshParent();
   };
 
   const [refresh, setRefresh] = useState(0);
@@ -80,8 +81,12 @@ const Selection = () => {
     <div className="selection-container">
       {submitted ? (
         <>
-          <div className="message-div" style={{background: "green"}}>
-            you have sucessfully submitted the following 3 subjects
+          <div className="message-div" style={{ background: "green" }}>
+            you have sucessfully submitted the following 3 subjects. Check{" "}
+            <Link to={"/student/assignedSubject"} style={{ color: "purple" }}>
+              here
+            </Link>{" "}
+            to see if there has been a subject assigned to you!
           </div>
           <div className="subject-bar-container">
             {subjectsInCart.map((subject) => (

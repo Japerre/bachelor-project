@@ -20,6 +20,7 @@ import Favorites from "./pages/student/Favorites";
 import Selection from "./pages/student/Selection";
 import PromotorDetail from "./pages/student/PromotorDetail";
 import BoostStudent from "./pages/promotor/BoostStudent";
+import AssignedSubject from "./pages/student/AssignedSubject";
 
 function App() {
 
@@ -51,6 +52,7 @@ function App() {
           {/* student */}
           <Route path="/student/favorites" element={<Favorites />} />
           <Route path="/student/selection" element={<Selection />} />
+          <Route path="/student/assignedSubject" element={<AssignedSubject />} />
         </Routes>
       </div>
     </Router>

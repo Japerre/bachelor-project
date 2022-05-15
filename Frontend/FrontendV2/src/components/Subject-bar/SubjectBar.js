@@ -23,12 +23,12 @@ const SubjectBar = ({ subject,student, refreshParent,submitted }) => {
   return (
     <div className="subject-bar">
       {subject.title}
-      <span className="item-right">
+      <div className="item-right" style={{background: "red"}}>
         {subject.amountOfStars == 0 && <Star0 onStarClick={onStarClick} submitted={submitted}/>}
         {subject.amountOfStars == 1 && <Star1 onStarClick={onStarClick} submitted={submitted}/>}
         {subject.amountOfStars == 2 && <Star2 onStarClick={onStarClick} submitted={submitted}/>}
         {subject.amountOfStars == 3 && <Star3 onStarClick={onStarClick} submitted={submitted}/>}
-      </span>
+      </div>
     </div>
   );
 };
