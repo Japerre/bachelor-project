@@ -91,9 +91,11 @@ const SubjectDetail = () => {
     }
 
     function findNextPrevSubject() {
-        const currentIndex = indexOfObject(subjects, "subjectId", id)
-        setNextSubject(subjects[currentIndex + 1])
-        setPrevSubject(subjects[currentIndex - 1])
+        if (subjects.length !== 0){
+            const currentIndex = indexOfObject(subjects, "subjectId", id)
+            setNextSubject(subjects[currentIndex + 1])
+            setPrevSubject(subjects[currentIndex - 1])
+        }
     }
 
     const fetchEmployer = async (subjectData) => {
@@ -165,28 +167,29 @@ const SubjectDetail = () => {
                     )}
                 </div>
             </div>
+            {subjects.length !== 0 && (
+                <footer className="footer">
+                    <div className="footer-right">
+                        {nextSubject &&
+                            <Link to={`/subject/${nextSubject.subjectId}`} state={{subjects}}>
+                                <div className={"footer-link"}>
+                                    Next Subject <FaLongArrowAltRight/>
+                                </div>
 
-            <footer className="footer">
-                <div className="footer-right" >
-                    {nextSubject &&
-                        <Link to={`/subject/${nextSubject.subjectId}`} state={{subjects}} >
-                            <div className={"footer-link"}>
-                                Next Subject <FaLongArrowAltRight />
-                            </div>
+                            </Link>
+                        }
 
-                        </Link>
-                    }
-
-                </div>
-                <div className="footer-left">
-                    {prevSubject &&
-                        <Link to={`/subject/${prevSubject.subjectId}`} state={{subjects}} >
-                            <div className={"footer-link"}>
-                                <FaLongArrowAltLeft /> Previous Subject
-                            </div>
-                        </Link>}
-                </div>
-            </footer>
+                    </div>
+                    <div className="footer-left">
+                        {prevSubject &&
+                            <Link to={`/subject/${prevSubject.subjectId}`} state={{subjects}}>
+                                <div className={"footer-link"}>
+                                    <FaLongArrowAltLeft/> Previous Subject
+                                </div>
+                            </Link>}
+                    </div>
+                </footer>
+            )}
         </>
 
     )

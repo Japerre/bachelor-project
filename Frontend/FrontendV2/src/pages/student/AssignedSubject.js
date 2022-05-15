@@ -36,7 +36,7 @@ const AssignedSubject = () => {
           <div className="message-div" style={{ background: "green" }}>
             <center>You have been assigned to the following subject.</center>
           </div>
-          <Subject subject={student.assignedSubject} type=""/>
+          <Subject subject={student.assignedSubject} subjects={[]} type=""/>
         </>
       )}
     </div>
