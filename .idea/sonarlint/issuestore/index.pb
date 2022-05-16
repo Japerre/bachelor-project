@@ -29,7 +29,11 @@ Abackend/src/main/java/com/bachproject/demo/employer/Employer.java,d\0\d0d8f67d
 Kbackend/src/main/java/com/bachproject/demo/researchGroup/ResearchGroup.java,0\4\04254ccffb8a3bb1b18ddb6701b8abb5251525b0
 d
 4Frontend/FrontendV2/src/pages/promotor/AddSubject.js,d\3\d34e27d5f9dbaf9a737234a8965104f769d9c40d
-g
-7Frontend/FrontendV2/src/pages/student/PromotorDetail.js,1\6\16617975b1efb7479592f2e3619ec979cd2ccc8b
 v
 Fbackend/src/main/java/com/bachproject/demo/subject/SubjectService.java,f\4\f44d6cbfbe18bd3123fcbfb507e6ed8a9843e241
+J
+Database_file/database.sql,d\e\de842762498f0a4a49a96881e0ba3fdb810273e6
+M
+Frontend/FrontendV2/README.md,6\a\6aa16fabeadc6b60edacf8b72a7140ceb159e1dd
+9
+	README.md,8\e\8ec9a00bfd09b3190ac6b22251dbb1aa95a0579d

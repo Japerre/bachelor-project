@@ -33,8 +33,7 @@ const PromotorDetail = () => {
     console.log(promotor)
     const sendEmail = (data) => {
         const entry = {
-            //promotorEmail: promotor.user.userName,
-            promotorEmail: "elian.vantomme@hotmail.be",
+            promotorEmail: promotor.user.userName,
             studentEmail: student.user.userName,
             message: data.message,
             promotorName: promotor.user.firstName,
