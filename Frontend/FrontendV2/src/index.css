@@ -374,7 +374,7 @@ button {
 }
 .subject-link-promotor{
     color: black;
-    text-decoration: none;
+    text-decoration: double;
 }
 footer{
     position: fixed;

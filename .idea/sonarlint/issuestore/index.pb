@@ -23,5 +23,13 @@ Y
 )Frontend/FrontendV2/src/components/Nav.js,f\4\f4e07c3067f27870bbca711c936009fc11920fdd
 y
 Ibackend/src/main/java/com/bachproject/demo/subject/SubjectForStudent.java,4\a\4a98505a43ebe3422be9c90c2fd5ab2751a9d317
+q
+Abackend/src/main/java/com/bachproject/demo/employer/Employer.java,d\0\d0d8f67d1fafde99b2275d428d90b37e403046ac
+{
+Kbackend/src/main/java/com/bachproject/demo/researchGroup/ResearchGroup.java,0\4\04254ccffb8a3bb1b18ddb6701b8abb5251525b0
+d
+4Frontend/FrontendV2/src/pages/promotor/AddSubject.js,d\3\d34e27d5f9dbaf9a737234a8965104f769d9c40d
+g
+7Frontend/FrontendV2/src/pages/student/PromotorDetail.js,1\6\16617975b1efb7479592f2e3619ec979cd2ccc8b
 v
 Fbackend/src/main/java/com/bachproject/demo/subject/SubjectService.java,f\4\f44d6cbfbe18bd3123fcbfb507e6ed8a9843e241
