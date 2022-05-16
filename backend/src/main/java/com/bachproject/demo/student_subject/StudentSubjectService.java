@@ -148,6 +148,15 @@ public class StudentSubjectService {
         subjectRepository.save(subject);
     }
 
+    public void unboostStudent(Long subjectId){
+        StudentSubject studentSubject = studentSubjectRepository.findBySubjectSubjectIdAndBoostedTrue(subjectId);
+        Subject subject = subjectRepository.getById(subjectId);
+        studentSubject.setBoosted(false);
+        subject.setBoosted(false);
+        studentSubjectRepository.save(studentSubject);
+        subjectRepository.save(subject);
+    }
+
     public StudentSubject getSelectedSubject(Long subjectId, Long studentId) {
         return studentSubjectRepository.findByStudentStudentIdAndSubjectSubjectId(studentId, subjectId);
     }

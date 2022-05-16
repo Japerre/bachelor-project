@@ -204,7 +204,7 @@ const Register = () => {
             <Controller
               shouldUnregister={true}
               name="targetAudienceId"
-              rules={{ required: false }}
+              rules={{ required: true }}
               control={control}
               render={({ field }) => (
                 <Select
@@ -215,6 +215,7 @@ const Register = () => {
                 />
               )}
             />
+            {errors.targetAudienceId && <p className={"errmsg"}>target audience is required</p>}
             <button style={{ cursor: "pointer" }}>submit</button>
           </>
         )}

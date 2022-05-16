@@ -87,5 +87,8 @@ public class StudentSubjectController {
     public void boostStudent(@PathVariable("subjectId") Long subjectId, @PathVariable("studentId") Long studentId){
         studentSubjectService.boostStudent(subjectId,studentId);
     }
-
+    @PutMapping(value = "/unboostStudent/{subjectId}")
+    public void unboostStudent(@PathVariable("subjectId") Long subjectId) {
+        studentSubjectService.unboostStudent(subjectId);
+    }
 }

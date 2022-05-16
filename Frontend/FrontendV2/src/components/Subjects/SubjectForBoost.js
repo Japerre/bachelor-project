@@ -22,7 +22,7 @@ const SubjectForBoost = ({ subject, studentList }) => {
         }
       )
       .then((data) => {
-        setBoostedStudent(data.data)
+        setBoostedStudent(data.data);
       });
   };
 
@@ -50,6 +50,22 @@ const SubjectForBoost = ({ subject, studentList }) => {
           alert("Operation Failed");
         }
       );
+  };
+
+  const unboostStudent = () => {
+    axios
+      .put(
+        `http://localhost:8080/studentPreferences/unboostStudent/${subject.subjectId}`,
+        {
+          headers: { Authorization: localStorage.getItem("token") },
+        }
+      )
+      .then((response) => {
+        window.location.reload();
+      })
+      .catch((error) => {
+        alert("Operation Failed");
+      });
   };
 
   const mapStudents = () => {
@@ -94,7 +110,22 @@ const SubjectForBoost = ({ subject, studentList }) => {
             <button>Submit</button>
           </form>
         )}
-        {subject.boosted && boostedStudent.user && <p>Boosted Student: {boostedStudent.user.firstName + " " + boostedStudent.user.lastName}</p>}
+        {subject.boosted && boostedStudent.user && (
+          <>
+            <p>
+              Boosted Student:{" "}
+              {boostedStudent.user.firstName +
+                " " +
+                boostedStudent.user.lastName}
+            </p>
+            <button
+              className={"remove-btn-studentSubject"}
+              onClick={unboostStudent}
+            >
+              Unboost student
+            </button>
+          </>
+        )}
       </div>
     </main>
   );

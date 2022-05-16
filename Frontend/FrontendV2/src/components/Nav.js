@@ -66,9 +66,9 @@ const Nav = () => {
             <Link to="/approveSubjects">
               <li>approve subjects</li>
             </Link>
-            <Link to="/assignPromotors">
+            {/* <Link to="/assignPromotors">
               <li>assign promotors</li>
-            </Link>
+            </Link> */}
             <Link to="/assignSubjects">
               <li>Assign subject to Student</li>
             </Link>

@@ -43,6 +43,7 @@ const PromotorDetail = () => {
         emailjs.send('service_av1w41s', 'template_dy25uar', entry)
             .then((result) => {
                 console.log("Gelukt" + result.text);
+                alert("email has been sent")
             }, (error) => {
                 console.log("Error" + error.text);
             });
