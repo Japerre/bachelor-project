@@ -2,6 +2,7 @@ import {useEffect, useState} from "react";
 import {Controller, useForm} from "react-hook-form";
 import Select from "react-select";
 import axios from "axios";
+import emailjs from "emailjs-com";
 
 const StudentSubject = ({subject, studentSubjects}) => {
 
@@ -35,6 +36,7 @@ const StudentSubject = ({subject, studentSubjects}) => {
             {
                 label: studentSubject.student.user.firstName + " " + studentSubject.student.user.lastName + " / stars: " + studentSubject.amountOfStars + " / boosted: " + studentSubject.boosted,
                 value: studentSubject.student.studentId,
+                email: studentSubject.student.user.userName,
             }
         )))
         setAssignedStudents(assignedStudentsArray.map((studentSubject) => (
@@ -54,6 +56,8 @@ const StudentSubject = ({subject, studentSubjects}) => {
                 .put(`http://localhost:8080/students/assignedSubject/${assignedStudent.value}`, subject)
                 .then((response) => {
                     console.log(response);
+                    console.log(assignedStudent.email)
+                    sendEmailToStudents(assignedStudent)
                     alert("Subject have been assigned");
                     findAllStudents()
                     window.location.reload()
@@ -61,10 +65,21 @@ const StudentSubject = ({subject, studentSubjects}) => {
                     console.log(error);
                     alert("Operation Failed")
                 })
+
         }
     }
-    function validateStudents(data){
-        console.log(data)
+    const sendEmailToStudents = (assignedStudent) => {
+        const entry = {
+            assignedSubject: subject.title,
+            studentEmail: assignedStudent.email
+        }
+        emailjs.init("WDJAJHpX9BdqcGo1D")
+        emailjs.send("service_av1w41s","template_2l69ix2",entry)
+            .then((result) => {
+                console.log("Gelukt" + result.text);
+            }, (error) => {
+                console.log("Error" + error.text);
+            });
 
     }
 
